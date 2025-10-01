@@ -25,7 +25,6 @@ class Option(BaseModel):
     def __init__(self, **data):
         super().__init__(**data)
 
-Option.model_rebuild()
 
 
 # Question Models
@@ -94,8 +93,6 @@ class Response(BaseModel):
 
     def __init__(self, **data):
         super().__init__(**data)
-
-Response.model_rebuild()
 
 
 # Quiz Models
