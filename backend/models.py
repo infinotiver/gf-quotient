@@ -161,7 +161,6 @@ class QuizPublic(BaseModel):
         __init__(**data): Initializes a new instance of QuizPublic with the provided data.
             Prints the initialization data for debugging purposes.
     """
-    """Quiz model for public view (taking the quiz), without sensitive data."""
     _id: str
     title: str
     description: Optional[str] = None
