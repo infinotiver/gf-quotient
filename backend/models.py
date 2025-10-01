@@ -5,7 +5,7 @@ from pydantic import (
     ConfigDict
 )
 from typing import List, Optional, Dict, Literal
-
+from backend.intimacy_level import IntimacyLevel
 
 # Option Model
 class Option(BaseModel):
@@ -121,7 +121,7 @@ class Quiz(BaseModel):
     _id: str  # Full UUID for unique identification
     title: str
     description: Optional[str] = None
-    intimacy_level: Literal["<2 months", "6m", "1y", "2y", "2y+"]  # Restrict to specific values
+    intimacy_level: IntimacyLevel
     questions: List[Question]
     responses: Optional[List[Response]] = None  # List of responses
     score: Optional[int] = None  # Computed score
@@ -164,7 +164,7 @@ class QuizPublic(BaseModel):
     _id: str
     title: str
     description: Optional[str] = None
-    intimacy_level: Literal["<2 months", "6m", "1y", "2y", "2y+"]
+    intimacy_level: IntimacyLevel
     questions: List[QuestionPublic]
 
     def __init__(self, **data):
