@@ -60,12 +60,12 @@ class Question(BaseModel):
         super().__init__(**data)
 
     @field_validator("correct_option")
-    def validate_correct_option(cls, value, values):
-        options = values.data.get("options", [])
+    def validate_correct_option(cls, correct_option, info):
+        options = info.data.get("options", [])
         option_ids = [opt.id for opt in options]
-        if value not in option_ids:
+        if correct_option not in option_ids:
             raise ValueError("correct_option must match one of the option ids")
-        return value
+        return correct_option
 
 
 class QuestionPublic(BaseModel):
