@@ -1,9 +1,9 @@
 function InfoBox() {
     return (
-        <div className="p-4 bg-white rounded-lg shadow-md min-w-[24vw]">
+        <div className="p-4 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4">
-                LET <span className="bg-pink-300 p-1 rounded-lg">LOVE</span>{" "}
-                <span className="bg-red-300 p-1 rounded-lg">BLOOM</span>
+                Test <span className="bg-pink-300 p-1 rounded-lg">Your</span>{" "}
+                <span className="bg-red-300 p-1 rounded-lg">Boyfriend</span>
             </h1>
             <div className="">
                 <div className="space-y-4 p-2">

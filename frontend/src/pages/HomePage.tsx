@@ -6,15 +6,10 @@ import Footer from "../components/ui/Footer";
 function HomePage() {
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-center items-center w-full min-h-screen bg-gray-900 gap-4 p-4">
-        {/* Left Section */}
-        <div className="flex flex-col justify-center items-center w-full md:w-1/2 gap-4">
+      <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gray-900 gap-4 p-4">
+        <div className="w-full max-w-md flex flex-col gap-4">
           <Bubble subtitle="Does your BF actually" title="KNOW YOU?" />
           <InfoBox />
-        </div>
-
-        {/* Right Section */}
-        <div className="flex flex-col justify-center items-center w-full md:w-1/2 gap-4">
           <CreateQuizButton />
         </div>
       </div>
