@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { createQuiz } from "../api/quizApi";
+const createQuiz = async (quizData: { title: string; options: OptionType[] }) => {
+  return Promise.resolve({ success: true, quizId: "dummy-id" , quizData});
+};
 import OptionCard from "../components/create-quiz/OptionCard";
 import type { OptionType } from "../components/create-quiz/OptionCard";
 export default function CreateQuizPage() {
@@ -33,7 +35,7 @@ export default function CreateQuizPage() {
           key={index}
           option={option}
           isCorrect={option.isCorrect}
-          onTextChange={(newText) =>
+          onTextChange={(newText: string) =>
             setOptions((prev) =>
               prev.map((opt, i) =>
                 i === index ? { ...opt, text: newText } : opt

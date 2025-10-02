@@ -1,4 +1,4 @@
-import { FaHeartBroken, FaCheck } from "react-icons/fa";
+
 import OptionCard from "./OptionCard";
 import type { OptionType } from "./OptionCard";
 

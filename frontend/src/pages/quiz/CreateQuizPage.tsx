@@ -1,6 +1,6 @@
 import { useState } from "react";
-import OptionCard, { OptionType } from "../../components/quiz/OptionCard"; // Corrected the relative path
-
+import OptionCard from "../../components/create-quiz/OptionCard";
+import type { OptionType } from "../../components/create-quiz/OptionCard";
 export default function CreateQuizPage() {
   const [options, setOptions] = useState<OptionType[]>([
     { id: "1", text: "", isCorrect: false },
@@ -43,7 +43,7 @@ export default function CreateQuizPage() {
           key={option.id}
           option={option}
           isCorrect={option.isCorrect}
-          onTextChange={(newText) => handleTextChange(option.id, newText)}
+          onTextChange={(newText: string) => handleTextChange(option.id, newText)}
           onToggleCorrect={() => handleToggleCorrect(option.id)}
           onDelete={() => handleDelete(option.id)}
         />
