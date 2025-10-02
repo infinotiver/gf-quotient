@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { processQuizData } from "../utils/quizUtils";
-import { MAX_STEPS } from "../constants/quizConstants";
 
 interface useCreateQuizProps {
   (quizData: object): Promise<void>;
 }
 
 export function useCreateQuiz(onSubmission: useCreateQuizProps) {
+  const MAX_STEPS = 5;
   const [quizData, setQuizData] = useState({
     title: "",
     questions: [],

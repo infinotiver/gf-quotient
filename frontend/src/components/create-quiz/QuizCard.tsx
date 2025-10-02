@@ -1,5 +1,6 @@
 import { FaHeartBroken, FaCheck } from "react-icons/fa";
-import OptionCard, { OptionType } from "./OptionCard";
+import OptionCard from "./OptionCard";
+import type { OptionType } from "./OptionCard";
 
 export type QuestionType = {
   text: string;
@@ -16,7 +17,10 @@ export default function QuestionCard({ question, onChange, onDelete }: Props) {
   const addOption = () => {
     onChange({
       ...question,
-      options: [...question.options, { text: "", isCorrect: false }],
+      options: [
+        ...question.options,
+        { id: (question.options.length + 1).toString(), text: "", isCorrect: false },
+      ],
     });
   };
 
