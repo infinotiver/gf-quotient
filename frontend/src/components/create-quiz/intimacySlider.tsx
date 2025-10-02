@@ -3,20 +3,14 @@ interface IntimacySliderProps {
   onChange: (value: string) => void;
 }
 function IntimacySlider({ onChange }: IntimacySliderProps) {
-  const [relationshipLength, setRelationshipLength] = useState("<2m");
-
-  const lengthOptions = [
-    "<2 months",
-    "6 months",
-    "1 year",
-    "2 year",
-    "2+ year",
-  ];
+  const lengthOptions = ["<2 months", "6m", "1y", "2y", "2y+"]; // Updated values
+  const [relationshipLength, setRelationshipLength] = useState(lengthOptions[0]);
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const index = parseInt(event.target.value, 10);
-    setRelationshipLength(lengthOptions[index]);
-    onChange(relationshipLength);
+    const selectedValue = lengthOptions[index];
+    setRelationshipLength(selectedValue);
+    onChange(selectedValue); // Pass the correct value
   };
 
   return (

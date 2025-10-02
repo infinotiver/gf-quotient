@@ -1,23 +1,20 @@
-import { FaHeartBroken, FaCheck } from "react-icons/fa";
-
 export type OptionType = {
-  id: string;
+  id: number;
   text: string;
-  isCorrect: boolean;
 };
 
-type OptionCardProps = {
+interface OptionCardProps {
   option: OptionType;
-  isCorrect: boolean;
+  correct_option: boolean;
   onTextChange: (newText: string) => void;
   onToggleCorrect: () => void;
   onDelete: () => void;
   disabled?: boolean; // New prop to disable interactions
-};
+}
 
 export default function OptionCard({
   option,
-  isCorrect,
+  correct_option,
   onTextChange,
   onToggleCorrect,
   onDelete,
@@ -31,11 +28,7 @@ export default function OptionCard({
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {isCorrect ? (
-          <FaCheck className="text-green-400" />
-        ) : (
-          <FaHeartBroken className="text-pink-400" />
-        )}
+        {correct_option ? "✔️" : "💔"}
       </button>
       <input
         className={`flex-1 p-2 bg-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400 ${

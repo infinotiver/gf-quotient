@@ -1,81 +1,88 @@
 
-import OptionCard from "./OptionCard";
+import OptionCard from "./OptionCard"; // Import the OptionCard component
 import type { OptionType } from "./OptionCard";
 
-export type QuestionType = {
+export interface QuestionType {
   text: string;
   options: OptionType[];
-};
+  correct_option: number | null; // Store the ID of the correct option
+}
 
-type Props = {
+interface QuizCardProps {
   question: QuestionType;
-  onChange: (updated: QuestionType) => void;
+  onChange: (updatedQuestion: QuestionType) => void;
   onDelete: () => void;
-};
+}
 
-export default function QuestionCard({ question, onChange, onDelete }: Props) {
+export default function QuizCard({
+  question,
+  onChange,
+  onDelete,
+}: QuizCardProps) {
   const addOption = () => {
+    const nextOptionId =
+      question.options.length > 0
+        ? question.options.reduce((maxId, opt) => Math.max(maxId, opt.id), 0) +
+          1
+        : 1;
+    const newOption: OptionType = { id: nextOptionId, text: "" };
+    onChange({ ...question, options: [...question.options, newOption] });
+  };
+
+  const deleteOption = (optionId: number) => {
+    const updatedOptions = question.options.filter(
+      (opt) => opt.id !== optionId
+    );
+    const updatedCorrectOption =
+      question.correct_option === optionId ? null : question.correct_option;
     onChange({
       ...question,
-      options: [
-        ...question.options,
-        { id: (question.options.length + 1).toString(), text: "", isCorrect: false },
-      ],
+      options: updatedOptions,
+      correct_option: updatedCorrectOption,
     });
   };
 
   return (
-    <div className="bg-gray-900 text-white p-6 rounded-lg mb-4 w-full shadow-md">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="font-bold text-xl text-pink-400">Question</h3>
-        <button onClick={onDelete} className="text-red-500 hover:underline">
-          Remove
-        </button>
-      </div>
-
-      <textarea
-        className="w-full p-3 bg-gray-800 rounded-lg mb-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400"
+    <div className="flex flex-col gap-4 p-4 bg-gray-800 rounded">
+      <input
+        type="text"
         value={question.text}
         onChange={(e) => onChange({ ...question, text: e.target.value })}
-        placeholder="Enter your question here"
+        placeholder="Enter question text"
+        className="w-full p-2 bg-gray-700 rounded"
       />
 
-      {question.options.map((option, index) => (
+      {question.options.map((option) => (
         <OptionCard
-          key={index}
+          key={option.id}
           option={option}
-          isCorrect={option.isCorrect}
+          correct_option={question.correct_option === option.id}
           onTextChange={(newText) =>
             onChange({
               ...question,
-              options: question.options.map((opt, i) =>
-                i === index ? { ...opt, text: newText } : opt
+              options: question.options.map((opt) =>
+                opt.id === option.id ? { ...opt, text: newText } : opt
               ),
             })
           }
           onToggleCorrect={() =>
-            onChange({
-              ...question,
-              options: question.options.map((opt, i) => ({
-                ...opt,
-                isCorrect: i === index,
-              })),
-            })
+            onChange({ ...question, correct_option: option.id })
           }
-          onDelete={() =>
-            onChange({
-              ...question,
-              options: question.options.filter((_, i) => i !== index),
-            })
-          }
+          onDelete={() => deleteOption(option.id)}
         />
       ))}
 
       <button
         onClick={addOption}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-3"
+        className="px-4 py-2 bg-blue-500 text-white rounded"
       >
         Add Option
+      </button>
+      <button
+        onClick={onDelete}
+        className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+      >
+        Delete Question
       </button>
     </div>
   );
