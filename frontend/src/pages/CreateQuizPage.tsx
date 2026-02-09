@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import QuizTitle from "../components/create-quiz/QuizTitle";
 import QuestionsStep from "../components/create-quiz/QuestionsStep";
 import QuizSummaryStep from "../components/create-quiz/QuizSummary";
+import PresetPicker from "../components/create-quiz/PresetPicker";
 import type { QuestionType } from "../components/create-quiz/QuizCard";
 import { useNavigate } from "react-router-dom";
 import { createQuiz } from "../api/quiz";
@@ -186,66 +187,14 @@ export default function CreateQuizPage() {
                   </Button>
                 </div>
 
-                {showPresets && (
-                  <>
-                    <div
-                      className="fixed inset-0 z-40"
-                      onClick={() => setShowPresets(false)}
-                    />
-                    <div className="fixed right-6 top-28 z-50 bg-card border border-border rounded-2xl p-3 shadow-sm w-72">
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Load preset questions
-                    </div>
-                    {quizData.questions.length > 0 && (
-                      <>
-                        <div className="text-xs text-muted-foreground mb-2">
-                          Replace current questions or add to them?
-                        </div>
-                        <div className="flex gap-2 mb-3">
-                          <Button
-                            size="sm"
-                            variant={presetMode === "replace" ? "primary" : "secondary"}
-                            onClick={() => setPresetMode("replace")}
-                          >
-                            Replace
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant={presetMode === "add" ? "primary" : "secondary"}
-                            onClick={() => setPresetMode("add")}
-                          >
-                            Add
-                          </Button>
-                        </div>
-                      </>
-                    )}
-                    <div className="flex flex-col gap-2">
-                      {(
-                        [
-                          { key: "normal", label: "normal" },
-                          { key: "cute", label: "cute" },
-                          { key: "spicy", label: "spicy" },
-                          { key: "playful", label: "playful" },
-                          { key: "deep", label: "deep" },
-                        ] as const
-                      ).map((cat) => (
-                        <Button
-                          key={cat.key}
-                          size="sm"
-                          variant="secondary"
-                          className="w-full"
-                          onClick={() => applyPreset(cat.key)}
-                        >
-                          <span className="capitalize">{cat.label}</span>
-                        </Button>
-                      ))}
-                    </div>
-                    <div className="mt-2 text-xs text-muted-foreground">
-                      Max questions: 14
-                    </div>
-                    </div>
-                  </>
-                )}
+                <PresetPicker
+                  open={showPresets}
+                  hasQuestions={quizData.questions.length > 0}
+                  presetMode={presetMode}
+                  onClose={() => setShowPresets(false)}
+                  onModeChange={setPresetMode}
+                  onPick={applyPreset}
+                />
 
                 <QuestionsStep
                   questions={quizData.questions}
