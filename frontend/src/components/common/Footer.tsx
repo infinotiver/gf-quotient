@@ -1,20 +1,18 @@
 function Footer() {
   return (
     <div className="fixed bottom-3 right-3 w-auto flex items-center gap-2 py-2 px-3 bg-card border border-border rounded-full text-muted-foreground text-xs">
-      <span className="text-muted-foreground">
-        Made with love by
-      </span>
+      <span className="text-muted-foreground">Made with love by</span>
       <a
-        href="https://example.com/profile"
+        href="https://github.com/infinotiver"
         target="_blank"
         rel="noreferrer"
-        className="hover:text-foreground"
+        className="hover:text-foreground font-medium"
       >
         infinotiver
       </a>
       <span>·</span>
       <a
-        href="https://github.com/example/repo"
+        href="https://github.com/infinotiver/gf-quotient"
         target="_blank"
         rel="noreferrer"
         className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted text-foreground hover:bg-muted/70"

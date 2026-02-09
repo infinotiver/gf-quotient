@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getQuiz } from "../../api/quiz";
-import Button from "../../components/common/Button";
-import Card from "../../components/common/Card";
-import Skeleton from "../../components/common/Skeleton";
+import { getQuiz } from "../../api";
+import Button from "../../../../components/common/Button";
+import Skeleton from "../../../../components/common/Skeleton";
+import Card from "../../../../components/common/Card";
 
 export default function AttemptLanding() {
   const { quizId } = useParams();
@@ -26,14 +26,7 @@ export default function AttemptLanding() {
   if (isLoading)
     return (
       <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background text-foreground outer-pad">
-        <Card className="w-full max-w-2xl">
-          <div className="flex flex-col gap-3">
-            <Skeleton className="h-8 w-2/3 mx-auto" />
-            <Skeleton className="h-4 w-3/4 mx-auto" />
-            <Skeleton className="h-4 w-1/3 mx-auto" />
-            <Skeleton className="h-10 w-full mt-2" />
-          </div>
-        </Card>
+        <Skeleton width="lg" lines={3} />
       </div>
     );
 

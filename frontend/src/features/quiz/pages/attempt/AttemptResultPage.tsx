@@ -1,9 +1,9 @@
 import { useLocation, useParams, Link } from "react-router-dom";
-import Button from "../../components/common/Button";
-import Card from "../../components/common/Card";
-import LoveScale from "../../components/common/LoveScale";
+import Button from "../../../../components/common/Button";
+import Card from "../../../../components/common/Card";
+import LoveScale from "../../../../components/common/LoveScale";
 import { useMemo } from "react";
-import { pickRandom, submissionMessages } from "../../utils/messages";
+import { pickRandom, submissionMessages } from "../../../../utils/messages";
 
 export default function AttemptResultPage() {
   const { quizId } = useParams();

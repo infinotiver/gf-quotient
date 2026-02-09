@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import QuestionCard from "./QuizCard";
 import type { QuestionType } from "./QuizCard";
-import type { QuizData } from "../../api/quiz";
+import type { QuizData } from "../../features/quiz/api";
 import { ChevronDown, ChevronUp, Plus } from "lucide-react";
 import Button from "../common/Button";
 interface QuestionsStepProps {

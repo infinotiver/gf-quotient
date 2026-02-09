@@ -1,10 +1,11 @@
-import apiClient from "./apiClient";
-import type { QuestionType } from "../components/create-quiz/QuizCard";
-import type { OptionType } from "../components/create-quiz/OptionCard";
+import apiClient from "../../api/apiClient";
+import type { QuestionType } from "../../components/create-quiz/QuizCard";
+import type { OptionType } from "../../components/create-quiz/OptionCard";
+
 export type QuizData = {
   title: string;
   description: string;
-  questions: QuestionType[]; // replace `any` with your real Question type
+  questions: QuestionType[];
 };
 
 export type GetQuestionType = {
@@ -34,6 +35,7 @@ export type StatsResponse = {
   total_quizzes: number;
   message?: string;
 };
+
 export type CreateQuizResponse = {
   status: "success" | "error";
   quiz_id: string;

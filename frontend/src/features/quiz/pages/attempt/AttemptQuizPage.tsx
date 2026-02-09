@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import apiClient from "../../api/apiClient";
-import { getQuiz } from "../../api/quiz";
-import type { OptionType } from "../../components/create-quiz/OptionCard";
-import Button from "../../components/common/Button";
-import Card from "../../components/common/Card";
-import Skeleton from "../../components/common/Skeleton";
+import apiClient from "../../../../api/apiClient";
+import { getQuiz } from "../../api";
+import type { OptionType } from "../../../../components/create-quiz/OptionCard";
+import Button from "../../../../components/common/Button";
+import Skeleton from "../../../../components/common/Skeleton";
+import Card from "../../../../components/common/Card";
 
 type Question = {
   id: number;
@@ -48,17 +48,7 @@ export default function AttemptQuiz() {
   if (isLoading)
     return (
       <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background text-foreground outer-pad">
-        <Card className="w-full max-w-2xl">
-          <div className="flex flex-col gap-4">
-            <Skeleton className="h-6 w-1/2 mx-auto" />
-            <Skeleton className="h-5 w-3/4 mx-auto" />
-            <div className="flex flex-col gap-3">
-              <Skeleton className="h-10 w-full" />
-              <Skeleton className="h-10 w-full" />
-              <Skeleton className="h-10 w-full" />
-            </div>
-          </div>
-        </Card>
+        <Skeleton width="lg" lines={5} />
       </div>
     );
   if (!quiz) return <p>Quiz not found.</p>;

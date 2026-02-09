@@ -9,3 +9,4 @@ client = AsyncIOMotorClient(MONGO_DETAILS)
 
 db = client["db"]
 quizes_col = db["quizes"]
+crush_pages_col = db["crush_pages"]

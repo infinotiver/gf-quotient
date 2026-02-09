@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import QuizTitle from "../components/create-quiz/QuizTitle";
-import QuestionsStep from "../components/create-quiz/QuestionsStep";
-import QuizSummaryStep from "../components/create-quiz/QuizSummary";
-import PresetPicker from "../components/create-quiz/PresetPicker";
-import type { QuestionType } from "../components/create-quiz/QuizCard";
+import QuizTitle from "../../../components/create-quiz/QuizTitle";
+import QuestionsStep from "../../../components/create-quiz/QuestionsStep";
+import QuizSummaryStep from "../../../components/create-quiz/QuizSummary";
+import PresetPicker from "../../../components/create-quiz/PresetPicker";
+import type { QuestionType } from "../../../components/create-quiz/QuizCard";
 import { useNavigate } from "react-router-dom";
-import { createQuiz } from "../api/quiz";
-import { getQuestions } from "../utils/getQuestions";
-import type { OptionType } from "../components/create-quiz/OptionCard";
-import Button from "../components/common/Button";
-import Card from "../components/common/Card";
-import Footer from "../components/common/Footer";
-import { saveQuizToStorage } from "../utils/storage";
+import { createQuiz } from "../api";
+import { getQuestions } from "../../../utils/getQuestions";
+import type { OptionType } from "../../../components/create-quiz/OptionCard";
+import Button from "../../../components/common/Button";
+import Card from "../../../components/common/Card";
+import Footer from "../../../components/common/Footer";
+import { saveQuizToStorage } from "../../../utils/storage";
 
 export default function CreateQuizPage() {
   const [step, setStep] = useState(0);
@@ -59,8 +59,7 @@ export default function CreateQuizPage() {
     description: "",
     questions: [],
   });
-  const [quizId, setQuizId] = useState<string | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  
   const [notice, setNotice] = useState<string | null>(null);
   const [showPresets, setShowPresets] = useState(false);
   const [presetMode, setPresetMode] = useState<"add" | "replace">("add");
@@ -72,8 +71,6 @@ export default function CreateQuizPage() {
       return response;
     },
     onSuccess: (data) => {
-      setQuizId(data.quiz_id);
-      setToken(data.token);
       saveQuizToStorage({
         quiz_id: data.quiz_id,
         token: data.token,

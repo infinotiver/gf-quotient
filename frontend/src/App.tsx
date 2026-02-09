@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage"; // Corrected the relative path
-import CreateQuizPage from "./pages/CreateQuizPage";
+import CreateQuizPage from "./features/quiz/pages/CreateQuizPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ShareQuizPage from "./pages/QuizSharePage";
-import AttemptLanding from "./pages/attempt/LandingPage";
-import AttemptQuiz from "./pages/attempt/AttemptQuizPage";
-import ResultPage from "./pages/ResultPage";
-import AttemptResultPage from "./pages/attempt/AttemptResultPage";
+import ShareQuizPage from "./features/quiz/pages/QuizSharePage";
+import AttemptLanding from "./features/quiz/pages/attempt/LandingPage";
+import AttemptQuiz from "./features/quiz/pages/attempt/AttemptQuizPage";
+import ResultPage from "./features/quiz/pages/ResultPage";
+import AttemptResultPage from "./features/quiz/pages/attempt/AttemptResultPage";
+import CreateCrushPage from "./features/crush/CreateCrushPage";
+import CrushPage from "./features/crush/CrushPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +30,8 @@ function App() {
           <Route path="/attempt/:quizId/results" element={<AttemptResultPage />} />
           <Route path="/quiz/share/:quizId" element={<ShareQuizPage />} />
           <Route path="/results/:token" element={<ResultPage />} />
+          <Route path="/crush/create" element={<CreateCrushPage />} />
+          <Route path="/crush/:pageId" element={<CrushPage />} />
         </Routes>
       </QueryClientProvider>
     </Router>

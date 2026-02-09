@@ -1,13 +1,13 @@
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { deleteQuiz, getResults } from "../api/quiz";
-import Card from "../components/common/Card";
-import Skeleton from "../components/common/Skeleton";
-import Button from "../components/common/Button";
+import { deleteQuiz, getResults } from "../api";
+import Card from "../../../components/common/Card";
+import Skeleton from "../../../components/common/Skeleton";
+import Button from "../../../components/common/Button";
 import { useMemo } from "react";
-import { getVerdict, pickRandom, resultsMessages } from "../utils/messages";
-import LoveScale from "../components/common/LoveScale";
+import { getVerdict, pickRandom, resultsMessages } from "../../../utils/messages";
+import LoveScale from "../../../components/common/LoveScale";
 
 export default function ResultPage() {
   const { token } = useParams();
@@ -27,6 +27,9 @@ export default function ResultPage() {
       if (!token) throw new Error("Token is required");
       return deleteQuiz(token);
     },
+    onSuccess: () => {
+      window.location.href = "/";
+    },
   });
 
   const blurb = useMemo(() => pickRandom(resultsMessages), []);
@@ -34,17 +37,7 @@ export default function ResultPage() {
   if (isLoading)
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground outer-pad">
-        <Card className="w-full max-w-3xl">
-          <div className="flex flex-col gap-4">
-            <Skeleton className="h-8 w-1/2 mx-auto" />
-            <Skeleton className="h-4 w-2/3 mx-auto" />
-            <Skeleton className="h-6 w-1/3 mx-auto" />
-            <div className="flex flex-col gap-3">
-              <Skeleton className="h-16 w-full" />
-              <Skeleton className="h-16 w-full" />
-            </div>
-          </div>
-        </Card>
+        <Skeleton width="lg" lines={6} />
       </div>
     );
   if (error || !data) return <p>Error loading results.</p>;
@@ -61,9 +54,9 @@ export default function ResultPage() {
       <Card className="w-full max-w-3xl">
         <h1 className="text-3xl font-bold text-center mb-2">{quiz.title}</h1>
         <p className="text-muted-foreground text-center mb-2">{quiz.description}</p>
-        <p className="text-center text-base font-bold mb-3">
+        <h2 className="text-center text-xl font-display font-bold mb-1">
           LoveMeter verdict: <span className="text-primary">{verdict}</span>
-        </p>
+        </h2>
         <div className="text-center mb-8">
           <LoveScale score={score} total={total} label="Love scale" />
         </div>

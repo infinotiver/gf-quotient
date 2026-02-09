@@ -1,4 +1,4 @@
-import type { QuizData } from "../../api/quiz";
+import type { QuizData } from "../../features/quiz/api";
 import Button from "../common/Button";
 
 interface QuizSummaryProps {
