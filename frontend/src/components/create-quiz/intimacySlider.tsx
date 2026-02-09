@@ -14,13 +14,13 @@ function IntimacySlider({ onChange }: IntimacySliderProps) {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 bg-gray-800 rounded-xl shadow-md min-w-[24vw]">
+    <div className="flex flex-col items-center bg-card border border-border rounded-xl w-full inner-pad">
       <label
         htmlFor="relationship-slider"
-        className="text-2xl font-semibold text-pink-400 mb-4"
+        className="text-xl font-semibold text-foreground mb-3 text-center"
       >
-        Relationship Length:{" "}
-        <span className="text-pink-500 text-2xl ">{relationshipLength}</span>
+        Relationship Length
+        <div className="text-primary text-2xl">{relationshipLength}</div>
       </label>
       <input
         id="relationship-slider"
@@ -30,7 +30,7 @@ function IntimacySlider({ onChange }: IntimacySliderProps) {
         step="1"
         value={lengthOptions.indexOf(relationshipLength)}
         onChange={handleSliderChange}
-        className="w-full h-3 bg-pink-500 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-400"
+        className="w-full h-3 bg-accent rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring"
       />
     </div>
   );

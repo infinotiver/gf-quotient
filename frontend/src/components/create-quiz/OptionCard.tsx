@@ -1,3 +1,5 @@
+import Button from "../common/Button";
+import { Heart, HeartCrack } from "lucide-react";
 export type OptionType = {
   id: number;
   text: string;
@@ -9,7 +11,7 @@ interface OptionCardProps {
   onTextChange: (newText: string) => void;
   onToggleCorrect: () => void;
   onDelete: () => void;
-  disabled?: boolean; // New prop to disable interactions
+  disabled?: boolean;
 }
 
 export default function OptionCard({
@@ -18,20 +20,21 @@ export default function OptionCard({
   onTextChange,
   onToggleCorrect,
   onDelete,
-  disabled = false, // Default value for disabled
+  disabled = false,
 }: OptionCardProps) {
   return (
     <div className="flex items-center gap-3 mb-3">
-      <button
+      <Button
+        variant={correct_option ? "primary" : "secondary"}
         onClick={disabled ? undefined : onToggleCorrect}
-        className={`p-2 rounded-full focus:outline-none ${
+        className={`px-2 py-1 rounded border border-input ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {correct_option ? "✔️" : "💔"}
-      </button>
+        {correct_option ? <Heart size={16} /> : <HeartCrack size={16} />}
+      </Button>
       <input
-        className={`flex-1 p-2 bg-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-400 ${
+        className={`flex-1 p-2 bg-background rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
         value={option.text}
@@ -39,14 +42,14 @@ export default function OptionCard({
         placeholder="Option text"
         disabled={disabled}
       />
-      <button
+      <Button
         onClick={disabled ? undefined : onDelete}
-        className={`text-red-400 hover:underline ${
+        className={`text-destructive hover:opacity-80 ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        ❌
-      </button>
+        Remove
+      </Button>
     </div>
   );
 }

@@ -1,293 +1,224 @@
 const QUIZ_QUESTIONS = {
-    "<2 months": [
-        {
-            "question": "What is your partner's favorite type of cuisine?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which musician or band does your partner enjoy the most?",
-            "type": "mcq"
-        },
-        {
-            "question": "What is your partner's favorite movie genre?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which color is your partner's favorite?",
-            "type": "mcq"
-        },
-        {
-            "question": "What does your partner enjoy doing most on a weekend morning?",
-            "type": "mcq"
-        },
-        {
-            "question": "Where did you and your partner go on your first date?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which pet does your partner like more?",
-            "type": "mcq"
-        },
-        {
-            "question": "What is your partner's favorite ice cream flavor?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which phone app does your partner use most frequently?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which season of the year does your partner like the most?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which type of vacation does your partner prefer?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which hobby does your partner enjoy?",
-            "type": "mcq"
-        },
-        {
-            "question": "True or False: Your partner usually wakes up before 7 AM on weekdays.",
-            "type": "true_false"
-        },
-        {
-            "question": "True or False: Your partner has a favorite late-night snack.",
-            "type": "true_false"
-        }
-    ],
-    "6 months": [
-        {
-            "question": "Which of these activities does your partner prefer to do when relaxing after work?",
-            "type": "mcq"
-        },
-        {
-            "question": "What is your partner's favorite comfort food?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which movie did your partner recommend that you watched together?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which gift did your partner say was their favorite that you've given them?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these describes a hobby your partner has picked up recently?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which topic do you and your partner often discuss together?",
-            "type": "mcq"
-        },
-        {
-            "question": "What does your partner usually do on a lazy Sunday?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these is a chore that your partner dislikes doing?",
-            "type": "mcq"
-        },
-        {
-            "question": "How did your partner spend your last anniversary?",
-            "type": "mcq"
-        },
-        {
-            "question": "What does your partner usually do when they are feeling stressed?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which personal habit has your partner developed in the last year?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which TV show have you and your partner watched together?",
-            "type": "mcq"
-        },
-        {
-            "question": "True or False: Your partner prefers dogs over cats.",
-            "type": "true_false"
-        },
-        {
-            "question": "True or False: Your partner likes to make plans at the last minute rather than ahead.",
-            "type": "true_false"
-        }
-    ],
-    "1 year": [
-        {
-            "question": "How did your partner plan to celebrate your first anniversary?",
-            "type": "mcq"
-        },
-        {
-            "question": "How does your partner prefer to celebrate their birthday?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which quality does your partner value most in their friendships?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which city or country does your partner want to visit with you someday?",
-            "type": "mcq"
-        },
-        {
-            "question": "What does your partner usually do to relax on a Friday night?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which cause or interest is your partner passionate about?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which memory from the past year is your partner most likely to bring up?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which music genre does your partner listen to most often?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these pet peeves has your partner mentioned to you?",
-            "type": "mcq"
-        },
-        {
-            "question": "What does your partner like to talk to you about the most?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which TV series have you and your partner binge-watched together?",
-            "type": "mcq"
-        },
-        {
-            "question": "What does your partner usually do when you feel upset?",
-            "type": "mcq"
-        },
-        {
-            "question": "True or False: Your partner considers themselves more logical than emotional.",
-            "type": "true_false"
-        },
-        {
-            "question": "True or False: Your partner is a night owl who tends to stay up late regularly.",
-            "type": "true_false"
-        }
-    ],
-    "2 years": [
-        {
-            "question": "Which personal goal is your partner most focused on right now?",
-            "type": "mcq"
-        },
-        {
-            "question": "How does your partner prefer to spend time with you after a long day?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which type of gift would your partner appreciate most on a random day?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which habit have you and your partner successfully formed together?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which aspect of your relationship does your partner value most?",
-            "type": "mcq"
-        },
-        {
-            "question": "What is something your partner never forgets to do each day?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these would best make your partner feel appreciated?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these describes your partner's outlook on the future?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which household chore does your partner always do without complaining?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these topics do you and your partner argue about the least?",
-            "type": "mcq"
-        },
-        {
-            "question": "What tradition have you and your partner established together?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which statement best reflects something your partner has said about your relationship?",
-            "type": "mcq"
-        },
-        {
-            "question": "True or False: Your partner regularly talks about or plans for the future with you.",
-            "type": "true_false"
-        },
-        {
-            "question": "True or False: Your partner often surprises you with something thoughtful.",
-            "type": "true_false"
-        }
-    ],
-    "2+ years": [
-        {
-            "question": "Which core value does your partner hold most strongly?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which dream vacation is your partner most excited about taking together?",
-            "type": "mcq"
-        },
-        {
-            "question": "What do you and your partner consider your greatest shared achievement?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of the following does your partner say they appreciate most about you?",
-            "type": "mcq"
-        },
-        {
-            "question": "What is a tradition you and your partner have maintained over the years?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these household items does your partner insist on keeping organized?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which value would your partner want to pass on if you had children?",
-            "type": "mcq"
-        },
-        {
-            "question": "What kind of outings does your partner still enjoy doing with you regularly?",
-            "type": "mcq"
-        },
-        {
-            "question": "What is something you and your partner still have yet to do that your partner always talks about?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which of these interests does your partner still pursue passionately?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which household decision does your partner want to make jointly?",
-            "type": "mcq"
-        },
-        {
-            "question": "Which statement best describes how your partner shows their commitment to the relationship?",
-            "type": "mcq"
-        },
-        {
-            "question": "True or False: Your partner still plans surprises or special gestures for you.",
-            "type": "true_false"
-        },
-        {
-            "question": "True or False: Your partner feels that you know them inside and out by now.",
-            "type": "true_false"
-        }
-    ]
-}
+  normal: [
+    {
+      question:
+        "What’s their ultimate lazy-day meal that instantly makes them happy?",
+      type: "mcq",
+    },
+    { question: "Which season actually makes them feel alive?", type: "mcq" },
+    { question: "How do they spend the perfect Sunday?", type: "mcq" },
+        {
+      question: "What song do they blast when they’re in a great mood?",
+      type: "mcq",
+    },
+    {
+      question: "What’s their go-to way to unwind after a shitty day?",
+      type: "mcq",
+    },
+    {
+      question: "Do they prefer mountains, ocean, or city for a getaway?",
+      type: "mcq",
+    },
+    {
+      question: "What’s the one app they open first thing in the morning?",
+      type: "mcq",
+    },
+        {
+      question: "Which movie genre do they rewatch when they need comfort?",
+      type: "mcq",
+    },
+    {
+      question: "How do they take their coffee/tea (be specific)?",
+      type: "mcq",
+    },
+    {
+      question: "What’s their favorite smell in the entire world?",
+      type: "mcq",
+    },
+        {
+      question: "What childhood snack do they still crave as an adult?",
+      type: "mcq",
+    }
+  ],
+
+  cute: [
+    {
+      question: "What nickname from you makes them melt every single time?",
+      type: "mcq",
+    },
+    {
+      question: "Which tiny daily thing you do makes their heart explode?",
+      type: "mcq",
+    },
+    { question: "What’s their dream cozy at-home date night?", type: "mcq" },
+        { question: "What’s their favorite way to be held?", type: "mcq" },
+    {
+      question: "Which forehead kiss moment do they replay in their head?",
+      type: "mcq",
+    },
+    { question: "What song lyric reminds them of you instantly?", type: "mcq" },
+    {
+      question: "Do they get butterflies when you call them “baby” in public?",
+      type: "mcq",
+    },
+        {
+      question:
+        "What’s the cutest habit of yours they can’t stop talking about?",
+      type: "mcq",
+    },
+    {
+      question: "Which emoji do they spam when texting you good morning?",
+      type: "mcq",
+    },
+    {
+      question: "What’s the softest thing they’ve ever whispered to you?",
+      type: "mcq",
+    },
+        {
+      question:
+        "What animal do they say you remind them of when you’re sleepy?",
+      type: "mcq",
+    }
+  ],
+
+  spicy: [
+    {
+      question: "Which outfit on you makes them lose their mind instantly?",
+      type: "mcq",
+    },
+    {
+      question: "What kind of date night gets them ridiculously turned on?",
+      type: "mcq",
+    },
+    {
+      question: "What’s the hottest compliment you can whisper in their ear?",
+      type: "mcq",
+    },
+        {
+      question: "Where’s their favorite place for you to kiss them (not lips)?",
+      type: "mcq",
+    },
+    {
+      question: "Slow teasing or rough and fast — which do they crave more?",
+      type: "mcq",
+    },
+    { question: "What dirty talk line actually makes them weak?", type: "mcq" },
+        {
+      question: "What fantasy have they admitted to you (even a little)?",
+      type: "mcq",
+    },
+    {
+      question: "Do they prefer taking control or being completely taken?",
+      type: "mcq",
+    },
+    {
+      question: "Which lingerie/underwear style on you drives them insane?",
+      type: "mcq",
+    },
+        {
+      question:
+        "What part of your body do they literally can’t keep their hands off?",
+      type: "mcq",
+    },
+    {
+      question: "What’s their signature move when things start getting hot?",
+      type: "mcq",
+    }
+  ],
+
+  playful: [
+    {
+      question:
+        "What game do they always want to play with you (even if they suck)?",
+      type: "mcq",
+    },
+    {
+      question: "What ridiculous challenge or bet would they make right now?",
+      type: "mcq",
+    },
+    {
+      question:
+        "What’s their funniest habit that you tease them about constantly?",
+      type: "mcq",
+    },
+        {
+      question: "Tickle fight, pillow fight, or wrestling — which one wins?",
+      type: "mcq",
+    },
+    {
+      question:
+        "What inside joke between you two still makes them laugh out loud?",
+      type: "mcq",
+    },
+    {
+      question: "Which dare would they never refuse, no matter how dumb?",
+      type: "mcq",
+    },
+        {
+      question:
+        "What’s their favorite way to make you laugh when you’re grumpy?",
+      type: "mcq",
+    },
+    {
+      question: "Board games, video games, or card games — their real ranking?",
+      type: "mcq",
+    },
+    {
+      question: "What silly nickname do they only use when you’re being cute?",
+      type: "mcq",
+    },
+        {
+      question: "Which meme or TikTok trend do you two recreate together?",
+      type: "mcq",
+    },
+    {
+      question:
+        "What’s the dumbest argument you’ve ever had that still makes you laugh?",
+      type: "mcq",
+    }
+  ],
+
+  deep: [
+    {
+      question: "What’s the one value they would never compromise on?",
+      type: "mcq",
+    },
+    {
+      question: "What topic can they talk about for hours at 2 a.m.?",
+      type: "mcq",
+    },
+    {
+      question: "What memory with you do they say they’ll never forget?",
+      type: "mcq",
+    },
+        { question: "What fear do they only feel safe telling you?", type: "mcq" },
+    {
+      question: "What’s the biggest dream they’re scared to say out loud?",
+      type: "mcq",
+    },
+    {
+      question: "What lesson from their past changed how they love?",
+      type: "mcq",
+    },
+        {
+      question:
+        "What do they believe actually keeps two people together long-term?",
+      type: "mcq",
+    },
+    {
+      question:
+        "If money didn’t matter, how would they want to spend their life?",
+      type: "mcq",
+    },
+    { question: "What’s something they’ve only ever told you?", type: "mcq" },
+        {
+      question: "What makes them feel truly seen and understood by you?",
+      type: "mcq",
+    },
+    {
+      question: "How do they picture their life together in 10 years?",
+      type: "mcq",
+    }
+  ],
+};
 export default QUIZ_QUESTIONS;

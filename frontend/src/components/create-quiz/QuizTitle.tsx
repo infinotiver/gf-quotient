@@ -25,20 +25,23 @@ export default function QuizTitle({
   };
   return (
     <>
-      <div className="flex flex-col p-6 bg-gray-800 rounded-lg shadow-lg gap-4">
-        <h1 className="text-3xl font-bold mb-4 text-white">
-          Quiz Title & Description
+      <div className="flex flex-col bg-card border border-border rounded-lg inner-pad stack-gap">
+        <h1 className="text-3xl font-bold mb-2 text-foreground">
+          LoveMeter Quiz Title
         </h1>
+        <p className="text-sm text-muted-foreground mb-2">
+          Create a sweet quiz for your special someone.
+        </p>
         <input
           value={title}
           onChange={handleTitleChange}
-          className="w-full p-3 border border-gray-600 rounded-lg bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500"
+          className="w-full p-3 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           placeholder="Enter the quiz title..."
         />
         <input
           value={description}
           onChange={handleDescriptionChange}
-          className="w-full p-3 border border-gray-600 rounded-lg bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+          className="w-full p-3 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-sm"
           placeholder="Enter the quiz description..."
         />
       </div>

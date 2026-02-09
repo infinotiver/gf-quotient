@@ -1,7 +1,7 @@
 import QUIZ_QUESTIONS from "./questions.ts";
 
 export function getQuestions(
-  intimacyLevel: "<2 months" | "6 months" | "1 year" | "2 years" | "2+ years"
+  category: "normal" | "cute" | "spicy" | "playful" | "deep"
 ) {
-  return QUIZ_QUESTIONS[intimacyLevel] || [];
+  return QUIZ_QUESTIONS[category] || [];
 }

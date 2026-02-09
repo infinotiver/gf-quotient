@@ -5,7 +5,6 @@ from pydantic import (
     ConfigDict
 )
 from typing import List, Optional, Dict, Literal
-from backend.intimacy_level import IntimacyLevel
 
 # Option Model
 class Option(BaseModel):
@@ -54,13 +53,15 @@ class Question(BaseModel):
     id: Optional[int] = None  # Make it optional, will be auto-assigned
     text: str
     options: List[Option]
-    correct_option: int  # The id of the correct option
+    correct_option: Optional[int]  # The id of the correct option (can be None during draft)
 
     def __init__(self, **data):
         super().__init__(**data)
 
     @field_validator("correct_option")
     def validate_correct_option(cls, correct_option, info):
+        if correct_option is None:
+            return correct_option
         options = info.data.get("options", [])
         option_ids = [opt.id for opt in options]
         if correct_option not in option_ids:
@@ -78,7 +79,7 @@ class QuestionPublic(BaseModel):
 
 
 # Response Model
-class Response(BaseModel):
+class ResponseBase(BaseModel):
     """
     Represents a user's response to a question.
     Attributes:
@@ -90,6 +91,22 @@ class Response(BaseModel):
     """
     question_id: int
     selected_option: int
+
+    def __init__(self, **data):
+        super().__init__(**data)
+
+
+# ResponseList Model
+class Response(BaseModel):
+    """
+    Represents a list of user responses.
+    Attributes:
+        responses (List[Response]): A list of Response objects.
+    Methods:
+        __init__(**data):
+            Initializes a ResponseList instance with the provided data.
+    """
+    responses: List[ResponseBase]
 
     def __init__(self, **data):
         super().__init__(**data)
@@ -121,11 +138,11 @@ class Quiz(BaseModel):
     _id: str  # Full UUID for unique identification
     title: str
     description: Optional[str] = None
-    intimacy_level: IntimacyLevel
     questions: List[Question]
-    responses: Optional[List[Response]] = None  # List of responses
+    responses: Optional[List[ResponseBase]] = None  # List of responses
     score: Optional[int] = None  # Computed score
-    token: str  # Short 6-character code for accessing results
+    quiz_id: str  # Short code for taking the quiz
+    token: str  # Full ObjectId string for accessing results
     model_config = ConfigDict(validate_by_name=True)
 
     def compute_score(self):
@@ -138,7 +155,7 @@ class Quiz(BaseModel):
         for question in self.questions:
             if question.id in response_mapping:
                 selected_option = response_mapping[question.id]
-                if selected_option == question.correct_option:
+                if question.correct_option is not None and selected_option == question.correct_option:
                     total_score += 1
 
         self.score = total_score
@@ -164,8 +181,9 @@ class QuizPublic(BaseModel):
     _id: str
     title: str
     description: Optional[str] = None
-    intimacy_level: IntimacyLevel
     questions: List[QuestionPublic]
+
+    quiz_id: str
 
     def __init__(self, **data):
         super().__init__(**data)
@@ -190,7 +208,6 @@ class QuizCreate(BaseModel):
     """
     title: str
     description: Optional[str] = None
-    intimacy_level: Literal["<2 months", "6m", "1y", "2y", "2y+"]  # Restrict to specific values
     questions: List[Question]
     model_config = ConfigDict(validate_by_name=True)
     

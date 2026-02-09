@@ -1,19 +1,42 @@
-import Bubble from "../components/ui/Bubble";
-import InfoBox from "../components/ui/InfoBox";
-import CreateQuizButton from "../components/ui/CreateQuizButton";
-import Footer from "../components/ui/Footer";
+import Bubble from "../components/common/Bubble";
+import InfoBox from "../components/common/InfoBox";
+import CreateQuizButton from "../components/common/CreateQuizButton";
+import Footer from "../components/common/Footer";
+import ResultsQuickLink from "../components/common/ResultsQuickLink";
+import { useQuery } from "@tanstack/react-query";
+import { getStats } from "../api/quiz";
+import Card from "../components/common/Card";
 
 function HomePage() {
+  const { data } = useQuery({
+    queryKey: ["stats"],
+    queryFn: getStats,
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gray-900 gap-4 p-4">
-        <div className="w-full max-w-md flex flex-col gap-4">
-          <Bubble subtitle="Does your BF actually" title="KNOW YOU?" />
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center outer-pad">
+        <div className="w-full max-w-md flex flex-col stack-gap-lg">
+          <Bubble subtitle="A small love quiz to see if they" title="Know You" />
+          <Card className="text-center">
+            <div className="text-sm text-muted-foreground">Community Stats</div>
+            <div className="mt-2 flex items-center justify-center">
+              <div>
+                <div className="text-2xl font-bold">
+                  {data?.total_quizzes ?? "—"}
+                </div>
+                <div className="text-xs text-muted-foreground">Quizzes</div>
+              </div>
+            </div>
+          </Card>
           <InfoBox />
           <CreateQuizButton />
         </div>
       </div>
       <Footer />
+      <ResultsQuickLink />
     </>
   );
 }

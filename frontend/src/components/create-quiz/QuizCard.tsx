@@ -1,7 +1,7 @@
-
 import OptionCard from "./OptionCard"; // Import the OptionCard component
 import type { OptionType } from "./OptionCard";
-
+import { Plus, Trash2 } from "lucide-react";
+import Button from "../common/Button";
 export interface QuestionType {
   text: string;
   options: OptionType[];
@@ -31,7 +31,7 @@ export default function QuizCard({
 
   const deleteOption = (optionId: number) => {
     const updatedOptions = question.options.filter(
-      (opt) => opt.id !== optionId
+      (opt) => opt.id !== optionId,
     );
     const updatedCorrectOption =
       question.correct_option === optionId ? null : question.correct_option;
@@ -43,13 +43,13 @@ export default function QuizCard({
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-gray-800 rounded">
+    <div className="flex flex-col gap-3 p-3 bg-card rounded-2xl border border-border">
       <input
         type="text"
         value={question.text}
         onChange={(e) => onChange({ ...question, text: e.target.value })}
-        placeholder="Enter question text"
-        className="w-full p-2 bg-gray-700 rounded"
+        placeholder="Question text"
+        className="w-full p-2 bg-background rounded border border-input focus:ring-2 focus:ring-ring"
       />
 
       {question.options.map((option) => (
@@ -61,7 +61,7 @@ export default function QuizCard({
             onChange({
               ...question,
               options: question.options.map((opt) =>
-                opt.id === option.id ? { ...opt, text: newText } : opt
+                opt.id === option.id ? { ...opt, text: newText } : opt,
               ),
             })
           }
@@ -72,18 +72,16 @@ export default function QuizCard({
         />
       ))}
 
-      <button
-        onClick={addOption}
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Add Option
-      </button>
-      <button
-        onClick={onDelete}
-        className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-      >
-        Delete Question
-      </button>
+      <div className="flex gap-2">
+        <Button onClick={addOption} variant="secondary">
+          <Plus size={14} />
+          Add Option
+        </Button>
+        <Button onClick={onDelete} variant="secondary">
+          <Trash2 size={14} />
+          Delete
+        </Button>
+      </div>
     </div>
   );
 }
