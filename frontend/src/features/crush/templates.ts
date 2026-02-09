@@ -48,7 +48,7 @@ export const crushTemplates: {
         "https://media.gifdb.com/dudu-shower-kisses-bubu-8a50xh2b6wxatij5.gif",
       theme: {
         background: "galaxy",
-        accent: "#8fd3ff",
+        accent: "#111184",
         text: "#eaf6ff",
       },
     },

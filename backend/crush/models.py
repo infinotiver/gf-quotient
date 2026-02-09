@@ -11,7 +11,6 @@ class CrushTheme(BaseModel):
 
 class CrushCreate(BaseModel):
     title: str
-    subtitle: Optional[str] = None
     question: str
     yes_text: str
     no_text: str
@@ -19,12 +18,12 @@ class CrushCreate(BaseModel):
     message_after_yes: Optional[str] = None
     message_after_no: Optional[str] = None
     hero_image: Optional[str] = None
+    after_yes_gif: Optional[str] = None
 
 
 class CrushPublic(BaseModel):
     page_id: str
     title: str
-    subtitle: Optional[str] = None
     question: str
     yes_text: str
     no_text: str
@@ -32,3 +31,4 @@ class CrushPublic(BaseModel):
     message_after_yes: Optional[str] = None
     message_after_no: Optional[str] = None
     hero_image: Optional[str] = None
+    after_yes_gif: Optional[str] = None
