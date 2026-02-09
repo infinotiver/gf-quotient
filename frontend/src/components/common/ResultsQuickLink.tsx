@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-import { getLatestQuiz } from "../../utils/storage";
+import { getLatestQuiz } from "@utils/storage";
 
 export default function ResultsQuickLink() {
   const [latest, setLatest] = useState<ReturnType<typeof getLatestQuiz>>(null);

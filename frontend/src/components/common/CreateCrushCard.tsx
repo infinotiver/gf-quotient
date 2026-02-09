@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import { buttonClassName } from "./buttonClassName";
 
-function CreateQuizButton() {
+function CreateCrushCard() {
   return (
     <div className="bg-card border border-border rounded-2xl inner-pad">
       <div className="text-lg font-semibold text-foreground mb-3">
-        Create your quiz
+        Create a crush page
       </div>
       <div className="text-sm text-muted-foreground mb-3">
-        Create a personalized quiz to share with your partner and see how well they know you.
+        A tiny utility to ask them out in a creative way (and we'll try to get you a date, hopefully).
       </div>
       <Link
-        to="/create-quiz"
-        className={buttonClassName("primary", "lg", "w-full")}
+        to="/crush/create"
+        className={buttonClassName("secondary", "lg", "w-full")}
       >
         Start
       </Link>
@@ -20,4 +20,4 @@ function CreateQuizButton() {
   );
 }
 
-export default CreateQuizButton;
+export default CreateCrushCard;

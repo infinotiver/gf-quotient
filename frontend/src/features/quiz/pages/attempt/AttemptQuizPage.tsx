@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import apiClient from "../../../../api/apiClient";
+import apiClient from "@api/apiClient";
 import { getQuiz } from "../../api";
-import type { OptionType } from "../../../../components/create-quiz/OptionCard";
-import Button from "../../../../components/common/Button";
-import Skeleton from "../../../../components/common/Skeleton";
-import Card from "../../../../components/common/Card";
+import type { OptionType } from "../../components/OptionCard";
+import Button from "@components/common/Button";
+import Skeleton from "@components/common/Skeleton";
+import Card from "@components/common/Card";
+import TopNav from "@components/common/TopNav";
 
 type Question = {
   id: number;
@@ -47,8 +48,16 @@ export default function AttemptQuiz() {
 
   if (isLoading)
     return (
-      <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background text-foreground outer-pad">
-        <Skeleton width="lg" lines={5} />
+      <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
+        <TopNav
+          links={[
+            { label: "Home", to: "/", variant: "ghost" },
+            { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+          ]}
+        />
+        <div className="flex flex-1 items-center justify-center">
+          <Skeleton width="lg" lines={5} />
+        </div>
       </div>
     );
   if (!quiz) return <p>Quiz not found.</p>;
@@ -77,7 +86,14 @@ export default function AttemptQuiz() {
   const currentAnswer = answers.find((a) => a.question_id === currentQ.id);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background text-foreground outer-pad">
+    <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
+      <TopNav
+        links={[
+          { label: "Home", to: "/", variant: "ghost" },
+          { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+        ]}
+      />
+      <div className="flex flex-1 items-center justify-center">
       <Card className="w-full max-w-2xl">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Question {step + 1} of {questions.length}
@@ -121,6 +137,7 @@ export default function AttemptQuiz() {
           )}
         </div>
       </Card>
+      </div>
     </div>
   );
 }

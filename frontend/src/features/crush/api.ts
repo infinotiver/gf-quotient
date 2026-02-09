@@ -1,4 +1,4 @@
-import apiClient from "../../api/apiClient";
+import apiClient from "@api/apiClient";
 import type { CrushCreate, CrushPublic } from "./types";
 
 export async function createCrushPage(data: CrushCreate): Promise<{ status: string; page_id: string }> {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import QuestionCard from "./QuizCard";
 import type { QuestionType } from "./QuizCard";
-import type { QuizData } from "../../features/quiz/api";
+import type { QuizData } from "../api";
 import { ChevronDown, ChevronUp, Plus } from "lucide-react";
-import Button from "../common/Button";
+import Button from "@components/common/Button";
 interface QuestionsStepProps {
   questions: QuestionType[];
   setQuizData: React.Dispatch<React.SetStateAction<QuizData>>;

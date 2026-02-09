@@ -1,4 +1,4 @@
-import Button from "../common/Button";
+import Button from "@components/common/Button";
 
 const presets = [
   { key: "normal", label: "normal" },

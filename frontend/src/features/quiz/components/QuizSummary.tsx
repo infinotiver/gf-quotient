@@ -1,5 +1,5 @@
-import type { QuizData } from "../../features/quiz/api";
-import Button from "../common/Button";
+import type { QuizData } from "../api";
+import Button from "@components/common/Button";
 
 interface QuizSummaryProps {
   data: QuizData;

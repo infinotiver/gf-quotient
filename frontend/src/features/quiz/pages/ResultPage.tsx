@@ -2,12 +2,13 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { deleteQuiz, getResults } from "../api";
-import Card from "../../../components/common/Card";
-import Skeleton from "../../../components/common/Skeleton";
-import Button from "../../../components/common/Button";
+import Card from "@components/common/Card";
+import Skeleton from "@components/common/Skeleton";
+import Button from "@components/common/Button";
 import { useMemo } from "react";
-import { getVerdict, pickRandom, resultsMessages } from "../../../utils/messages";
-import LoveScale from "../../../components/common/LoveScale";
+import { getVerdict, pickRandom, resultsMessages } from "../utils/messages";
+import LoveScale from "@components/common/LoveScale";
+import TopNav from "@components/common/TopNav";
 
 export default function ResultPage() {
   const { token } = useParams();
@@ -50,13 +51,23 @@ export default function ResultPage() {
   const verdict = getVerdict(pct);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground outer-pad">
+    <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
+      <TopNav
+        links={[
+          { label: "Home", to: "/", variant: "ghost" },
+          { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+        ]}
+      />
+      <div className="flex flex-1 items-center justify-center">
       <Card className="w-full max-w-3xl">
         <h1 className="text-3xl font-bold text-center mb-2">{quiz.title}</h1>
         <p className="text-muted-foreground text-center mb-2">{quiz.description}</p>
         <h2 className="text-center text-xl font-display font-bold mb-1">
           LoveMeter verdict: <span className="text-primary">{verdict}</span>
         </h2>
+        <p className="text-center text-sm text-muted-foreground mb-4">
+          {blurb}
+        </p>
         <div className="text-center mb-8">
           <LoveScale score={score} total={total} label="Love scale" />
         </div>
@@ -111,6 +122,7 @@ export default function ResultPage() {
           </Button>
         </div>
       </Card>
+      </div>
     </div>
   );
 }

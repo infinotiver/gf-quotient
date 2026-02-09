@@ -1,6 +1,7 @@
 import { useLocation, useParams, Link } from "react-router-dom";
-import Button from "../../../components/common/Button";
-import Card from "../../../components/common/Card";
+import Button from "@components/common/Button";
+import Card from "@components/common/Card";
+import TopNav from "@components/common/TopNav";
 
 export default function ShareQuizPage() {
   const { quizId } = useParams<{ quizId: string }>();
@@ -8,7 +9,14 @@ export default function ShareQuizPage() {
   const token = (location.state as { token: string } | undefined)?.token;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground outer-pad">
+    <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
+      <TopNav
+        links={[
+          { label: "Home", to: "/", variant: "ghost" },
+          { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+        ]}
+      />
+      <div className="flex flex-1 items-center justify-center">
       <Card className="w-full max-w-xl">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Quiz Created with Love!
@@ -38,6 +46,7 @@ export default function ShareQuizPage() {
           </Link>
         </div>
       </Card>
+      </div>
     </div>
   );
 }

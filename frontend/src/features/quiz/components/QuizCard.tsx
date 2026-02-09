@@ -1,7 +1,7 @@
 import OptionCard from "./OptionCard"; // Import the OptionCard component
 import type { OptionType } from "./OptionCard";
 import { Plus, Trash2 } from "lucide-react";
-import Button from "../common/Button";
+import Button from "../../../components/common/Button";
 export interface QuestionType {
   text: string;
   options: OptionType[];

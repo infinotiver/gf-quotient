@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import QuizTitle from "../../../components/create-quiz/QuizTitle";
-import QuestionsStep from "../../../components/create-quiz/QuestionsStep";
-import QuizSummaryStep from "../../../components/create-quiz/QuizSummary";
-import PresetPicker from "../../../components/create-quiz/PresetPicker";
-import type { QuestionType } from "../../../components/create-quiz/QuizCard";
+import QuizTitle from "../components/QuizTitle";
+import QuestionsStep from "../components/QuestionsStep";
+import QuizSummaryStep from "../components/QuizSummary";
+import PresetPicker from "../components/PresetPicker";
+import type { QuestionType } from "../components/QuizCard";
 import { useNavigate } from "react-router-dom";
 import { createQuiz } from "../api";
-import { getQuestions } from "../../../utils/getQuestions";
-import type { OptionType } from "../../../components/create-quiz/OptionCard";
-import Button from "../../../components/common/Button";
-import Card from "../../../components/common/Card";
-import Footer from "../../../components/common/Footer";
-import { saveQuizToStorage } from "../../../utils/storage";
+import { getQuestions } from "../utils/getQuestions";
+import type { OptionType } from "../components/OptionCard";
+import Button from "@components/common/Button";
+import Card from "@components/common/Card";
+import Footer from "@components/common/Footer";
+import { saveQuizToStorage } from "@utils/storage";
+import TopNav from "@components/common/TopNav";
 
 export default function CreateQuizPage() {
   const [step, setStep] = useState(0);
@@ -116,29 +117,17 @@ export default function CreateQuizPage() {
     <>
       <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background text-foreground outer-pad">
         <div className="w-full max-w-6xl">
+        <TopNav
+          links={[{ label: "Home", to: "/", variant: "ghost" }]}
+          actions={[
+            { label: "Review", onClick: () => setStep(3), variant: "secondary" },
+          ]}
+        />
         <div className="mb-4">
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground mb-2">
             <div className="inline-flex items-center gap-2">
               <span>Step {step + 1} of 3</span>
               <span>{Math.round(((step + 1) / 3) * 100)}%</span>
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate("/")}
-                className="rounded-full"
-              >
-                Home
-              </Button>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => setStep(3)}
-                className="rounded-full"
-              >
-                Review
-              </Button>
             </div>
           </div>
           <div className="bg-muted rounded-full h-2 overflow-hidden">

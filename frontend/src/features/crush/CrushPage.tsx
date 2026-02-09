@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCrushPage } from "./api";
-import Card from "../../components/common/Card";
-import Button from "../../components/common/Button";
-import Skeleton from "../../components/common/Skeleton";
+import Card from "@components/common/Card";
+import Button from "@components/common/Button";
+import Skeleton from "@components/common/Skeleton";
+import TopNav from "@components/common/TopNav";
 
 export default function CrushPage() {
   const { pageId } = useParams();
@@ -22,8 +23,16 @@ export default function CrushPage() {
 
   if (isLoading)
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground outer-pad">
-        <Skeleton width="lg" lines={4} />
+      <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
+        <TopNav
+          links={[
+            { label: "Home", to: "/", variant: "ghost" },
+            { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+          ]}
+        />
+        <div className="flex flex-1 items-center justify-center">
+          <Skeleton width="lg" lines={4} />
+        </div>
       </div>
     );
   if (error || !data) return <p>Error loading page.</p>;
@@ -32,7 +41,7 @@ export default function CrushPage() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center outer-pad"
+      className="min-h-screen flex flex-col outer-pad"
       style={{
         background: page.theme.background,
         color: page.theme.text,
@@ -43,6 +52,13 @@ export default function CrushPage() {
         backgroundPosition: "center",
       }}
     >
+      <TopNav
+        links={[
+          { label: "Home", to: "/", variant: "ghost" },
+          { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+        ]}
+      />
+      <div className="flex flex-1 items-center justify-center">
       <Card className="w-full max-w-xl">
         <h1 className="text-3xl font-bold font-display text-center mb-4">
           {page.title}
@@ -72,17 +88,27 @@ export default function CrushPage() {
           <div className="flex gap-3 justify-center">
             <Button
               onClick={() => setAnswer("yes")}
-              className="min-w-[120px]"
+              className="min-w-[120px] text-white"
               style={{ background: page.theme.accent }}
             >
               {page.yes_text}
             </Button>
-            <Button variant="secondary" onClick={() => setAnswer("no")} className="min-w-[120px]">
+            <Button
+              variant="ghost"
+              onClick={() => setAnswer("no")}
+              className="min-w-[120px] border"
+              style={{
+                borderColor: page.theme.accent,
+                color: page.theme.accent,
+                background: "transparent",
+              }}
+            >
               {page.no_text}
             </Button>
           </div>
         )}
       </Card>
+      </div>
     </div>
   );
 }
