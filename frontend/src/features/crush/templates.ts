@@ -10,53 +10,54 @@ export const crushTemplates: {
 }[] = [
   {
     key: "sparkle",
-    label: "Sparkle Bloom",
-    description: "Blush pink gradient with a wink of confetti.",
+    label: "Soft Pink",
+    description: "Warm blush glow, easy and sweet.",
     defaultValues: {
       title: "Will you be my Valentine?",
-      subtitle: "A tiny question with a big heart",
-      question: "Would you go on a cozy date with me?",
+      subtitle: "A small ask with a warm heart",
+      question: "Want to go on a cozy date with me?",
       yes_text: "Yes, I'd love to",
       no_text: "Not right now",
-      message_after_yes: "You just made my day glow.",
+      message_after_yes: "You just made my day.",
       message_after_no: "Thanks for being honest.",
       hero_image:
-        "https://media.giphy.com/media/3oz8xQeB6Jj1U1H7NK/giphy.gif",
+        "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnVmd2JjbDF2czByZm9lM2s2ZWt5bHVnbnBuZWVtYjMwNWNnMWt6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LBMiDWkCw0e53UOcm0/giphy.gif",
       theme: {
-        background: "linear-gradient(180deg, #f7e9f8 0%, #ffd6ec 100%)",
-        accent: "#ff5fa2",
-        text: "#1d0b24",
+        background:
+          "linear-gradient(135deg, #ffe6f2 0%, #ffd1e0 50%, #ff99cc 100%)",
+        accent: "#ff69b4",
+        text: "#2d0a1e",
       },
     },
   },
   {
     key: "starlight",
-    label: "Starlight Whisper",
-    description: "Midnight blues with tiny twinkling sparks.",
+    label: "Starry Night",
+    description: "Deep blues, quiet sparkle.",
     defaultValues: {
-      title: "A starry question, just for you",
+      title: "A starry question for you",
       subtitle: "A soft ask under a sky of lights",
-      question: "Will you go out with me under the stars?",
+      question: "Want to go out under the stars?",
       yes_text: "Yes, let's go",
       no_text: "Let's stay friends",
-      message_after_yes: "A cosmic yes. I'm over the moon.",
+      message_after_yes: "That makes me so happy.",
       message_after_no: "I appreciate your honesty.",
       hero_image:
-        "https://media.giphy.com/media/3o7TKvRFoB4BvE0C1y/giphy.gif",
+        "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx5dDN6bW9nbGFyeTc1ZzN2Zmp5eTh5ZmU1MW5wYXRzOWY5MHY5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d2RalajGxUS3ZBimrD/giphy.gif",
       theme: {
         background:
-          "radial-gradient(circle at 20% 20%, #7b6bff 0%, #141033 80%)",
-        accent: "#f7b8ff",
-        text: "#f5f3ff",
+          "radial-gradient(circle at 30% 20%, #6a5acd 0%, #2c1b47 50%, #0f0820 100%)",
+        accent: "#d8bfff",
+        text: "#f0e6ff",
       },
     },
   },
   {
     key: "sunset",
-    label: "Sunset Haze",
-    description: "Warm toasty oranges with a soft glow.",
+    label: "Golden Hour",
+    description: "Soft orange glow, sunset calm.",
     defaultValues: {
-      title: "Will you join me for a sunset walk?",
+      title: "Sunset date?",
       subtitle: "A gentle ask in golden light",
       question: "Want to go out for a sunset date?",
       yes_text: "Absolutely",
@@ -64,37 +65,41 @@ export const crushTemplates: {
       message_after_yes: "Can't wait to spend time together.",
       message_after_no: "Thanks for letting me know.",
       hero_image:
-        "https://media.giphy.com/media/3o7TKU8RvQuomFfUUU/giphy.gif",
+        "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2E2dGxkMzV5ejdjdzNkejA0a3RvbXU1NjBlZTQycTJoaGttc2k1NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wvYNSqBAMDVx8CEYkt/giphy.gif",
       theme: {
-        background: "linear-gradient(180deg, #ffefef 0%, #ffd3b6 50%, #ffb347 100%)",
-        accent: "#ff7e5f",
-        text: "#42211a",
+        background:
+          "linear-gradient(180deg, #ffecd2 0%, #fcb69f 40%, #ff9a8b 100%)",
+        accent: "#ff6b6b",
+        text: "#3d1f1a",
       },
     },
   },
   {
     key: "radiant",
-    label: "Radiant Bloom",
-    description: "Peachy glow with mint highlights for a playful ask.",
+    label: "Peach Pop",
+    description: "Peachy glow with a fresh lift.",
     defaultValues: {
       title: "Will you be my Valentine?",
       subtitle: "A playful note with a warm smile",
-      question: "Care to share a date and some laughs?",
+      question: "Want to share a date and some laughs?",
       yes_text: "Yes, please",
       no_text: "Not right now",
       message_after_yes: "You just made me smile so wide.",
       message_after_no: "No worries, thanks for the honesty.",
       hero_image:
-        "https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif",
+        "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2h6bW1vdnV2NWg4cncyY2UxNzliaHV4cWt1ZnF4cmV5Z20zeG44ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qFmdpUKAFZ6rMobzzu/giphy.gif",
       theme: {
-        background: "linear-gradient(180deg, #fef3ec 0%, #ffe8d1 60%, #d7ffee 100%)",
-        accent: "#ff9a8b",
-        text: "#0f141b",
+        background:
+          "linear-gradient(135deg, #fff5e6 0%, #ffe8d6 40%, #d4f4dd 80%, #c7f0e0 100%)",
+        accent: "#ff85a2",
+        text: "#1a0f1f",
       },
     },
   },
 ];
 
 export function findCrushTemplate(key: CrushTemplateKey) {
-  return crushTemplates.find((template) => template.key === key) ?? crushTemplates[0];
+  return (
+    crushTemplates.find((template) => template.key === key) ?? crushTemplates[0]
+  );
 }

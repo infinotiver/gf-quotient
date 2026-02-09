@@ -1,5 +1,4 @@
 import Bubble from "@components/common/Bubble";
-import InfoBox from "@components/common/InfoBox";
 import CreateQuizButton from "@components/common/CreateQuizButton";
 import CreateCrushCard from "@components/common/CreateCrushCard";
 import Footer from "@components/common/Footer";
@@ -45,7 +44,6 @@ function HomePage() {
             <CreateQuizButton />
             <CreateCrushCard />
           </div>
-          <InfoBox />
         </div>
       </div>
       <Footer />

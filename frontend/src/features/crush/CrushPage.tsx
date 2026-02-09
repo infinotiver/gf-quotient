@@ -10,6 +10,8 @@ import TopNav from "@components/common/TopNav";
 export default function CrushPage() {
   const { pageId } = useParams();
   const [answer, setAnswer] = useState<"yes" | "no" | null>(null);
+  const [noClicks, setNoClicks] = useState(0);
+  const cappedNoClicks = Math.min(noClicks, 3);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["crush", pageId],
@@ -88,19 +90,23 @@ export default function CrushPage() {
           <div className="flex gap-3 justify-center">
             <Button
               onClick={() => setAnswer("yes")}
-              className="min-w-[120px] text-white"
-              style={{ background: page.theme.accent }}
+              className="min-w-[120px] text-white transition-transform"
+              style={{
+                background: page.theme.accent,
+                transform: `scale(${1 + cappedNoClicks * 0.05})`,
+              }}
             >
               {page.yes_text}
             </Button>
             <Button
               variant="ghost"
-              onClick={() => setAnswer("no")}
-              className="min-w-[120px] border"
+              onClick={() => setNoClicks((count) => Math.min(count + 1, 3))}
+              className="min-w-[120px] border transition-transform"
               style={{
                 borderColor: page.theme.accent,
                 color: page.theme.accent,
                 background: "transparent",
+                transform: `scale(${Math.max(0.85, 1 - cappedNoClicks * 0.08)})`,
               }}
             >
               {page.no_text}
