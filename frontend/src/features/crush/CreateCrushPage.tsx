@@ -37,7 +37,6 @@ export default function CreateCrushPage() {
   };
 
   const activeTemplate = findCrushTemplate(selectedTemplate);
-  const theme = activeTemplate.defaultValues.theme;
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
@@ -71,21 +70,9 @@ export default function CreateCrushPage() {
                 </option>
               ))}
             </select>
-            <div className="flex items-center justify-between gap-4 text-xs text-muted-foreground">
-              <p className="flex-1">{activeTemplate.description}</p>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-wide">Accent</span>
-                <span
-                  className="h-5 w-8 rounded"
-                  style={{ background: theme.accent }}
-                />
-                <span className="text-[10px] uppercase tracking-wide">Text</span>
-                <span
-                  className="h-5 w-8 rounded-lg border  border-border"
-                  style={{ background: theme.text }}
-                />
-              </div>
-            </div>
+            <p className="text-xs text-muted-foreground">
+              {activeTemplate.description}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
