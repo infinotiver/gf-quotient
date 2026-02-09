@@ -47,6 +47,7 @@ function HomePage() {
         </div>
       </div>
       <Footer />
+      <ResultsQuickLink />
     </>
   );
 }

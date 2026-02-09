@@ -13,7 +13,7 @@ export default function ResultsQuickLink() {
   if (!latest) return null;
 
   return (
-    <div className="bg-card border border-border rounded-full px-3 py-2 text-xs text-muted-foreground flex items-center gap-2">
+    <div className="fixed bottom-14 right-3 z-50 bg-card/80 border border-border rounded-full px-3 py-1 text-xs text-muted-foreground flex items-center gap-2 backdrop-blur">
       <span className="hidden sm:inline">Latest quiz:</span>
       <span className="font-semibold text-foreground truncate max-w-[140px]">
         {latest.title}
