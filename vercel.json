@@ -1,19 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python"
-    }
-  ],
+  "installCommand": "pnpm -C frontend install",
+  "buildCommand": "pnpm -C frontend build",
+  "outputDirectory": "frontend/dist",
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.py" },
-    { "src": "/", "dest": "/frontend/dist/index.html" },
-    { "src": "/(.*)", "dest": "/frontend/dist/$1" }
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

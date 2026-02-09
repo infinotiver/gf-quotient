@@ -1,6 +1,6 @@
 import uuid
 from bson import ObjectId
-from backend.database import quizes_col
+from backend.database import quizes_col, crush_pages_col
 from .models import QuizCreate, QuizPublic, Quiz, Response
 
 
@@ -98,6 +98,11 @@ async def delete_quiz(token: str):
 async def get_stats():
     try:
         total_quizzes = await quizes_col.count_documents({})
-        return {"status": "success", "total_quizzes": total_quizzes}
+        total_crush_pages = await crush_pages_col.count_documents({})
+        return {
+            "status": "success",
+            "total_quizzes": total_quizzes,
+            "total_crush_pages": total_crush_pages,
+        }
     except Exception as e:
         return {"status": "error", "message": str(e)}

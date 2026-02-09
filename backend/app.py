@@ -30,5 +30,5 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-app.include_router(quiz_router)
-app.include_router(crush_router)
+app.include_router(quiz_router, prefix="/api")
+app.include_router(crush_router, prefix="/api")

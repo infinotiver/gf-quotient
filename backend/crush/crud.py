@@ -21,6 +21,12 @@ async def get_crush_page(page_id: str):
         doc = await crush_pages_col.find_one({"page_id": page_id}, {"_id": 0})
         if not doc:
             return {"status": "error", "message": "Page not found"}
+        theme = doc.get("theme") or {}
+        if theme.get("background") == "galaxy":
+            theme["background"] = (
+                "linear-gradient(160deg, #0f0b1f 0%, #1b1234 50%, #2a1b4a 100%)"
+            )
+            doc["theme"] = theme
         public = CrushPublic(**doc)
         return {"status": "success", "page": public.model_dump()}
     except Exception as e:

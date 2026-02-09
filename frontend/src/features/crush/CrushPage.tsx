@@ -6,13 +6,13 @@ import Card from "@components/common/Card";
 import Button from "@components/common/Button";
 import Skeleton from "@components/common/Skeleton";
 import TopNav from "@components/common/TopNav";
-import Galaxy from "@components/Galaxy";
 
 export default function CrushPage() {
   const { pageId } = useParams();
   const [answer, setAnswer] = useState<"yes" | "no" | null>(null);
   const [noClicks, setNoClicks] = useState(0);
-  const cappedNoClicks = Math.min(noClicks, 3);
+  const cappedNoClicks = Math.min(noClicks, 5);
+  const [heroError, setHeroError] = useState(false);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["crush", pageId],
@@ -41,13 +41,17 @@ export default function CrushPage() {
   if (error || !data) return <p>Error loading page.</p>;
 
   const page = data.page;
-  const useGalaxy = page.theme.background === "galaxy";
+  const safeBackground =
+    page.theme.background === "galaxy"
+      ? "linear-gradient(160deg, #0f0b1f 0%, #1b1234 50%, #2a1b4a 100%)"
+      : page.theme.background;
+  const imageSrc = page.after_yes_gif || page.hero_image;
 
   return (
     <div
       className="min-h-screen flex flex-col outer-pad relative overflow-hidden"
       style={{
-        background: useGalaxy ? "#0f0820" : page.theme.background,
+        background: safeBackground,
         color: page.theme.text,
         backgroundImage: page.theme.background_image
           ? `url(${page.theme.background_image})`
@@ -56,24 +60,6 @@ export default function CrushPage() {
         backgroundPosition: "center",
       }}
     >
-      {useGalaxy && (
-        <div className="absolute inset-0 -z-10">
-          <Galaxy
-            starSpeed={0.5}
-            density={0.4}
-            hueShift={140}
-            speed={0.5}
-            glowIntensity={0.15}
-            saturation={0}
-            mouseRepulsion={false}
-            repulsionStrength={1.2}
-            twinkleIntensity={0.1}
-            rotationSpeed={0.02}
-            disableAnimation
-            transparent
-          />
-        </div>
-      )}
       <TopNav
         links={[
           { label: "Home", to: "/", variant: "ghost" },
@@ -85,13 +71,31 @@ export default function CrushPage() {
         <h1 className="text-3xl font-bold font-display text-center mb-4">
           {page.title}
         </h1>
-        {page.hero_image && (
+        {imageSrc && (
           <div className="flex justify-center mb-4">
-            <img
-              src={page.hero_image}
-              alt="Crush"
-              className="max-h-48 rounded-lg"
-            />
+            {!heroError ? (
+              <img
+                src={imageSrc}
+                alt=""
+                className="max-h-48 rounded-lg"
+                referrerPolicy="no-referrer"
+                crossOrigin="anonymous"
+                onError={() => setHeroError(true)}
+              />
+            ) : (
+              <div className="text-xs text-muted-foreground text-center">
+                Image failed to load.{" "}
+                <a
+                  href={imageSrc}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline"
+                >
+                  Open it directly
+                </a>
+                .
+              </div>
+            )}
           </div>
         )}
         <p className="text-center mb-6">{page.question}</p>
@@ -100,15 +104,6 @@ export default function CrushPage() {
             {answer === "yes"
               ? page.message_after_yes || "Sweet!"
               : page.message_after_no || "Thanks for being honest."}
-            {answer === "yes" && page.after_yes_gif && (
-              <div className="mt-4 flex justify-center">
-                <img
-                  src={page.after_yes_gif}
-                  alt="Celebration"
-                  className="max-h-40 rounded-lg"
-                />
-              </div>
-            )}
           </div>
         ) : (
           <div className="flex gap-3 justify-center">
@@ -117,20 +112,20 @@ export default function CrushPage() {
               className="min-w-[120px] text-white transition-transform"
               style={{
                 background: page.theme.accent,
-                transform: `scale(${1 + cappedNoClicks * 0.05})`,
+                transform: `scale(${1 + cappedNoClicks * 0.1})`,
               }}
             >
               {page.yes_text}
             </Button>
             <Button
               variant="ghost"
-              onClick={() => setNoClicks((count) => Math.min(count + 1, 3))}
+              onClick={() => setNoClicks((count) => Math.min(count + 1, 5))}
               className="min-w-[120px] border transition-transform"
               style={{
                 borderColor: page.theme.accent,
                 color: page.theme.accent,
                 background: "transparent",
-                transform: `scale(${Math.max(0.85, 1 - cappedNoClicks * 0.08)})`,
+                transform: `scale(${Math.max(0.85, 1 - cappedNoClicks * 0.1)})`,
               }}
             >
               {page.no_text}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Card from "@components/common/Card";
 import Button from "@components/common/Button";
@@ -20,6 +20,7 @@ export default function CreateCrushPage() {
   const [form, setForm] = useState<CrushCreate>(defaultTemplate.defaultValues);
   const [pageId, setPageId] = useState<string | null>(null);
   const [showLinkModal, setShowLinkModal] = useState(false);
+  const [previewError, setPreviewError] = useState(false);
 
   const mutation = useMutation({
     mutationFn: async () => createCrushPage(form),
@@ -37,6 +38,12 @@ export default function CreateCrushPage() {
   };
 
   const activeTemplate = findCrushTemplate(selectedTemplate);
+  const theme = activeTemplate.defaultValues.theme;
+  const previewHero = form.after_yes_gif || form.hero_image;
+
+  useEffect(() => {
+    setPreviewError(false);
+  }, [previewHero]);
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
@@ -47,7 +54,8 @@ export default function CreateCrushPage() {
         ]}
       />
       <div className="flex flex-1 items-center justify-center">
-      <Card className="w-full max-w-2xl space-y-6">
+      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <Card className="space-y-6">
         <h1 className="text-3xl font-bold font-display text-center">
           LoveMeter Crush Page
         </h1>
@@ -70,9 +78,21 @@ export default function CreateCrushPage() {
                 </option>
               ))}
             </select>
-            <p className="text-xs text-muted-foreground">
-              {activeTemplate.description}
-            </p>
+            <div className="flex items-center justify-between gap-4 text-xs text-muted-foreground">
+              <p className="flex-1">{activeTemplate.description}</p>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] uppercase tracking-wide">Accent</span>
+                <span
+                  className="h-5 w-8 rounded"
+                  style={{ background: theme.accent }}
+                />
+                <span className="text-[10px] uppercase tracking-wide">Text</span>
+                <span
+                  className="h-5 w-8 rounded-lg border  border-border"
+                  style={{ background: theme.text }}
+                />
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -91,6 +111,45 @@ export default function CreateCrushPage() {
                   }))
                 }
                 placeholder="Will you be my Valentine?"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold" htmlFor="backgroundColor">
+                Background color or gradient
+              </label>
+              <input
+                id="backgroundColor"
+                className="w-full p-2 bg-background rounded-lg border  border-input"
+                value={form.theme.background}
+                onChange={(event) =>
+                  setForm((previous) => ({
+                    ...previous,
+                    theme: { ...previous.theme, background: event.target.value },
+                  }))
+                }
+                placeholder="linear-gradient(135deg, #ffe3ef, #ffb3d7)"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold" htmlFor="backgroundImage">
+                Background image URL (optional)
+              </label>
+              <input
+                id="backgroundImage"
+                className="w-full p-2 bg-background rounded-lg border  border-input"
+                value={form.theme.background_image ?? ""}
+                onChange={(event) =>
+                  setForm((previous) => ({
+                    ...previous,
+                    theme: {
+                      ...previous.theme,
+                      background_image: event.target.value || undefined,
+                    },
+                  }))
+                }
+                placeholder="https://example.com/bg.jpg"
               />
             </div>
           </div>
@@ -189,7 +248,7 @@ export default function CreateCrushPage() {
 
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold" htmlFor="heroImage">
-              Hero GIF URL
+              Hero image or GIF URL
             </label>
             <input
               id="heroImage"
@@ -201,12 +260,12 @@ export default function CreateCrushPage() {
                   hero_image: event.target.value,
                 }))
               }
-              placeholder="https://media.giphy.com/media/..."
+              placeholder="https://example.com/image.jpg or .gif"
             />
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold" htmlFor="afterYesGif">
-              After Yes GIF URL
+              After Yes image or GIF URL
             </label>
             <input
               id="afterYesGif"
@@ -218,7 +277,7 @@ export default function CreateCrushPage() {
                   after_yes_gif: event.target.value,
                 }))
               }
-              placeholder="https://media.giphy.com/media/..."
+              placeholder="https://example.com/celebrate.gif"
             />
           </div>
         </div>
@@ -262,6 +321,59 @@ export default function CreateCrushPage() {
           </>
         )}
       </Card>
+      <Card className="space-y-4">
+        <div className="text-sm font-semibold">Live preview</div>
+        <div
+          className="rounded-2xl border border-border p-6"
+          style={{
+            background: form.theme.background || theme.background,
+            color: form.theme.text,
+            backgroundImage: form.theme.background_image
+              ? `url(${form.theme.background_image})`
+              : undefined,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="text-center font-display text-2xl font-bold mb-3">
+            {form.title || "Your page title"}
+          </div>
+          {previewHero && (
+            <div className="flex justify-center mb-3">
+              {!previewError ? (
+                <img
+                  src={previewHero}
+                  alt=""
+                  className="max-h-36 rounded-lg"
+                  referrerPolicy="no-referrer"
+                  crossOrigin="anonymous"
+                  onError={() => setPreviewError(true)}
+                />
+              ) : (
+                <div className="text-xs text-muted-foreground text-center">
+                  Preview image failed to load. Try a direct GIF link.
+                </div>
+              )}
+            </div>
+          )}
+          <div className="text-center mb-4">
+            {form.question || "Your main question goes here."}
+          </div>
+          <div className="flex gap-3 justify-center">
+            <Button style={{ background: theme.accent, color: "#fff" }}>
+              {form.yes_text || "Yes"}
+            </Button>
+            <Button
+              variant="ghost"
+              className="border"
+              style={{ borderColor: theme.accent, color: theme.accent }}
+            >
+              {form.no_text || "No"}
+            </Button>
+          </div>
+        </div>
+      </Card>
+      </div>
       </div>
     </div>
   );

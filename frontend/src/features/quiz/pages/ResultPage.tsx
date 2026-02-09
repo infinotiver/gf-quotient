@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import { getVerdict, pickRandom, resultsMessages } from "../utils/messages";
 import LoveScale from "@components/common/LoveScale";
 import TopNav from "@components/common/TopNav";
+import { removeQuizFromStorage } from "@utils/storage";
 
 export default function ResultPage() {
   const { token } = useParams();
@@ -29,6 +30,9 @@ export default function ResultPage() {
       return deleteQuiz(token);
     },
     onSuccess: () => {
+      if (token) {
+        removeQuizFromStorage(token);
+      }
       window.location.href = "/";
     },
   });

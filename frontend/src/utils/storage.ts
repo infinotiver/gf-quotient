@@ -28,3 +28,15 @@ export function getLatestQuiz(): StoredQuiz | null {
     return null;
   }
 }
+
+export function removeQuizFromStorage(token: string) {
+  try {
+    const stored = localStorage.getItem(KEY);
+    if (!stored) return;
+    const list: StoredQuiz[] = JSON.parse(stored);
+    const next = list.filter((quiz) => quiz.token !== token);
+    localStorage.setItem(KEY, JSON.stringify(next));
+  } catch {
+    // ignore storage errors
+  }
+}
