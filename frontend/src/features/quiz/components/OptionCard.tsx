@@ -34,7 +34,7 @@ export default function OptionCard({
         {correct_option ? <Heart size={16} /> : <HeartCrack size={16} />}
       </Button>
       <input
-        className={`flex-1 p-2 bg-background rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
+        className={`flex-1 p-2 bg-background rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
         value={option.text}

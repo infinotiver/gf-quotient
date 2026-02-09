@@ -43,13 +43,13 @@ export default function QuizCard({
   };
 
   return (
-    <div className="flex flex-col gap-3 p-3 bg-card rounded-2xl border border-border">
+    <div className="flex flex-col gap-3 p-3 bg-card rounded-2xl">
       <input
         type="text"
         value={question.text}
         onChange={(e) => onChange({ ...question, text: e.target.value })}
         placeholder="Question text"
-        className="w-full p-2 bg-background rounded border border-input focus:ring-2 focus:ring-ring"
+        className="w-full p-2 bg-background rounded-xl border border-input focus:ring-2 focus:ring-ring"
       />
 
       {question.options.map((option) => (

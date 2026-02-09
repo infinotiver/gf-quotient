@@ -5,7 +5,7 @@ function CreateCrushCard() {
   return (
     <div className="bg-card border border-border rounded-2xl inner-pad">
       <div className="text-lg font-semibold text-foreground mb-3">
-        Create a crush page
+        Ask your crush out
       </div>
       <div className="text-sm text-muted-foreground mb-3">
         A tiny utility to ask them out in a creative way (and we'll try to get you a date, hopefully).
@@ -14,7 +14,7 @@ function CreateCrushCard() {
         to="/crush/create"
         className={buttonClassName("secondary", "lg", "w-full")}
       >
-        Start
+        Be bold, ask now!
       </Link>
     </div>
   );

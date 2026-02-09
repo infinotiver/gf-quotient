@@ -62,18 +62,38 @@ export default function ResultPage() {
       <Card className="w-full max-w-3xl">
         <h1 className="text-3xl font-bold text-center mb-2">{quiz.title}</h1>
         <p className="text-muted-foreground text-center mb-2">{quiz.description}</p>
-        <h2 className="text-center text-xl font-display font-bold mb-1">
-          LoveMeter verdict: <span className="text-primary">{verdict}</span>
-        </h2>
-        <p className="text-center text-sm text-muted-foreground mb-4">
-          {blurb}
-        </p>
-        <div className="text-center mb-8">
-          <LoveScale score={score} total={total} label="Love scale" />
-        </div>
+        {responses.length > 0 ? (
+          <>
+            <h2 className="text-center text-xl font-display font-bold mb-1">
+              LoveMeter verdict: <span className="text-primary">{verdict}</span>
+            </h2>
+            <p className="text-center text-sm text-muted-foreground mb-4">
+              {blurb}
+            </p>
+            <div className="text-center mb-8">
+              <LoveScale score={score} total={total} label="Love scale" />
+            </div>
+          </>
+        ) : (
+          <div className="mt-6 mb-8 text-center">
+            <div className="text-sm text-muted-foreground mb-2">
+              No attempts yet. Share this link:
+            </div>
+            <code className="block border border-border px-4 py-2 rounded-lg text-center break-all">
+              {quiz.quiz_id
+                ? `${window.location.origin}/attempt/${quiz.quiz_id}`
+                : "Attempt link unavailable"}
+            </code>
+            <div className="mt-3 text-xs text-muted-foreground">
+              Results link (keep private):{" "}
+              {token ? `${window.location.origin}/results/${token}` : "Unavailable"}
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col gap-4">
-          {quiz.questions.map((q) => {
+          {responses.length > 0 &&
+            quiz.questions.map((q) => {
             const userResponse = responses.find((r) => r.question_id === q.id);
             const correctId = q.correct_option ?? null;
             return (

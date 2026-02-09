@@ -14,7 +14,7 @@ function CreateQuizButton() {
         to="/create-quiz"
         className={buttonClassName("primary", "lg", "w-full")}
       >
-        Start
+        Create the quiz
       </Link>
     </div>
   );

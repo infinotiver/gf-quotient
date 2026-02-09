@@ -19,6 +19,9 @@ export type GetQuizData = {
   title: string;
   description: string;
   questions: GetQuestionType[];
+  quiz_id?: string;
+  _id?: string;
+  token?: string;
 };
 
 export type QuizResult = {

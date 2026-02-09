@@ -29,7 +29,7 @@ function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr,0.8fr] gap-4">
             <Bubble subtitle="A small love quiz to see if they" title="Know You" />
             <Card className="text-center flex flex-col justify-center">
-              <div className="text-sm text-muted-foreground">Community Stats</div>
+              <div className="text-sm text-muted-foreground">Stats</div>
               <div className="mt-2 flex items-center justify-center">
                 <div>
                   <div className="text-2xl font-bold">
@@ -47,7 +47,6 @@ function HomePage() {
         </div>
       </div>
       <Footer />
-      <ResultsQuickLink />
     </>
   );
 }

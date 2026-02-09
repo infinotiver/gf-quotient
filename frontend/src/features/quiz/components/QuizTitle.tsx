@@ -25,9 +25,9 @@ export default function QuizTitle({
   };
   return (
     <>
-      <div className="flex flex-col bg-card border border-border rounded-lg inner-pad stack-gap">
-        <h1 className="text-3xl font-bold mb-1 text-foreground">
-          LoveMeter Quiz Title
+      <div className="flex flex-col bg-card rounded-lg inner-pad stack-gap">
+        <h1 className="text-3xl font-bold font-display mb-1 text-foreground">
+          Quiz Details
         </h1>
         <p className="text-sm text-muted-foreground mb-2">
           Create a sweet quiz for your special someone.
