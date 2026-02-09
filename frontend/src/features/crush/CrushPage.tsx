@@ -6,6 +6,7 @@ import Card from "@components/common/Card";
 import Button from "@components/common/Button";
 import Skeleton from "@components/common/Skeleton";
 import TopNav from "@components/common/TopNav";
+import Galaxy from "@components/Galaxy";
 
 export default function CrushPage() {
   const { pageId } = useParams();
@@ -40,12 +41,13 @@ export default function CrushPage() {
   if (error || !data) return <p>Error loading page.</p>;
 
   const page = data.page;
+  const useGalaxy = page.theme.background === "galaxy";
 
   return (
     <div
-      className="min-h-screen flex flex-col outer-pad"
+      className="min-h-screen flex flex-col outer-pad relative overflow-hidden"
       style={{
-        background: page.theme.background,
+        background: useGalaxy ? "#0f0820" : page.theme.background,
         color: page.theme.text,
         backgroundImage: page.theme.background_image
           ? `url(${page.theme.background_image})`
@@ -54,6 +56,23 @@ export default function CrushPage() {
         backgroundPosition: "center",
       }}
     >
+      {useGalaxy && (
+        <div className="absolute inset-0 -z-10">
+          <Galaxy
+            starSpeed={0.5}
+            density={1}
+            hueShift={140}
+            speed={1}
+            glowIntensity={0.3}
+            saturation={0}
+            mouseRepulsion
+            repulsionStrength={2}
+            twinkleIntensity={0.3}
+            rotationSpeed={0.1}
+            transparent
+          />
+        </div>
+      )}
       <TopNav
         links={[
           { label: "Home", to: "/", variant: "ghost" },

@@ -22,9 +22,11 @@ type TopNavProps = {
 export default function TopNav({ links = [], actions = [] }: TopNavProps) {
   return (
     <div className="flex items-center justify-between mb-4">
-      <Link to="/" className="text-sm font-semibold font-display tracking-wide">
-        LoveMeter
-      </Link>
+      <Button variant="ghost">
+        <Link to="/" className="text-md font-bold font-display tracking-wide">
+          LoveMeter
+        </Link>
+      </Button>
       <div className="flex flex-wrap items-center gap-2">
         {links.map((link) => (
           <Link key={link.to} to={link.to}>

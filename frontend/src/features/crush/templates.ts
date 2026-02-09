@@ -45,8 +45,7 @@ export const crushTemplates: {
       hero_image:
         "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGx5dDN6bW9nbGFyeTc1ZzN2Zmp5eTh5ZmU1MW5wYXRzOWY5MHY5aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d2RalajGxUS3ZBimrD/giphy.gif",
       theme: {
-        background:
-          "radial-gradient(circle at 30% 20%, #6a5acd 0%, #2c1b47 50%, #0f0820 100%)",
+        background: "galaxy",
         accent: "#d8bfff",
         text: "#f0e6ff",
       },
