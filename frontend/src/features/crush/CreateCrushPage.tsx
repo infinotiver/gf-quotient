@@ -19,10 +19,14 @@ export default function CreateCrushPage() {
   );
   const [form, setForm] = useState<CrushCreate>(defaultTemplate.defaultValues);
   const [pageId, setPageId] = useState<string | null>(null);
+  const [showLinkModal, setShowLinkModal] = useState(false);
 
   const mutation = useMutation({
     mutationFn: async () => createCrushPage(form),
-    onSuccess: (data) => setPageId(data.page_id),
+    onSuccess: (data) => {
+      setPageId(data.page_id);
+      setShowLinkModal(true);
+    },
   });
 
   const onTemplateChange = (key: CrushTemplateKey) => {
@@ -100,23 +104,6 @@ export default function CreateCrushPage() {
                   }))
                 }
                 placeholder="Will you be my Valentine?"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold" htmlFor="subtitle">
-                Subtitle
-              </label>
-              <input
-                id="subtitle"
-                className="w-full p-2 bg-background rounded-lg border  border-input"
-                value={form.subtitle ?? ""}
-                onChange={(event) =>
-                  setForm((previous) => ({
-                    ...previous,
-                    subtitle: event.target.value,
-                  }))
-                }
-                placeholder="A tiny question with a big heart"
               />
             </div>
           </div>
@@ -230,26 +217,62 @@ export default function CreateCrushPage() {
               placeholder="https://media.giphy.com/media/..."
             />
           </div>
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-semibold" htmlFor="afterYesGif">
+              After Yes GIF URL
+            </label>
+            <input
+              id="afterYesGif"
+              className="w-full p-2 bg-background rounded-lg border  border-input"
+              value={form.after_yes_gif ?? ""}
+              onChange={(event) =>
+                setForm((previous) => ({
+                  ...previous,
+                  after_yes_gif: event.target.value,
+                }))
+              }
+              placeholder="https://media.giphy.com/media/..."
+            />
+          </div>
         </div>
         <div className="flex flex-wrap gap-2 my-2">
           <Button onClick={() => mutation.mutate()}>Create Page</Button>
-          {pageId && (
-            <Button
-              variant="secondary"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  `${window.location.origin}/crush/${pageId}`,
-                )
-              }
-            >
-              Copy Link
-            </Button>
-          )}
         </div>
-        {pageId && (
-          <div className="text-sm text-muted-foreground">
-            Share: {window.location.origin}/crush/{pageId}
-          </div>
+        {pageId && showLinkModal && (
+          <>
+            <div
+              className="fixed inset-0 bg-black/40 z-40"
+              onClick={() => setShowLinkModal(false)}
+            />
+            <div className="fixed inset-0 z-50 flex items-center justify-center outer-pad">
+              <Card className="w-full max-w-md">
+                <div className="text-lg font-semibold mb-2">Crush page is ready</div>
+                <div className="text-sm text-muted-foreground mb-4">
+                  Share this link:
+                </div>
+                <code className="block border border-border px-3 py-2 rounded-lg text-center break-all">
+                  {window.location.origin}/crush/{pageId}
+                </code>
+                <div className="mt-4 flex gap-2">
+                  <Button
+                    onClick={() =>
+                      navigator.clipboard.writeText(
+                        `${window.location.origin}/crush/${pageId}`,
+                      )
+                    }
+                  >
+                    Copy Link
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowLinkModal(false)}
+                  >
+                    Close
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          </>
         )}
       </Card>
       </div>

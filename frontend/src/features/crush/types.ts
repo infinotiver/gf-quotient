@@ -7,7 +7,6 @@ export type CrushTheme = {
 
 export type CrushCreate = {
   title: string;
-  subtitle?: string;
   question: string;
   yes_text: string;
   no_text: string;
@@ -15,6 +14,7 @@ export type CrushCreate = {
   message_after_yes?: string;
   message_after_no?: string;
   hero_image?: string;
+  after_yes_gif?: string;
 };
 
 export type CrushPublic = CrushCreate & { page_id: string };

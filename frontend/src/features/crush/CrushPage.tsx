@@ -60,15 +60,16 @@ export default function CrushPage() {
         <div className="absolute inset-0 -z-10">
           <Galaxy
             starSpeed={0.5}
-            density={1}
+            density={0.4}
             hueShift={140}
-            speed={1}
-            glowIntensity={0.3}
+            speed={0.5}
+            glowIntensity={0.15}
             saturation={0}
-            mouseRepulsion
-            repulsionStrength={2}
-            twinkleIntensity={0.3}
-            rotationSpeed={0.1}
+            mouseRepulsion={false}
+            repulsionStrength={1.2}
+            twinkleIntensity={0.1}
+            rotationSpeed={0.02}
+            disableAnimation
             transparent
           />
         </div>
@@ -84,11 +85,6 @@ export default function CrushPage() {
         <h1 className="text-3xl font-bold font-display text-center mb-4">
           {page.title}
         </h1>
-        {page.subtitle && (
-          <p className="text-center text-sm text-muted-foreground mb-4">
-            {page.subtitle}
-          </p>
-        )}
         {page.hero_image && (
           <div className="flex justify-center mb-4">
             <img
@@ -104,6 +100,15 @@ export default function CrushPage() {
             {answer === "yes"
               ? page.message_after_yes || "Sweet!"
               : page.message_after_no || "Thanks for being honest."}
+            {answer === "yes" && page.after_yes_gif && (
+              <div className="mt-4 flex justify-center">
+                <img
+                  src={page.after_yes_gif}
+                  alt="Celebration"
+                  className="max-h-40 rounded-lg"
+                />
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex gap-3 justify-center">

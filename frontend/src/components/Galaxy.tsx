@@ -1,5 +1,5 @@
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import { useEffect, useRef, type HTMLAttributes } from "react";
+import { useEffect, useRef, useState, type HTMLAttributes } from "react";
 import "./Galaxy.css";
 
 const vertexShader = `
@@ -213,13 +213,19 @@ export default function Galaxy({
   const smoothMousePos = useRef({ x: 0.5, y: 0.5 });
   const targetMouseActive = useRef(0.0);
   const smoothMouseActive = useRef(0.0);
+  const [contextLost, setContextLost] = useState(false);
 
   useEffect(() => {
-    if (!ctnDom.current) return;
+    if (contextLost || !ctnDom.current) return;
     const ctn = ctnDom.current;
     const renderer = new Renderer({
       alpha: transparent,
       premultipliedAlpha: false,
+      powerPreference: "low-power",
+      antialias: false,
+      depth: false,
+      stencil: false,
+      preserveDrawingBuffer: false,
     });
     const gl = renderer.gl;
 
@@ -232,6 +238,7 @@ export default function Galaxy({
     }
 
     let program: Program;
+    let animateId = 0;
 
     function resize() {
       const scale = 1;
@@ -285,7 +292,6 @@ export default function Galaxy({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId = 0;
 
     function update(t: number) {
       animateId = requestAnimationFrame(update);
@@ -312,6 +318,19 @@ export default function Galaxy({
     animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
+    function handleContextLost(event: Event) {
+      event.preventDefault();
+      setContextLost(true);
+      cancelAnimationFrame(animateId);
+    }
+
+    function handleContextRestored() {
+      setContextLost(false);
+    }
+
+    gl.canvas.addEventListener("webglcontextlost", handleContextLost, false);
+    gl.canvas.addEventListener("webglcontextrestored", handleContextRestored, false);
+
     function handleMouseMove(e: MouseEvent) {
       const rect = ctn.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
@@ -332,14 +351,20 @@ export default function Galaxy({
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener("resize", resize);
+      gl.canvas.removeEventListener("webglcontextlost", handleContextLost, false);
+      gl.canvas.removeEventListener(
+        "webglcontextrestored",
+        handleContextRestored,
+        false,
+      );
       if (mouseInteraction) {
         ctn.removeEventListener("mousemove", handleMouseMove);
         ctn.removeEventListener("mouseleave", handleMouseLeave);
       }
       ctn.removeChild(gl.canvas);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
   }, [
+    contextLost,
     focal,
     rotation,
     starSpeed,
@@ -358,5 +383,11 @@ export default function Galaxy({
     transparent,
   ]);
 
-  return <div ref={ctnDom} className="galaxy-container" {...rest} />;
+  return (
+    <div
+      ref={ctnDom}
+      className={`galaxy-container ${contextLost ? "galaxy-fallback" : ""}`}
+      {...rest}
+    />
+  );
 }
