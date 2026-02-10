@@ -1,25 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getQuiz } from "../../api";
 import Button from "@components/common/Button";
 import Skeleton from "@components/common/Skeleton";
 import Card from "@components/common/Card";
 import TopNav from "@components/common/TopNav";
+import useQuiz from "@hooks/quiz/useQuiz";
 
 export default function AttemptLanding() {
   const { quizId } = useParams();
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["quiz", quizId],
-    queryFn: async () => {
-      if (!quizId) throw new Error("Quiz ID is required");
-      return await getQuiz(quizId);
-    },
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading, error } = useQuiz(quizId);
 
   const quiz = data ? data : null;
   const attempted = quiz?.attempted === true;

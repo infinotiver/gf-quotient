@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getCrushPage } from "./api";
+import useCrushPage from "@hooks/crush/useCrushPage";
 import Card from "@components/common/Card";
 import Button from "@components/common/Button";
 import Skeleton from "@components/common/Skeleton";
@@ -14,15 +13,7 @@ export default function CrushPage() {
   const cappedNoClicks = Math.min(noClicks, 5);
   const [heroError, setHeroError] = useState(false);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["crush", pageId],
-    queryFn: async () => {
-      if (!pageId) throw new Error("Page ID required");
-      return await getCrushPage(pageId);
-    },
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading, error } = useCrushPage(pageId);
 
   if (isLoading)
     return (

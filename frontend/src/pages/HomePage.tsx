@@ -4,17 +4,11 @@ import CreateCrushCard from "@components/common/CreateCrushCard";
 import Footer from "@components/common/Footer";
 import ResultsQuickLink from "@components/common/ResultsQuickLink";
 import TopNav from "@components/common/TopNav";
-import { useQuery } from "@tanstack/react-query";
-import { getStats } from "@features/quiz/api";
 import Card from "@components/common/Card";
+import useStats from "@hooks/quiz/useStats";
 
 function HomePage() {
-  const { data } = useQuery({
-    queryKey: ["stats"],
-    queryFn: getStats,
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
+  const { data } = useStats();
 
   return (
     <>

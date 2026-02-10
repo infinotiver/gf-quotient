@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import apiClient from "@api/apiClient";
-import { getQuiz } from "../../api";
 import type { OptionType } from "../../components/OptionCard";
 import Button from "@components/common/Button";
 import Skeleton from "@components/common/Skeleton";
 import Card from "@components/common/Card";
 import TopNav from "@components/common/TopNav";
+import useQuiz from "@hooks/quiz/useQuiz";
 
 type Question = {
   id: number;
@@ -19,12 +19,7 @@ export default function AttemptQuiz() {
   const navigate = useNavigate();
 
   // Fetch quiz data
-  const { data: quiz, isLoading } = useQuery({
-    queryKey: ["quiz", quizId],
-    queryFn: () => getQuiz(quizId ? quizId : ""),
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
+  const { data: quiz, isLoading } = useQuiz(quizId);
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<

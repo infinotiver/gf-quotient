@@ -1,7 +1,5 @@
 
-import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { deleteQuiz, getResults } from "../api";
 import Card from "@components/common/Card";
 import Skeleton from "@components/common/Skeleton";
 import Button from "@components/common/Button";
@@ -10,31 +8,18 @@ import { getVerdict, pickRandom, resultsMessages } from "../utils/messages";
 import LoveScale from "@components/common/LoveScale";
 import TopNav from "@components/common/TopNav";
 import { removeQuizFromStorage } from "@utils/storage";
+import useResults from "@hooks/quiz/useResults";
+import useDeleteQuiz from "@hooks/quiz/useDeleteQuiz";
 
 export default function ResultPage() {
   const { token } = useParams();
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["results", token],
-    queryFn: async () => {
-      if (!token) throw new Error("Token is required");
-      return await getResults(token);
-    },
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: async () => {
-      if (!token) throw new Error("Token is required");
-      return deleteQuiz(token);
-    },
-    onSuccess: () => {
-      if (token) {
-        removeQuizFromStorage(token);
-      }
-      window.location.href = "/";
-    },
+  const { data, isLoading, error } = useResults(token);
+  const deleteMutation = useDeleteQuiz(token, () => {
+    if (token) {
+      removeQuizFromStorage(token);
+    }
+    window.location.href = "/";
   });
 
   const blurb = useMemo(() => pickRandom(resultsMessages), []);

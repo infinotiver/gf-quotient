@@ -13,6 +13,12 @@ function Footer() {
         infinotiver
       </a>
       <a
+        href="/PRIVACY"
+        className="hover:text-foreground font-medium"
+      >
+        Privacy
+      </a>
+      <a
         href="https://github.com/infinotiver/gf-quotient"
         target="_blank"
         rel="noreferrer"

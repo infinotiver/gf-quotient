@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import Card from "@components/common/Card";
 import Button from "@components/common/Button";
 import type { CrushCreate } from "./types";
-import { createCrushPage } from "./api";
+import useCreateCrushPage from "@hooks/crush/useCreateCrushPage";
 import TopNav from "@components/common/TopNav";
 import {
   crushTemplates,
@@ -22,12 +21,9 @@ export default function CreateCrushPage() {
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [previewError, setPreviewError] = useState(false);
 
-  const mutation = useMutation({
-    mutationFn: async () => createCrushPage(form),
-    onSuccess: (data) => {
-      setPageId(data.page_id);
-      setShowLinkModal(true);
-    },
+  const mutation = useCreateCrushPage(form, (data) => {
+    setPageId(data.page_id);
+    setShowLinkModal(true);
   });
 
   const onTemplateChange = (key: CrushTemplateKey) => {

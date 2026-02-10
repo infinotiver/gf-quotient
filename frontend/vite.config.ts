@@ -11,6 +11,7 @@ export default defineConfig({
       { find: "@", replacement: resolve(__dirname, "src") },
       { find: "@features", replacement: resolve(__dirname, "src/features") },
       { find: "@components", replacement: resolve(__dirname, "src/components") },
+      { find: "@hooks", replacement: resolve(__dirname, "src/hooks") },
       { find: "@utils", replacement: resolve(__dirname, "src/utils") },
       { find: "@api", replacement: resolve(__dirname, "src/api") },
     ],
