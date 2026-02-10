@@ -36,6 +36,7 @@ export type QuizResult = {
 export type StatsResponse = {
   status: string;
   total_quizzes: number;
+  total_crush_pages?: number;
   message?: string;
 };
 
