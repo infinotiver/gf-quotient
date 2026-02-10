@@ -9,6 +9,7 @@ import ResultPage from "./features/quiz/pages/ResultPage";
 import AttemptResultPage from "./features/quiz/pages/attempt/AttemptResultPage";
 import CreateCrushPage from "./features/crush/CreateCrushPage";
 import CrushPage from "./features/crush/CrushPage";
+import PrivacyPage from "./pages/PrivacyPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/results/:token" element={<ResultPage />} />
           <Route path="/crush/create" element={<CreateCrushPage />} />
           <Route path="/crush/:pageId" element={<CrushPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
       </QueryClientProvider>
     </Router>
