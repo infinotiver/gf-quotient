@@ -11,9 +11,13 @@ import os
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Speed up quiz lookup by short code and results token
-    await quizes_col.create_index("quiz_id", unique=True)
-    await quizes_col.create_index("token", unique=True)
-    await crush_pages_col.create_index("page_id", unique=True)
+    try:
+        await quizes_col.create_index("quiz_id", unique=True)
+        await quizes_col.create_index("token", unique=True)
+        await crush_pages_col.create_index("page_id", unique=True)
+    except Exception as exc:
+        # Avoid crashing startup when DB is unavailable (e.g., misconfigured env).
+        print(f"[startup] MongoDB index creation failed: {exc}")
 
     # This 'yield' statement separates startup and shutdown logic
     yield
