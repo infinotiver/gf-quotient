@@ -10,96 +10,104 @@ export default function PrivacyPage() {
           <TopNav links={[{ label: "Home", to: "/", variant: "ghost" }]} />
           <Card className="space-y-4">
             <h1 className="text-3xl font-bold font-display my-2">Privacy Policy</h1>
-            <div className="text-xs text-muted-foreground">
-              Last updated: 2026-02-10, (AI-generated)
+            <div className="text-xs text-muted-foreground p-1">
+              Last updated: 2026-02-10
             </div>
 
             <div className="space-y-3 text-sm text-muted-foreground">
               <p>
-                LoveMeter lets you create love quizzes and ask-out pages. The
-                content you type is stored so the link can work. We do not
-                require accounts, and links are the only access control. Treat
-                share links as public.
+                This Privacy Policy explains how LoveMeter collects, uses, and
+                shares information when you use the Service. By using the
+                Service, you agree to the collection and use of information in
+                accordance with this policy.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                What we store
+                Information we collect
               </h2>
               <p>
-                Quiz content: title, description, questions, options, correct
-                answers. Quiz results: responses and score. Crush pages: title,
-                question text, button labels, messages, theme colors, and
-                image/GIF URLs. Anonymous metadata: creation timestamps and
-                internal IDs.
+                Content you provide: quiz titles, questions, options, correct
+                answers, responses, scores, and ask-out page content including
+                button labels, messages, colors, and image/GIF URLs. We may also
+                collect basic usage data such as IP address, device type, and
+                browser information for security and analytics.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                What we do not store
+                How we use information
               </h2>
               <p>
-                No names, emails, phone numbers, or accounts. No payment data.
-                No precise location data.
+                We use your data to operate and improve the Service, generate
+                links, display your content, prevent abuse, and respond to
+                requests. We do not sell your data.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                How access works
+                Link-based access
               </h2>
               <p>
-                Quiz attempt links use a short quiz ID. Anyone with the link can
-                take the quiz. Results links use a private token. Anyone with the
-                token can view results. Crush page links use a short page ID.
-                Anyone with the link can view the page.
+                Access to quizzes, results, and ask-out pages is controlled by
+                links. Anyone with a link can view its content. Do not include
+                sensitive or private information in anything you create.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                Sharing equals public
+                Cookies and local storage
               </h2>
               <p>
-                If you share a link, the content is visible to anyone who has
-                it. Do not put sensitive or private information into quizzes or
-                crush pages.
+                We may use cookies or local storage to remember preferences and
+                keep recent links available. You can clear this data in your
+                browser settings.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                Local storage on your device
+                Third-party content
               </h2>
               <p>
-                Your browser stores recent quizzes in localStorage so you can
-                quickly reopen results. This data never leaves your browser
-                unless you share links.
+                If you include external images or GIFs, your browser loads them
+                directly from those providers. Those providers may log requests
+                in accordance with their own policies.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                Third-party content (images/GIFs)
+                Sharing and disclosures
               </h2>
               <p>
-                If you use external image or GIF URLs, your browser loads them
-                directly from the host. Those hosts may log requests. Use
-                trusted sources.
+                We may share information with service providers who help operate
+                the Service, or if required by law, to protect rights and safety,
+                or in connection with a business transaction. We only share what
+                is necessary.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
                 Retention and deletion
               </h2>
               <p>
-                You can delete a quiz and its results from the results page.
-                Crush pages currently do not have a delete UI. Contact the
-                project owner if you want it removed.
+                We keep data as long as needed to provide the Service and comply
+                with legal obligations. You can delete quizzes and results from
+                the results page. Ask-out pages may be removed upon request.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                Security basics
+                Security
               </h2>
               <p>
-                We use server-side validation and rate limits to reduce abuse.
-                There is no login system, so link secrecy is the main
-                protection.
+                We use reasonable safeguards to protect your data, but no method
+                of transmission or storage is completely secure.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
-                Questions or removal requests
+                Changes to this policy
               </h2>
-              <p>Contact the project owner to remove content or ask questions.</p>
+              <p>
+                We may update this policy from time to time. The updated version
+                will be posted here with a new effective date.
+              </p>
+
+              <h2 className="text-foreground font-semibold text-base">
+                Contact
+              </h2>
+              <p>Contact the project owner for questions or removal requests.</p>
             </div>
           </Card>
         </div>
