@@ -32,17 +32,29 @@ export default function CrushPage() {
   if (error || !data) return <p>Error loading page.</p>;
 
   const page = data.page;
-  const safeBackground =
-    page.theme.background === "galaxy"
-      ? "linear-gradient(160deg, #0f0b1f 0%, #1b1234 50%, #2a1b4a 100%)"
-      : page.theme.background;
+  const safeBackground = page.theme.background;
+  const accentGradient = (color: string) => {
+    const hex = color.replace("#", "");
+    const isShort = hex.length === 3;
+    const isLong = hex.length === 6;
+    if (!isShort && !isLong) {
+      return "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))";
+    }
+    const toByte = (value: string) =>
+      parseInt(isShort ? value + value : value, 16);
+    const r = toByte(hex.slice(0, 2));
+    const g = toByte(hex.slice(2, 4));
+    const b = toByte(hex.slice(4, 6));
+    return `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.14) 0%, rgba(${r}, ${g}, ${b}, 0.04) 100%)`;
+  };
+  const pageBackground = accentGradient(page.theme.accent);
   const imageSrc = page.after_yes_gif || page.hero_image;
 
   return (
     <div
       className="min-h-screen flex flex-col outer-pad relative overflow-hidden"
       style={{
-        background: safeBackground,
+        background: pageBackground,
         color: page.theme.text,
         backgroundImage: page.theme.background_image
           ? `url(${page.theme.background_image})`
@@ -58,7 +70,10 @@ export default function CrushPage() {
         ]}
       />
       <div className="flex flex-1 items-center justify-center">
-      <Card className="w-full max-w-xl">
+      <Card
+        className="w-full max-w-xl bg-card"
+        style={{ color: page.theme.text }}
+      >
         <h1 className="text-3xl font-bold font-display text-center mb-4">
           {page.title}
         </h1>
