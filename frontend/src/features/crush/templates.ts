@@ -49,8 +49,8 @@ export const crushTemplates: {
       theme: {
         background:
           "linear-gradient(160deg, #0f0b1f 0%, #1b1234 50%, #2a1b4a 100%)",
-        accent: "#111184",
-        text: "#eaf6ff",
+        accent: "#330476",
+        text: "#2a0b1f",
       },
     },
   },
