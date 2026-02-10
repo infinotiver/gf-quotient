@@ -36,6 +36,23 @@ export default function CreateCrushPage() {
   const activeTemplate = findCrushTemplate(selectedTemplate);
   const theme = activeTemplate.defaultValues.theme;
   const previewHero = form.after_yes_gif || form.hero_image;
+  const accentGradient = (color: string) => {
+    const hex = color.replace("#", "");
+    const isShort = hex.length === 3;
+    const isLong = hex.length === 6;
+    if (!isShort && !isLong) {
+      return "linear-gradient(135deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02))";
+    }
+    const toByte = (value: string) =>
+      parseInt(isShort ? value + value : value, 16);
+    const r = toByte(hex.slice(0, 2));
+    const g = toByte(hex.slice(2, 4));
+    const b = toByte(hex.slice(4, 6));
+    return `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.14) 0%, rgba(${r}, ${g}, ${b}, 0.04) 100%)`;
+  };
+  const previewPageBackground = accentGradient(
+    form.theme.accent || theme.accent,
+  );
 
   useEffect(() => {
     setPreviewError(false);
@@ -322,50 +339,47 @@ export default function CreateCrushPage() {
         <div
           className="rounded-2xl border border-border p-6"
           style={{
-            background: form.theme.background || theme.background,
+            background: previewPageBackground,
             color: form.theme.text,
-            backgroundImage: form.theme.background_image
-              ? `url(${form.theme.background_image})`
-              : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
           }}
         >
-          <div className="text-center font-display text-2xl font-bold mb-3">
-            {form.title || "Your page title"}
-          </div>
-          {previewHero && (
-            <div className="flex justify-center mb-3">
-              {!previewError ? (
-                <img
-                  src={previewHero}
-                  alt=""
-                  className="max-h-36 rounded-lg"
-                  referrerPolicy="no-referrer"
-                  crossOrigin="anonymous"
-                  onError={() => setPreviewError(true)}
-                />
-              ) : (
-                <div className="text-xs text-muted-foreground text-center">
-                  Preview image failed to load. Try a direct GIF link.
-                </div>
-              )}
+          <div className="rounded-2xl border border-border bg-card p-6">
+            <div className="text-center font-display text-2xl font-bold mb-3">
+              {form.title || "Your page title"}
             </div>
-          )}
-          <div className="text-center mb-4">
-            {form.question || "Your main question goes here."}
-          </div>
-          <div className="flex gap-3 justify-center">
-            <Button style={{ background: theme.accent, color: "#fff" }}>
-              {form.yes_text || "Yes"}
-            </Button>
-            <Button
-              variant="ghost"
-              className="border"
-              style={{ borderColor: theme.accent, color: theme.accent }}
-            >
-              {form.no_text || "No"}
-            </Button>
+            {previewHero && (
+              <div className="flex justify-center mb-3">
+                {!previewError ? (
+                  <img
+                    src={previewHero}
+                    alt=""
+                    className="max-h-36 rounded-lg"
+                    referrerPolicy="no-referrer"
+                    crossOrigin="anonymous"
+                    onError={() => setPreviewError(true)}
+                  />
+                ) : (
+                  <div className="text-xs text-muted-foreground text-center">
+                    Preview image failed to load. Try a direct GIF link.
+                  </div>
+                )}
+              </div>
+            )}
+            <div className="text-center mb-4">
+              {form.question || "Your main question goes here."}
+            </div>
+            <div className="flex gap-3 justify-center">
+              <Button style={{ background: theme.accent, color: "#fff" }}>
+                {form.yes_text || "Yes"}
+              </Button>
+              <Button
+                variant="ghost"
+                className="border"
+                style={{ borderColor: theme.accent, color: theme.accent }}
+              >
+                {form.no_text || "No"}
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
