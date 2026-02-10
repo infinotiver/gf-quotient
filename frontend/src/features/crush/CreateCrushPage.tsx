@@ -347,38 +347,47 @@ export default function CreateCrushPage() {
             <div className="text-center font-display text-2xl font-bold mb-3">
               {form.title || "Your page title"}
             </div>
-            {previewHero && (
-              <div className="flex justify-center mb-3">
-                {!previewError ? (
-                  <img
-                    src={previewHero}
-                    alt=""
-                    className="max-h-36 rounded-lg"
-                    referrerPolicy="no-referrer"
-                    crossOrigin="anonymous"
-                    onError={() => setPreviewError(true)}
-                  />
-                ) : (
-                  <div className="text-xs text-muted-foreground text-center">
-                    Preview image failed to load. Try a direct GIF link.
-                  </div>
-                )}
-              </div>
-            )}
+        {form.hero_image && !previewError ? (
+          <div className="flex justify-center mb-3">
+            <img
+              src={form.hero_image}
+              alt=""
+              className="max-h-36 rounded-lg"
+              referrerPolicy="no-referrer"
+              crossOrigin="anonymous"
+              onError={() => setPreviewError(true)}
+            />
+          </div>
+        ) : null}
             <div className="text-center mb-4">
               {form.question || "Your main question goes here."}
             </div>
-            <div className="flex gap-3 justify-center">
-              <Button style={{ background: theme.accent, color: "#fff" }}>
-                {form.yes_text || "Yes"}
-              </Button>
-              <Button
-                variant="ghost"
-                className="border"
-                style={{ borderColor: theme.accent, color: theme.accent }}
-              >
-                {form.no_text || "No"}
-              </Button>
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-3 justify-center">
+                <Button style={{ background: theme.accent, color: "#fff" }}>
+                  {form.yes_text || "Yes"}
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="border"
+                  style={{ borderColor: theme.accent, color: theme.accent }}
+                >
+                  {form.no_text || "No"}
+                </Button>
+              </div>
+              {form.after_yes_gif && (
+                <div className="text-xs text-muted-foreground text-center">
+                  After-yes preview:&nbsp;
+                  <a
+                    href={form.after_yes_gif}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline"
+                  >
+                    open image
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

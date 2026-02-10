@@ -76,39 +76,35 @@ export default function CrushPage() {
         <h1 className="text-3xl font-bold font-display text-center mb-4">
           {page.title}
         </h1>
-        {imageSrc && (
+        {page.hero_image && !heroError ? (
           <div className="flex justify-center mb-4">
-            {!heroError ? (
-              <img
-                src={imageSrc}
-                alt=""
-                className="max-h-48 rounded-lg"
-                referrerPolicy="no-referrer"
-                crossOrigin="anonymous"
-                onError={() => setHeroError(true)}
-              />
-            ) : (
-              <div className="text-xs text-muted-foreground text-center">
-                Image failed to load.{" "}
-                <a
-                  href={imageSrc}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline"
-                >
-                  Open it directly
-                </a>
-                .
-              </div>
-            )}
+            <img
+              src={page.hero_image}
+              alt=""
+              className="max-h-48 rounded-lg"
+              referrerPolicy="no-referrer"
+              crossOrigin="anonymous"
+              onError={() => setHeroError(true)}
+            />
           </div>
-        )}
+        ) : null}
         <p className="text-center mb-6">{page.question}</p>
         {answer ? (
           <div className="text-center font-semibold">
             {answer === "yes"
               ? page.message_after_yes || "Sweet!"
               : page.message_after_no || "Thanks for being honest."}
+            {answer === "yes" && page.after_yes_gif && (
+              <div className="mt-4 flex justify-center">
+                <img
+                  src={page.after_yes_gif}
+                  alt=""
+                  className="max-h-40 rounded-lg"
+                  referrerPolicy="no-referrer"
+                  crossOrigin="anonymous"
+                />
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex gap-3 justify-center">
