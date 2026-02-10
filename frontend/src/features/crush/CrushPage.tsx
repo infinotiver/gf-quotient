@@ -32,7 +32,6 @@ export default function CrushPage() {
   if (error || !data) return <p>Error loading page.</p>;
 
   const page = data.page;
-  const safeBackground = page.theme.background;
   const accentGradient = (color: string) => {
     const hex = color.replace("#", "");
     const isShort = hex.length === 3;
