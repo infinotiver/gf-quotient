@@ -47,7 +47,6 @@ export default function CrushPage() {
     return `linear-gradient(135deg, rgba(${r}, ${g}, ${b}, 0.14) 0%, rgba(${r}, ${g}, ${b}, 0.04) 100%)`;
   };
   const pageBackground = accentGradient(page.theme.accent);
-  const imageSrc = page.after_yes_gif || page.hero_image;
 
   return (
     <div
@@ -76,10 +75,14 @@ export default function CrushPage() {
         <h1 className="text-3xl font-bold font-display text-center mb-4">
           {page.title}
         </h1>
-        {page.hero_image && !heroError ? (
+        {(page.hero_image || page.after_yes_gif) && !heroError ? (
           <div className="flex justify-center mb-4">
             <img
-              src={page.hero_image}
+              src={
+                answer === "yes" && page.after_yes_gif
+                  ? page.after_yes_gif
+                  : page.hero_image
+              }
               alt=""
               className="max-h-48 rounded-lg"
               referrerPolicy="no-referrer"
@@ -94,17 +97,6 @@ export default function CrushPage() {
             {answer === "yes"
               ? page.message_after_yes || "Sweet!"
               : page.message_after_no || "Thanks for being honest."}
-            {answer === "yes" && page.after_yes_gif && (
-              <div className="mt-4 flex justify-center">
-                <img
-                  src={page.after_yes_gif}
-                  alt=""
-                  className="max-h-40 rounded-lg"
-                  referrerPolicy="no-referrer"
-                  crossOrigin="anonymous"
-                />
-              </div>
-            )}
           </div>
         ) : (
           <div className="flex gap-3 justify-center">
