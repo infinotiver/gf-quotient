@@ -24,6 +24,13 @@ function HomePage() {
             <Bubble
               subtitle="Ask your crush or send them a quiz about yourself!"
               title="LoveMeter"
+              icon={
+                <img
+                  src="/logo.jfif"
+                  alt="LoveMeter"
+                  className="h-12 w-12 rounded-full border border-border"
+                />
+              }
             />
             <Card className="text-center flex flex-col justify-center">
               <div className="text-sm text-muted-foreground">Website's tiny stats</div>
