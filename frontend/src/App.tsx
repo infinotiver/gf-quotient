@@ -10,7 +10,7 @@ import AttemptResultPage from "./features/quiz/pages/attempt/AttemptResultPage";
 import CreateCrushPage from "./features/crush/CreateCrushPage";
 import CrushPage from "./features/crush/CrushPage";
 import PrivacyPage from "./pages/PrivacyPage";
-
+import ClickSpark from "./components/common/ClickSpark";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,20 +22,31 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <Router>
-      <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/create-quiz" element={<CreateQuizPage />} />
-          <Route path="/attempt/:quizId" element={<AttemptLanding />} />
-          <Route path="/attempt/:quizId/start" element={<AttemptQuiz />} />
-          <Route path="/attempt/:quizId/results" element={<AttemptResultPage />} />
-          <Route path="/quiz/share/:quizId" element={<ShareQuizPage />} />
-          <Route path="/results/:token" element={<ResultPage />} />
-          <Route path="/crush/create" element={<CreateCrushPage />} />
-          <Route path="/crush/:pageId" element={<CrushPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-        </Routes>
-      </QueryClientProvider>
+      <ClickSpark
+        sparkColor="#FF0000"
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
+      >
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/create-quiz" element={<CreateQuizPage />} />
+            <Route path="/attempt/:quizId" element={<AttemptLanding />} />
+            <Route path="/attempt/:quizId/start" element={<AttemptQuiz />} />
+            <Route
+              path="/attempt/:quizId/results"
+              element={<AttemptResultPage />}
+            />
+            <Route path="/quiz/share/:quizId" element={<ShareQuizPage />} />
+            <Route path="/results/:token" element={<ResultPage />} />
+            <Route path="/crush/create" element={<CreateCrushPage />} />
+            <Route path="/crush/:pageId" element={<CrushPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+          </Routes>
+        </QueryClientProvider>
+      </ClickSpark>
     </Router>
   );
 }
