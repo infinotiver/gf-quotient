@@ -34,13 +34,17 @@ export default function CrushHeroCard({
   setNoClicks,
 }: Props) {
   const [heroError, setHeroError] = useState(false);
+  const [yesHoverCount, setYesHoverCount] = useState(0);
+  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const cappedNoClicks = Math.min(noClicks, 5);
   const heroImage =
-    answer === "yes" && page.after_yes_gif ? page.after_yes_gif : page.hero_image;
+    answer === "yes" && page.after_yes_gif
+      ? page.after_yes_gif
+      : page.hero_image;
   const accentBg = accentGradient(page.theme.accent);
   return (
     <Card
-      className="w-full max-w-xl bg-card"
+      className="w-full max-w-2xl bg-card"
       style={{ color: page.theme.text, background: accentBg }}
     >
       <h1 className="text-3xl font-bold font-display text-center mb-4">
@@ -72,7 +76,7 @@ export default function CrushHeroCard({
             className="min-w-[120px] text-white transition-transform"
             style={{
               background: page.theme.accent,
-              transform: `scale(${1 + cappedNoClicks * 0.1})`,
+              transform: `scale(${1 + cappedNoClicks * 0.1 + yesHoverCount * 0.05})`,
             }}
           >
             {page.yes_text}
@@ -80,12 +84,19 @@ export default function CrushHeroCard({
           <Button
             variant="ghost"
             onClick={() => setNoClicks((count) => Math.min(count + 1, 5))}
+            onMouseEnter={() => {
+              setYesHoverCount((c) => c + 1);
+              setNoPosition({
+                x: Math.random() * 200 - 100,
+                y: Math.random() * 200 - 100,
+              });
+            }}
             className="min-w-[120px] border transition-transform"
             style={{
               borderColor: page.theme.accent,
               color: page.theme.accent,
               background: "transparent",
-              transform: `scale(${Math.max(0.85, 1 - cappedNoClicks * 0.1)})`,
+              transform: `translate(${noPosition.x}px, ${noPosition.y}px) scale(${Math.max(0.85, 1 - cappedNoClicks * 0.1)})`,
             }}
           >
             {page.no_text}
