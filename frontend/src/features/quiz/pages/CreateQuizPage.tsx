@@ -11,6 +11,7 @@ import { getQuestions } from "../utils/getQuestions";
 import type { OptionType } from "../components/OptionCard";
 import Button from "@components/common/Button";
 import Card from "@components/common/Card";
+import FloatingActionBar from "@components/common/FloatingActionBar";
 import Footer from "@components/common/Footer";
 import { saveQuizToStorage } from "@utils/storage";
 import TopNav from "@components/common/TopNav";
@@ -113,9 +114,9 @@ export default function CreateQuizPage() {
     mutation.mutate(formattedQuizData);
   };
 
-  return (
+    return (
     <>
-      <div className="min-h-screen bg-background text-foreground outer-pad">
+      <div className="min-h-screen bg-background text-foreground outer-pad pb-28">
         <div className="w-full max-w-5xl mx-auto flex flex-col stack-gap-lg">
           <TopNav
             links={[{ label: "Home", to: "/", variant: "ghost" }]}
@@ -140,13 +141,6 @@ export default function CreateQuizPage() {
                 style={{ width: `${((step + 1) / 3) * 100}%` }}
               />
             </div>
-          </div>
-
-          <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold font-display">LoveMeter</h1>
-            <p className="text-muted-foreground text-sm mt-1">
-              Design a loving quiz for your special someone.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 stack-gap-lg">
@@ -206,16 +200,18 @@ export default function CreateQuizPage() {
             </div>
           )}
 
-          <div className="flex gap-2 mt-6 justify-center flex-wrap">
-            {step > 0 && (
-              <Button variant="secondary" onClick={back}>
-                Back
-              </Button>
-            )}
-            {step < 2 && <Button onClick={next}>Next</Button>}
-          </div>
         </div>
       </div>
+      {(step > 0 || step < 2) && (
+        <FloatingActionBar>
+          {step > 0 && (
+            <Button variant="secondary" onClick={back}>
+              Back
+            </Button>
+          )}
+          {step < 2 && <Button onClick={next}>Next</Button>}
+        </FloatingActionBar>
+      )}
       <Footer />
     </>
   );

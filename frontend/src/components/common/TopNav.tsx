@@ -21,7 +21,7 @@ type TopNavProps = {
 
 export default function TopNav({ links = [], actions = [] }: TopNavProps) {
   return (
-    <div className="sticky top-2 z-50 flex flex-wrap gap-2 rounded-3xl px-6 py-3 backdrop-blur-2xl flex-row items-center justify-between">
+    <div className="sticky top-0 z-50 flex flex-wrap gap-2 rounded-b-xl px-4 py-2 backdrop-blur-2xl flex-row items-center justify-between">
       <Link to="/" className="flex items-center gap-1">
         💕
         <Button variant="ghost">

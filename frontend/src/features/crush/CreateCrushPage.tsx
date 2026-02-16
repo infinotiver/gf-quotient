@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Card from "@components/common/Card";
 import Button from "@components/common/Button";
+import FloatingActionBar from "@components/common/FloatingActionBar";
 import type { CrushCreate } from "./types";
 import useCreateCrushPage from "@hooks/crush/useCreateCrushPage";
 import TopNav from "@components/common/TopNav";
@@ -39,7 +40,7 @@ export default function CreateCrushPage() {
   const theme = activeTemplate.defaultValues.theme;
 
   return (
-    <div className="min-h-screen bg-background text-foreground outer-pad">
+    <div className="min-h-screen bg-background text-foreground outer-pad pb-28">
       <div className="w-full max-w-5xl mx-auto flex flex-col stack-gap-lg">
         <TopNav
           links={[
@@ -275,9 +276,6 @@ export default function CreateCrushPage() {
             />
           </div>
         </div>
-        <div className="flex flex-wrap gap-2 my-2">
-          <Button onClick={() => mutation.mutate()}>Create Page</Button>
-        </div>
         {pageId && showLinkModal && (
           <>
             <div
@@ -328,6 +326,11 @@ export default function CreateCrushPage() {
       </div>
       </div>
       </div>
+      <FloatingActionBar>
+        <Button onClick={() => mutation.mutate()} disabled={mutation.isPending}>
+          {mutation.isPending ? "Creating..." : "Create Page"}
+        </Button>
+      </FloatingActionBar>
     </div>
   );
 }
