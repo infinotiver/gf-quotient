@@ -24,7 +24,7 @@ export default function CreateQuizPage() {
   }
 
   const buildPresetQuestions = (
-    category: "normal" | "cute" | "spicy" | "playful" | "deep"
+    category: "normal" | "cute" | "spicy" | "playful" | "deep",
   ): QuestionType[] => {
     const preset = getQuestions(category);
     return preset.map((q) => {
@@ -43,7 +43,7 @@ export default function CreateQuizPage() {
   };
 
   const applyPreset = (
-    category: "normal" | "cute" | "spicy" | "playful" | "deep"
+    category: "normal" | "cute" | "spicy" | "playful" | "deep",
   ) => {
     const preset = buildPresetQuestions(category);
     setQuizData((p) => {
@@ -60,7 +60,7 @@ export default function CreateQuizPage() {
     description: "",
     questions: [],
   });
-  
+
   const [notice, setNotice] = useState<string | null>(null);
   const [showPresets, setShowPresets] = useState(false);
   const [presetMode, setPresetMode] = useState<"add" | "replace">("add");
@@ -95,7 +95,7 @@ export default function CreateQuizPage() {
       return;
     }
     const missingCorrect = quizData.questions.some(
-      (q) => q.correct_option === null
+      (q) => q.correct_option === null,
     );
     if (missingCorrect) {
       setNotice("Please select a correct answer for every question.");
@@ -115,105 +115,105 @@ export default function CreateQuizPage() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background text-foreground outer-pad">
-        <div className="w-full max-w-6xl">
-        <TopNav
-          links={[{ label: "Home", to: "/", variant: "ghost" }]}
-          actions={[
-            { label: "Review", onClick: () => setStep(3), variant: "secondary" },
-          ]}
-        />
-        <div className="mb-4">
-          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground mb-2">
-            <div className="inline-flex items-center gap-2">
-              <span>Step {step + 1} of 3</span>
-              <span>{Math.round(((step + 1) / 3) * 100)}%</span>
+      <div className="min-h-screen bg-background text-foreground outer-pad">
+        <div className="w-full max-w-5xl mx-auto flex flex-col stack-gap-lg">
+          <TopNav
+            links={[{ label: "Home", to: "/", variant: "ghost" }]}
+            actions={[
+              {
+                label: "Review",
+                onClick: () => setStep(3),
+                variant: "secondary",
+              },
+            ]}
+          />
+          <div className="mb-4">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground mb-2">
+              <div className="inline-flex items-center gap-2">
+                <span>Step {step + 1} of 3</span>
+                <span>{Math.round(((step + 1) / 3) * 100)}%</span>
+              </div>
+            </div>
+            <div className="bg-muted rounded-full h-2 overflow-hidden">
+              <div
+                className="bg-primary h-full"
+                style={{ width: `${((step + 1) / 3) * 100}%` }}
+              />
             </div>
           </div>
-          <div className="bg-muted rounded-full h-2 overflow-hidden">
-            <div
-              className="bg-primary h-full"
-              style={{ width: `${((step + 1) / 3) * 100}%` }}
-            />
+
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold font-display">LoveMeter</h1>
+            <p className="text-muted-foreground text-sm mt-1">
+              Design a loving quiz for your special someone.
+            </p>
           </div>
-        </div>
 
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold font-display">LoveMeter</h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            Design a loving quiz for your special someone.
-          </p>
-        </div>
+          <div className="grid grid-cols-1 stack-gap-lg">
+            <Card>
+              {step === 0 && (
+                <QuizTitle
+                  onTitleChange={(value: string) =>
+                    setQuizData((prev) => ({ ...prev, title: value }))
+                  }
+                  onDescriptionChange={(value: string) =>
+                    setQuizData((prev) => ({ ...prev, description: value }))
+                  }
+                />
+              )}
 
-        <div className="grid grid-cols-1 stack-gap-lg">
-          <Card>
-            {step === 0 && (
-              <QuizTitle
-                onTitleChange={(value: string) =>
-                  setQuizData((prev) => ({ ...prev, title: value }))
-                }
-                onDescriptionChange={(value: string) =>
-                  setQuizData((prev) => ({ ...prev, description: value }))
-                }
-              />
-            )}
-
-            {step === 1 && (
-              <div className="flex flex-col gap-3 relative">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="text-sm text-muted-foreground">
-                    Start with a preset, then edit freely.
+              {step === 1 && (
+                <div className="flex flex-col gap-3 relative">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="text-sm text-muted-foreground">
+                      Start with a preset, then edit freely.
+                    </div>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => setShowPresets((v) => !v)}
+                    >
+                      Load preset questions
+                    </Button>
                   </div>
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => setShowPresets((v) => !v)}
-                  >
-                    Load preset questions
-                  </Button>
+
+                  <PresetPicker
+                    open={showPresets}
+                    hasQuestions={quizData.questions.length > 0}
+                    presetMode={presetMode}
+                    onClose={() => setShowPresets(false)}
+                    onModeChange={setPresetMode}
+                    onPick={applyPreset}
+                  />
+
+                  <QuestionsStep
+                    questions={quizData.questions}
+                    setQuizData={setQuizData}
+                  />
                 </div>
-
-                <PresetPicker
-                  open={showPresets}
-                  hasQuestions={quizData.questions.length > 0}
-                  presetMode={presetMode}
-                  onClose={() => setShowPresets(false)}
-                  onModeChange={setPresetMode}
-                  onPick={applyPreset}
-                />
-
-                <QuestionsStep
-                  questions={quizData.questions}
-                  setQuizData={setQuizData}
-                />
-              </div>
-            )}
-            {step === 2 && (
-              <div className="mt-4">
-                <QuizSummaryStep data={quizData} onSubmit={handleSubmit} />
-              </div>
-            )}
-          </Card>
-        </div>
-
-        {notice && (
-          <div className="mt-4 text-center text-sm text-destructive">
-            {notice}
+              )}
+              {step === 2 && (
+                <div className="mt-4">
+                  <QuizSummaryStep data={quizData} onSubmit={handleSubmit} />
+                </div>
+              )}
+            </Card>
           </div>
-        )}
 
-        <div className="flex gap-2 mt-6 justify-center flex-wrap">
-          {step > 0 && (
-            <Button variant="secondary" onClick={back}>
-              Back
-            </Button>
+          {notice && (
+            <div className="mt-4 text-center text-sm text-destructive">
+              {notice}
+            </div>
           )}
-          {step < 2 && (
-            <Button onClick={next}>
-              Next
-            </Button>
-          )}
-        </div>
+
+          <div className="flex gap-2 mt-6 justify-center flex-wrap">
+            {step > 0 && (
+              <Button variant="secondary" onClick={back}>
+                Back
+              </Button>
+            )}
+            {step < 2 && <Button onClick={next}>Next</Button>}
+          </div>
         </div>
       </div>
       <Footer />

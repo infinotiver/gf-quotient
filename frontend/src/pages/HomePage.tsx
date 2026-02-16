@@ -4,7 +4,6 @@ import CreateCrushCard from "@components/common/CreateCrushCard";
 import Footer from "@components/common/Footer";
 import ResultsQuickLink from "@components/common/ResultsQuickLink";
 import TopNav from "@components/common/TopNav";
-import Card from "@components/common/Card";
 import useStats from "@hooks/quiz/useStats";
 
 function HomePage() {
@@ -12,53 +11,29 @@ function HomePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-background text-foreground outer-pad">
-        <div className="w-full max-w-5xl mx-auto flex flex-col stack-gap-lg">
-          <TopNav
-            links={[
-              { label: "Create quiz", to: "/create-quiz", variant: "primary" },
-              { label: "Ask them out", to: "/crush/create", variant: "secondary" },
-            ]}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-[1.2fr,0.8fr] gap-4">
-            <Bubble
-              subtitle="Ask your crush or send them a quiz about yourself!"
-              title="LoveMeter"
-              icon={
-                <img
-                  src="/logo.jfif"
-                  alt="LoveMeter"
-                  className="h-12 w-12 rounded-full border border-border"
-                />
-              }
+      <div className="homepage-bg min-h-screen text-foreground flex flex-col">
+        <main className="outer-pad flex-1">
+          <div className="w-full max-w-5xl mx-auto flex flex-col gap-5">
+            <TopNav
+              links={[
+                { label: "Create quiz", to: "/create-quiz", variant: "primary" },
+                { label: "Will you be my valentine?", to: "/crush/create", variant: "secondary" },
+              ]}
             />
-            <Card className="text-center flex flex-col justify-center">
-              <div className="text-sm text-muted-foreground">Website's tiny stats</div>
-              <div className="mt-2 flex items-center justify-center">
-                <div className="flex items-center gap-6">
-                  <div>
-                    <div className="text-2xl font-bold">
-                      {data?.total_quizzes ?? "--"}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Quizzes</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">
-                      {data?.total_crush_pages ?? "--"}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Crush pages</div>
-                  </div>
-                </div>
-              </div>
-            </Card>
+            <Bubble subtitle="Valentine's Special" title="Know your love, know yourself" />
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <CreateQuizButton />
+                <CreateCrushCard />
+            </section>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <CreateQuizButton />
-            <CreateCrushCard />
-          </div>
-        </div>
+        </main>
+        <Footer
+          stats={{
+            totalQuizzes: data?.total_quizzes,
+            totalCrushPages: data?.total_crush_pages,
+          }}
+        />
       </div>
-      <Footer />
       <ResultsQuickLink />
     </>
   );

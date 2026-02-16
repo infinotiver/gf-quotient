@@ -39,15 +39,16 @@ export default function CreateCrushPage() {
   const theme = activeTemplate.defaultValues.theme;
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
-      <TopNav
-        links={[
-          { label: "Home", to: "/", variant: "ghost" },
-          { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
-        ]}
-      />
-      <div className="flex flex-1 items-center justify-center">
-      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="min-h-screen bg-background text-foreground outer-pad">
+      <div className="w-full max-w-5xl mx-auto flex flex-col stack-gap-lg">
+        <TopNav
+          links={[
+            { label: "Home", to: "/", variant: "ghost" },
+            { label: "Create quiz", to: "/create-quiz", variant: "secondary" },
+          ]}
+        />
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card className="space-y-6">
         <h1 className="text-3xl font-bold font-display text-center">
           LoveMeter Crush Page
@@ -324,6 +325,7 @@ export default function CreateCrushPage() {
           setNoClicks={setPreviewNoClicks}
         />
       </Card>
+      </div>
       </div>
       </div>
     </div>

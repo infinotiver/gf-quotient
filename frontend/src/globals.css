@@ -25,23 +25,23 @@
 
 :root {
   --space: 8px;
-  --background: 330 24% 92%;
-  --foreground: 330 35% 12%;
+  --background: 355 55% 92%;
+  --foreground: 355 30% 16%;
 
   --card: 0 0% 98%;
-  --card-foreground: 330 35% 12%;
+  --card-foreground: 355 30% 16%;
 
-  --muted: 330 25% 92%;
-  --muted-foreground: 330 10% 35%;
+  --muted: 355 40% 90%;
+  --muted-foreground: 355 18% 38%;
 
-  --primary: 345 75% 55%;
+  --primary: 355 80% 58%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 330 12% 20%;
-  --secondary-foreground: 0 0% 100%;
+  --secondary: 355 28% 84%;
+  --secondary-foreground: 355 30% 16%;
 
   --accent: 330 35% 90%;
-  --accent-foreground: 330 35% 12%;
+  --accent-foreground: 330 35% 16%;
 
   --destructive: 0 75% 55%;
   --destructive-foreground: 0 0% 100%;
@@ -49,9 +49,9 @@
   --success: 150 55% 38%;
   --success-foreground: 0 0% 100%;
 
-  --border: 330 20% 85%;
-  --input: 330 20% 85%;
-  --ring: 345 75% 55%;
+  --border: 355 25% 82%;
+  --input: 355 25% 82%;
+  --ring: 355 80% 58%;
 }
 
 /* Spacing scale: outer padding = inner padding + space */
@@ -83,4 +83,19 @@ body {
 
 .font-display {
   font-family: "Playfair Display", "Times New Roman", serif;
+}
+
+.homepage-bg {
+  background:
+    radial-gradient(980px 540px at 8% -18%, hsla(355, 90%, 70%, 0.42), transparent 60%),
+    radial-gradient(760px 520px at 95% -10%, hsla(8, 85%, 62%, 0.32), transparent 60%),
+    radial-gradient(640px 420px at 24% 95%, hsla(0, 80%, 58%, 0.22), transparent 60%),
+    linear-gradient(180deg, hsl(355 55% 92%), hsl(355 50% 88%)),
+    repeating-linear-gradient(
+      135deg,
+      hsla(355, 55%, 65%, 0.08) 0px,
+      hsla(355, 55%, 65%, 0.08) 2px,
+      transparent 2px,
+      transparent 8px
+    );
 }

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { buttonClassName } from "./buttonClassName";
-
+import Card from "./Card";
 function CreateQuizButton() {
   return (
-    <div className="bg-card border border-border rounded-2xl inner-pad">
+    <Card>
       <div className="text-lg font-semibold text-foreground mb-3">
         Create your quiz
       </div>
@@ -16,7 +16,7 @@ function CreateQuizButton() {
       >
         Create the quiz
       </Link>
-    </div>
+    </Card>
   );
 }
 
