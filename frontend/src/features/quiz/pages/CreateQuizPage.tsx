@@ -18,6 +18,7 @@ import TopNav from "@components/common/TopNav";
 
 export default function CreateQuizPage() {
   const [step, setStep] = useState(0);
+  const stepLabels = ["Details", "Questions", "Review"] as const;
   interface QuizData {
     title: string;
     description: string;
@@ -129,17 +130,19 @@ export default function CreateQuizPage() {
             ]}
           />
           <div className="mb-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground mb-2">
-              <div className="inline-flex items-center gap-2">
-                <span>Step {step + 1} of 3</span>
-                <span>{Math.round(((step + 1) / 3) * 100)}%</span>
-              </div>
+            <div className="mb-2 text-xs text-muted-foreground">
+              Step {step + 1} of 3: {stepLabels[step]}
             </div>
-            <div className="bg-muted rounded-full h-2 overflow-hidden">
-              <div
-                className="bg-primary h-full"
-                style={{ width: `${((step + 1) / 3) * 100}%` }}
-              />
+            <div className="grid grid-cols-3 gap-2">
+              {stepLabels.map((label, index) => (
+                <div
+                  key={label}
+                  className={`h-2 rounded-full ${
+                    index <= step ? "bg-primary" : "bg-muted"
+                  }`}
+                  aria-label={`Step ${index + 1}: ${label}`}
+                />
+              ))}
             </div>
           </div>
 
