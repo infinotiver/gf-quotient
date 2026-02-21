@@ -88,7 +88,7 @@ export default function CreateQuizPage() {
     },
   });
 
-  const next = () => setStep((s) => s + 1);
+  const next = () => setStep((s) => Math.min(s + 1, 2));
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   const handleSubmit = () => {
@@ -124,7 +124,7 @@ export default function CreateQuizPage() {
             actions={[
               {
                 label: "Review",
-                onClick: () => setStep(3),
+                onClick: () => setStep(2),
                 variant: "secondary",
               },
             ]}
