@@ -19,6 +19,10 @@ import TopNav from "@components/common/TopNav";
 export default function CreateQuizPage() {
   const [step, setStep] = useState(0);
   const stepLabels = ["Details", "Questions", "Review"] as const;
+  const lastStep = stepLabels.length - 1;
+  const currentStep = Math.max(0, Math.min(step, lastStep));
+  const canGoBack = currentStep > 0;
+  const canGoNext = currentStep < lastStep;
   interface QuizData {
     title: string;
     description: string;
@@ -88,7 +92,7 @@ export default function CreateQuizPage() {
     },
   });
 
-  const next = () => setStep((s) => Math.min(s + 1, 2));
+  const next = () => setStep((s) => Math.min(s + 1, lastStep));
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   const handleSubmit = () => {
@@ -115,7 +119,7 @@ export default function CreateQuizPage() {
     mutation.mutate(formattedQuizData);
   };
 
-    return (
+  return (
     <>
       <div className="min-h-screen bg-background text-foreground outer-pad pb-28">
         <div className="w-full max-w-5xl mx-auto flex flex-col stack-gap-lg">
@@ -124,21 +128,22 @@ export default function CreateQuizPage() {
             actions={[
               {
                 label: "Review",
-                onClick: () => setStep(2),
+                onClick: () => setStep(lastStep),
                 variant: "secondary",
               },
             ]}
           />
           <div className="mb-4">
             <div className="mb-2 text-xs text-muted-foreground">
-              Step {step + 1} of 3: {stepLabels[step]}
+              Step {currentStep + 1} of {stepLabels.length}:{" "}
+              {stepLabels[currentStep]}
             </div>
             <div className="grid grid-cols-3 gap-2">
               {stepLabels.map((label, index) => (
                 <div
                   key={label}
                   className={`h-2 rounded-full ${
-                    index <= step ? "bg-primary" : "bg-muted"
+                    index <= currentStep ? "bg-primary" : "bg-muted"
                   }`}
                   aria-label={`Step ${index + 1}: ${label}`}
                 />
@@ -148,7 +153,7 @@ export default function CreateQuizPage() {
 
           <div className="grid grid-cols-1 stack-gap-lg">
             <Card>
-              {step === 0 && (
+              {currentStep === 0 && (
                 <QuizTitle
                   onTitleChange={(value: string) =>
                     setQuizData((prev) => ({ ...prev, title: value }))
@@ -159,7 +164,7 @@ export default function CreateQuizPage() {
                 />
               )}
 
-              {step === 1 && (
+              {currentStep === 1 && (
                 <div className="flex flex-col gap-3 relative">
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-sm text-muted-foreground">
@@ -189,7 +194,7 @@ export default function CreateQuizPage() {
                   />
                 </div>
               )}
-              {step === 2 && (
+              {currentStep === 2 && (
                 <div className="mt-4">
                   <QuizSummaryStep data={quizData} onSubmit={handleSubmit} />
                 </div>
@@ -205,14 +210,14 @@ export default function CreateQuizPage() {
 
         </div>
       </div>
-      {(step > 0 || step < 2) && (
+      {(canGoBack || canGoNext) && (
         <FloatingActionBar>
-          {step > 0 && (
+          {canGoBack && (
             <Button variant="secondary" onClick={back}>
               Back
             </Button>
           )}
-          {step < 2 && <Button onClick={next}>Next</Button>}
+          {canGoNext && <Button onClick={next}>Next</Button>}
         </FloatingActionBar>
       )}
       <Footer />
