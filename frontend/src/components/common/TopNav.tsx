@@ -24,9 +24,7 @@ export default function TopNav({ links = [], actions = [] }: TopNavProps) {
     <div className="sticky top-0 z-50 flex flex-wrap gap-2 rounded-b-xl px-4 py-2 backdrop-blur-2xl flex-row items-center justify-between">
       <Link to="/" className="flex items-center gap-1">
         💕
-        <Button variant="ghost">
-          LoveMeter
-        </Button>
+        <Button variant="ghost">LoveMeter</Button>
       </Link>
       <div className="flex flex-wrap items-center gap-2">
         {links.map((link) => (
