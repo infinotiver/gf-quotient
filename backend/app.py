@@ -25,10 +25,30 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-# Adding CORS middleware to allow cross-origin requests.
+def _parse_origins(raw: str) -> list[str]:
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
+env = os.getenv("ENV", "dev")
+is_dev = env == "dev"
+
+# In production, default to Vercel subdomains unless explicitly overridden.
+cors_origins = (
+    _parse_origins(
+        os.getenv(
+            "CORS_ORIGINS",
+            "http://localhost:5173,http://127.0.0.1:5173" if is_dev else "",
+        )
+    )
+)
+cors_origin_regex = (
+    None if is_dev else os.getenv("CORS_ORIGIN_REGEX", r"^https://.*\.vercel\.app$")
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"] if os.getenv("ENV", "dev") == "dev" else os.getenv("CORS_ORIGINS", "").split(","),
+    allow_origins=cors_origins,
+    allow_origin_regex=cors_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
