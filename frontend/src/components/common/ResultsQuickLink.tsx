@@ -13,16 +13,14 @@ export default function ResultsQuickLink() {
   if (!latest) return null;
 
   return (
-    <div className="fixed left-1/2 bottom-20 z-40 -translate-x-1/2 px-4">
-      <div className="mx-auto flex items-center gap-2 rounded-full border border-border/60 bg-card/80 px-3 py-2 text-xs text-muted-foreground backdrop-blur-2xl">
+    <div className="fixed bottom-10 z-30 p-2 sm:p-3 flex justify-start sm:justify-center w-full left-0 sm:left-1/2 sm:-translate-x-1/2">
+      <div className="mx-auto flex items-center gap-2 rounded-full border border-border/60 bg-card/50 px-3 py-1 text-xs text-muted-foreground backdrop-blur-2xl">
         <span className="hidden sm:inline">Latest quiz</span>
         <span className="font-semibold text-foreground truncate max-w-[150px]">
           {latest.title}
         </span>
         <Link to={`/results/${latest.token}`}>
-          <Button size="sm" className="rounded-full px-3">
-            View
-          </Button>
+          <Button size="xs">View</Button>
         </Link>
       </div>
     </div>

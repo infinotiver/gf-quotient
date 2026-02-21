@@ -1,3 +1,4 @@
+import Button from "./Button";
 type FooterProps = {
   stats?: {
     totalQuizzes?: number;
@@ -24,25 +25,25 @@ function Footer({ stats }: FooterProps) {
             </div>
             {stats ? (
               <div className="text-[11px] text-muted-foreground/90">
-                {stats.totalQuizzes ?? "--"} quizzes | {stats.totalCrushPages ?? "--"} crush
-                pages
+                {stats.totalQuizzes ?? "--"} quizzes |{" "}
+                {stats.totalCrushPages ?? "--"} crush pages
               </div>
             ) : null}
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <a
-              href="/privacy"
-              className="rounded-full bg-muted/70 px-2 py-1 font-medium text-foreground hover:bg-muted"
-            >
-              Privacy
+            <a href="/privacy">
+              <Button variant="ghost" size="xs">
+                Privacy
+              </Button>
             </a>
             <a
               href="https://github.com/infinotiver/gf-quotient"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-muted/70 px-2 py-1 font-medium text-foreground hover:bg-muted"
+              
             >
-              GitHub
+              <Button variant="ghost" size="xs">
+              GitHub</Button>
             </a>
           </div>
         </div>
