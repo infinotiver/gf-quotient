@@ -9,6 +9,7 @@ const variantClasses = {
 } as const;
 
 const sizeClasses = {
+  xs: "text-xs px-2 py-1",
   sm: "text-sm px-3 py-1.5",
   md: "text-sm px-4 py-2",
   lg: "text-base px-5 py-3",
@@ -20,6 +21,6 @@ export type ButtonSize = keyof typeof sizeClasses;
 export const buttonClassName = (
   variant: ButtonVariant = "primary",
   size: ButtonSize = "md",
-  className = ""
+  className = "",
 ) =>
   `${base} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim();
