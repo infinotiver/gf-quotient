@@ -17,7 +17,7 @@ export default function QuizTitle({
     console.log(event.target.value);
   };
   const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setDescription(event.target.value);
     onDescriptionChange(event.target.value);
@@ -29,7 +29,7 @@ export default function QuizTitle({
         <h1 className="text-3xl font-bold font-display mb-1 text-foreground">
           Quiz Details
         </h1>
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-md text-muted-foreground mb-2">
           Create a sweet quiz for your special someone.
         </p>
         <input
@@ -41,7 +41,7 @@ export default function QuizTitle({
         <input
           value={description}
           onChange={handleDescriptionChange}
-          className="w-full p-3 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+          className="w-full p-3 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring text-md"
           placeholder="Enter the quiz description..."
         />
       </div>

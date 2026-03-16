@@ -135,7 +135,7 @@ export default function CreateQuizPage() {
             ]}
           />
           <div className="mb-4">
-            <div className="mb-2 text-xs text-muted-foreground">
+            <div className="mb-2 text-md text-muted-foreground">
               Step {currentStep + 1} of {stepLabels.length}:{" "}
               {stepLabels[currentStep]}
             </div>
@@ -168,7 +168,7 @@ export default function CreateQuizPage() {
               {currentStep === 1 && (
                 <div className="flex flex-col gap-3 relative">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-md text-muted-foreground">
                       Start with a preset, then edit freely.
                     </div>
                     <Button
@@ -208,17 +208,20 @@ export default function CreateQuizPage() {
           </div>
 
           {notice && (
-            <div className="mt-4 text-center text-sm text-destructive">
+            <div className="mt-4 text-center text-md text-destructive">
               {notice}
             </div>
           )}
-
         </div>
       </div>
       {(canGoBack || canGoNext) && (
         <FloatingActionBar>
           {canGoBack && (
-            <Button variant="secondary" onClick={back} disabled={mutation.isPending}>
+            <Button
+              variant="secondary"
+              onClick={back}
+              disabled={mutation.isPending}
+            >
               Back
             </Button>
           )}

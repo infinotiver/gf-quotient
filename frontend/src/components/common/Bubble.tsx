@@ -8,7 +8,7 @@ interface BubbleProps {
 function Bubble({ title, subtitle, children, icon }: BubbleProps) {
   return (
     <div className="relative rounded-3xl bg-card/50  inner-pad">
-      <p className="text-sm uppercase tracking-wide text-muted-foreground font-semibold">
+      <p className="text-md uppercase tracking-wide text-muted-foreground font-semibold">
         {subtitle}
       </p>
       <h1 className="text-3xl font-bold text-foreground font-display">

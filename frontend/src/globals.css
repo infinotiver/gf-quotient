@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap";
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Give+You+Glory&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -78,7 +78,8 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: "Inter", system-ui, sans-serif;
+  /* font-family: "Give You Glory", cursive; */
+  font-family: "Gaegu", sans-serif;
 }
 
 .font-display {

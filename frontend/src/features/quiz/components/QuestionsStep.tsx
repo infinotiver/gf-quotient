@@ -17,7 +17,7 @@ export default function QuestionsStep({
   const updateQuestion = (index: number, updatedQuestion: QuestionType) => {
     // Ensure correct_option is set at the question level
     const correctOption = updatedQuestion.options.find(
-      (opt) => opt.id === updatedQuestion.correct_option
+      (opt) => opt.id === updatedQuestion.correct_option,
     );
     if (!correctOption) {
       updatedQuestion.correct_option = null; // Reset if no valid correct option
@@ -25,7 +25,7 @@ export default function QuestionsStep({
     setQuizData((prev: QuizData) => ({
       ...prev,
       questions: prev.questions.map((q, i) =>
-        i === index ? updatedQuestion : q
+        i === index ? updatedQuestion : q,
       ),
     }));
   };
@@ -55,7 +55,7 @@ export default function QuestionsStep({
   return (
     <div className="flex flex-col gap-4 rounded">
       <div className="flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
+        <div className="text-md text-muted-foreground">
           Questions: {questions.length}
         </div>
         <Button
@@ -79,7 +79,7 @@ export default function QuestionsStep({
                 className="w-full justify-between"
                 onClick={() => setExpandedIndex(isOpen ? null : idx)}
               >
-                <div className="text-sm text-foreground">
+                <div className="text-md text-foreground">
                   Q{idx + 1}: {q.text || "Untitled question"}
                 </div>
                 {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}

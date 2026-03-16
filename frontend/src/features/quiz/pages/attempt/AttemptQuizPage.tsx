@@ -28,7 +28,9 @@ export default function AttemptQuiz() {
   // Submit mutation
   // Instead of sending { answers: [...] }, send one request per answer OR bulk submit properly
   const mutation = useMutation({
-    mutationFn: async (payload: { responses: { question_id: number; selected_option: number }[] }) => {
+    mutationFn: async (payload: {
+      responses: { question_id: number; selected_option: number }[];
+    }) => {
       const response = await apiClient.post(`/quiz/${quizId}/submit`, payload);
       return response.data;
     },
@@ -66,14 +68,14 @@ export default function AttemptQuiz() {
         return prev.map((a) =>
           a.question_id === currentQ.id
             ? { ...a, selected_option: optionId }
-            : a
+            : a,
         );
       }
       return [...prev, { question_id: currentQ.id, selected_option: optionId }];
     });
   };
   const handleSubmit = (
-    answers: { question_id: number; selected_option: number }[]
+    answers: { question_id: number; selected_option: number }[],
   ) => {
     if (mutation.isPending) return;
     mutation.mutate({ responses: answers });
@@ -91,56 +93,56 @@ export default function AttemptQuiz() {
         ]}
       />
       <div className="flex flex-1 items-center justify-center">
-      <Card className="w-full max-w-2xl">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          Question {step + 1} of {questions.length}
-        </h2>
-        <p className="text-lg mb-6 text-center">{currentQ.text}</p>
+        <Card className="w-full max-w-2xl">
+          <h2 className="text-2xl font-bold mb-4 text-center">
+            Question {step + 1} of {questions.length}
+          </h2>
+          <p className="text-xl mb-6 text-center">{currentQ.text}</p>
 
-        <div className="flex flex-col gap-4">
-          {currentQ.options.map((opt) => {
-            const selected = currentAnswer?.selected_option === opt.id;
-            return (
+          <div className="flex flex-col gap-4">
+            {currentQ.options.map((opt) => {
+              const selected = currentAnswer?.selected_option === opt.id;
+              return (
+                <Button
+                  key={opt.id}
+                  onClick={() => handleSelect(opt.id)}
+                  variant={selected ? "primary" : "secondary"}
+                  className="w-full border border-border"
+                >
+                  {opt.text}
+                </Button>
+              );
+            })}
+          </div>
+
+          <div className="flex gap-4 mt-8 justify-center">
+            {step > 0 && (
               <Button
-                key={opt.id}
-                onClick={() => handleSelect(opt.id)}
-                variant={selected ? "primary" : "secondary"}
-                className="w-full border border-border"
+                variant="secondary"
+                onClick={() => setStep((s) => s - 1)}
+                disabled={isSubmitting}
               >
-                {opt.text}
+                Back
               </Button>
-            );
-          })}
-        </div>
-
-        <div className="flex gap-4 mt-8 justify-center">
-          {step > 0 && (
-            <Button
-              variant="secondary"
-              onClick={() => setStep((s) => s - 1)}
-              disabled={isSubmitting}
-            >
-              Back
-            </Button>
-          )}
-          {step < questions.length - 1 && (
-            <Button
-              onClick={() => setStep((s) => s + 1)}
-              disabled={!currentAnswer || isSubmitting}
-            >
-              Next
-            </Button>
-          )}
-          {step === questions.length - 1 && (
-            <Button
-              onClick={() => handleSubmit(answers)}
-              disabled={answers.length < questions.length || isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : "Submit"}
-            </Button>
-          )}
-        </div>
-      </Card>
+            )}
+            {step < questions.length - 1 && (
+              <Button
+                onClick={() => setStep((s) => s + 1)}
+                disabled={!currentAnswer || isSubmitting}
+              >
+                Next
+              </Button>
+            )}
+            {step === questions.length - 1 && (
+              <Button
+                onClick={() => handleSubmit(answers)}
+                disabled={answers.length < questions.length || isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </Button>
+            )}
+          </div>
+        </Card>
       </div>
     </div>
   );

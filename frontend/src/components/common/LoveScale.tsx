@@ -19,7 +19,7 @@ export default function LoveScale({ score, total, label }: LoveScaleProps) {
 
   return (
     <div className="w-full flex flex-col items-center gap-2">
-      {label && <div className="text-sm text-muted-foreground">{label}</div>}
+      {label && <div className="text-md text-muted-foreground">{label}</div>}
       <div className="w-full max-w-md">
         <div className="flex items-center gap-1">
           {segments.map((seg, idx) => {
@@ -33,12 +33,12 @@ export default function LoveScale({ score, total, label }: LoveScaleProps) {
             );
           })}
         </div>
-        <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
+        <div className="mt-2 flex items-center justify-between text-md text-muted-foreground">
           <span>0%</span>
-          <span className="text-sm font-bold text-primary">{pct}%</span>
+          <span className="text-md font-bold text-primary">{pct}%</span>
           <span>100%</span>
         </div>
-        <div className="mt-1 text-xs text-muted-foreground text-center">
+        <div className="mt-1 text-md text-muted-foreground text-center">
           {score} / {total}
         </div>
       </div>

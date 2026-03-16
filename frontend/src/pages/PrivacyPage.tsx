@@ -9,12 +9,14 @@ export default function PrivacyPage() {
         <div className="w-full max-w-3xl mx-auto flex flex-col gap-6">
           <TopNav links={[{ label: "Home", to: "/", variant: "ghost" }]} />
           <Card className="space-y-4">
-            <h1 className="text-3xl font-bold font-display my-2">Privacy Policy</h1>
-            <div className="text-xs text-muted-foreground p-1">
+            <h1 className="text-3xl font-bold font-display my-2">
+              Privacy Policy
+            </h1>
+            <div className="text-md text-muted-foreground p-1">
               Last updated: 2026-02-10
             </div>
 
-            <div className="space-y-3 text-sm text-muted-foreground">
+            <div className="space-y-3 text-md text-muted-foreground">
               <p>
                 This Privacy Policy explains how LoveMeter collects, uses, and
                 shares information when you use the Service. By using the
@@ -74,9 +76,9 @@ export default function PrivacyPage() {
               </h2>
               <p>
                 We may share information with service providers who help operate
-                the Service, or if required by law, to protect rights and safety,
-                or in connection with a business transaction. We only share what
-                is necessary.
+                the Service, or if required by law, to protect rights and
+                safety, or in connection with a business transaction. We only
+                share what is necessary.
               </p>
 
               <h2 className="text-foreground font-semibold text-base">
@@ -107,7 +109,9 @@ export default function PrivacyPage() {
               <h2 className="text-foreground font-semibold text-base">
                 Contact
               </h2>
-              <p>Contact the project owner for questions or removal requests.</p>
+              <p>
+                Contact the project owner for questions or removal requests.
+              </p>
             </div>
           </Card>
         </div>

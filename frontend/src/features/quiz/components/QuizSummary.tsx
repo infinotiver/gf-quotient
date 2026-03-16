@@ -16,14 +16,14 @@ export default function QuizSummaryStep({
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-display font-bold">Quiz Summary</h2>
       <div className="bg-muted p-4 rounded">
-        <div className="text-sm text-muted-foreground">Title</div>
-        <div className="text-lg font-semibold">{data.title || "Untitled"}</div>
-        <div className="text-sm text-muted-foreground mt-3">Description</div>
-        <div className="text-sm text-foreground">
+        <div className="text-md text-muted-foreground">Title</div>
+        <div className="text-xl font-semibold">{data.title || "Untitled"}</div>
+        <div className="text-md text-muted-foreground mt-3">Description</div>
+        <div className="text-md text-foreground">
           {data.description || "No description"}
         </div>
-        <div className="text-sm text-muted-foreground mt-3">Questions</div>
-        <div className="text-sm text-foreground">{data.questions.length}</div>
+        <div className="text-md text-muted-foreground mt-3">Questions</div>
+        <div className="text-md text-foreground">{data.questions.length}</div>
       </div>
       <Button onClick={onSubmit} disabled={isSubmitting}>
         {isSubmitting ? "Creating..." : "Create Quiz"}

@@ -33,12 +33,12 @@ export default function PresetPicker({
     <>
       <div className="fixed inset-0 z-40" onClick={onClose} />
       <div className="fixed right-6 top-28 z-50 bg-card border border-border rounded-2xl p-3 shadow-sm w-72">
-        <div className="text-sm text-muted-foreground mb-2">
+        <div className="text-md text-muted-foreground mb-2">
           Load preset questions
         </div>
         {hasQuestions && (
           <>
-            <div className="text-xs text-muted-foreground mb-2">
+            <div className="text-md text-muted-foreground mb-2">
               Replace current questions or add to them?
             </div>
             <div className="flex gap-2 mb-3">
@@ -72,7 +72,7 @@ export default function PresetPicker({
             </Button>
           ))}
         </div>
-        <div className="mt-2 text-xs text-muted-foreground">
+        <div className="mt-2 text-md text-muted-foreground">
           Max questions: 14
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Card from "@components/common/Card";
 import Skeleton from "@components/common/Skeleton";
@@ -48,89 +47,104 @@ export default function ResultPage() {
         ]}
       />
       <div className="flex flex-1 items-center justify-center">
-      <Card className="w-full max-w-3xl">
-        <h1 className="text-3xl font-bold text-center mb-2">{quiz.title}</h1>
-        <p className="text-muted-foreground text-center mb-2">{quiz.description}</p>
-        {responses.length > 0 ? (
-          <>
-            <h2 className="text-center text-xl font-display font-bold mb-1">
-              LoveMeter verdict: <span className="text-primary">{verdict}</span>
-            </h2>
-            <p className="text-center text-sm text-muted-foreground mb-4">
-              {blurb}
-            </p>
-            <div className="text-center mb-8">
-              <LoveScale score={score} total={total} label="Love scale" />
-            </div>
-          </>
-        ) : (
-          <div className="mt-6 mb-8 text-center">
-            <div className="text-sm text-muted-foreground mb-2">
-              No attempts yet. Share this link:
-            </div>
-            <code className="block border border-border px-4 py-2 rounded-lg text-center break-all">
-              {quiz.quiz_id
-                ? `${window.location.origin}/attempt/${quiz.quiz_id}`
-                : "Attempt link unavailable"}
-            </code>
-            <div className="mt-3 text-xs text-muted-foreground">
-              Results link (keep private):{" "}
-              {token ? `${window.location.origin}/results/${token}` : "Unavailable"}
-            </div>
-          </div>
-        )}
-
-        <div className="flex flex-col gap-4">
-          {responses.length > 0 &&
-            quiz.questions.map((q) => {
-            const userResponse = responses.find((r) => r.question_id === q.id);
-            const correctId = q.correct_option ?? null;
-            return (
-              <div key={q.id} className="p-4 bg-card border border-border rounded-2xl">
-                <div className="font-semibold mb-3">
-                  Q{q.id}. {q.text}
-                </div>
-                <div className="flex flex-col gap-2">
-                  {q.options.map((opt) => {
-                    const isSelected = userResponse?.selected_option === opt.id;
-                    const isCorrect = correctId === opt.id;
-                    const classes = isCorrect
-                      ? "bg-success/15 border-success"
-                      : isSelected
-                      ? "bg-destructive/15 border-destructive"
-                      : "bg-muted border-border";
-                    return (
-                      <div
-                        key={opt.id}
-                        className={`w-full border rounded-lg px-3 py-2 text-sm ${classes}`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span>{opt.text || `Option ${opt.id}`}</span>
-                          <span className="text-xs text-muted-foreground">
-                            {isCorrect ? "Correct" : isSelected ? "Their choice" : ""}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+        <Card className="w-full max-w-3xl">
+          <h1 className="text-3xl font-bold text-center mb-2">{quiz.title}</h1>
+          <p className="text-muted-foreground text-center mb-2">
+            {quiz.description}
+          </p>
+          {responses.length > 0 ? (
+            <>
+              <h2 className="text-center text-xl font-display font-bold mb-1">
+                LoveMeter verdict:{" "}
+                <span className="text-primary">{verdict}</span>
+              </h2>
+              <p className="text-center text-md text-muted-foreground mb-4">
+                {blurb}
+              </p>
+              <div className="text-center mb-8">
+                <LoveScale score={score} total={total} label="Love scale" />
               </div>
-            );
-          })}
-        </div>
-        <div className="flex justify-center mt-8">
-          <Button
-            variant="danger"
-            onClick={() => {
-              if (confirm("Delete this quiz and all its results?")) {
-                deleteMutation.mutate();
-              }
-            }}
-          >
-            Delete Quiz
-          </Button>
-        </div>
-      </Card>
+            </>
+          ) : (
+            <div className="mt-6 mb-8 text-center">
+              <div className="text-md text-muted-foreground mb-2">
+                No attempts yet. Share this link:
+              </div>
+              <code className="block border border-border px-4 py-2 rounded-lg text-center break-all">
+                {quiz.quiz_id
+                  ? `${window.location.origin}/attempt/${quiz.quiz_id}`
+                  : "Attempt link unavailable"}
+              </code>
+              <div className="mt-3 text-md text-muted-foreground">
+                Results link (keep private):{" "}
+                {token
+                  ? `${window.location.origin}/results/${token}`
+                  : "Unavailable"}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col gap-4">
+            {responses.length > 0 &&
+              quiz.questions.map((q) => {
+                const userResponse = responses.find(
+                  (r) => r.question_id === q.id,
+                );
+                const correctId = q.correct_option ?? null;
+                return (
+                  <div
+                    key={q.id}
+                    className="p-4 bg-card border border-border rounded-2xl"
+                  >
+                    <div className="font-semibold mb-3">
+                      Q{q.id}. {q.text}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {q.options.map((opt) => {
+                        const isSelected =
+                          userResponse?.selected_option === opt.id;
+                        const isCorrect = correctId === opt.id;
+                        const classes = isCorrect
+                          ? "bg-success/15 border-success"
+                          : isSelected
+                            ? "bg-destructive/15 border-destructive"
+                            : "bg-muted border-border";
+                        return (
+                          <div
+                            key={opt.id}
+                            className={`w-full border rounded-lg px-3 py-2 text-md ${classes}`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span>{opt.text || `Option ${opt.id}`}</span>
+                              <span className="text-md text-muted-foreground">
+                                {isCorrect
+                                  ? "Correct"
+                                  : isSelected
+                                    ? "Their choice"
+                                    : ""}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+          <div className="flex justify-center mt-8">
+            <Button
+              variant="danger"
+              onClick={() => {
+                if (confirm("Delete this quiz and all its results?")) {
+                  deleteMutation.mutate();
+                }
+              }}
+            >
+              Delete Quiz
+            </Button>
+          </div>
+        </Card>
       </div>
     </div>
   );

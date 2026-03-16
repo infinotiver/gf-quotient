@@ -10,7 +10,7 @@ function Footer({ stats }: FooterProps) {
   return (
     <footer className="mt-6 pb-4">
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
-        <div className="flex flex-col gap-3 px-3 py-3 text-xs text-muted-foreground backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 px-3 py-3 text-md text-muted-foreground backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-1 ">
             <div className="flex items-center gap-1">
               <span>Made by</span>
@@ -30,7 +30,7 @@ function Footer({ stats }: FooterProps) {
               </div>
             ) : null}
           </div>
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center gap-2 text-md">
             <a href="/privacy">
               <Button variant="ghost" size="xs">
                 Privacy
@@ -40,10 +40,10 @@ function Footer({ stats }: FooterProps) {
               href="https://github.com/infinotiver/gf-quotient"
               target="_blank"
               rel="noreferrer"
-              
             >
               <Button variant="ghost" size="xs">
-              GitHub</Button>
+                GitHub
+              </Button>
             </a>
           </div>
         </div>
