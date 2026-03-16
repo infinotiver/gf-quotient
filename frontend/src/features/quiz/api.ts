@@ -1,6 +1,6 @@
 import apiClient from "@api/apiClient";
-import type { QuestionType } from "./components/QuizCard";
-import type { OptionType } from "./components/OptionCard";
+import type { QuestionType } from "@components/quiz/QuizCard";
+import type { OptionType } from "@components/quiz/OptionCard";
 
 export type QuizData = {
   title: string;

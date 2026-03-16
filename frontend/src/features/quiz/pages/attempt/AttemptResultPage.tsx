@@ -1,7 +1,7 @@
 import { useLocation, useParams, Link } from "react-router-dom";
 import Button from "@components/common/Button";
 import Card from "@components/common/Card";
-import LoveScale from "@components/common/LoveScale";
+import LoveScale from "@components/quiz/LoveScale";
 import { useMemo } from "react";
 import { pickRandom, submissionMessages } from "../../utils/messages";
 import TopNav from "@components/common/TopNav";

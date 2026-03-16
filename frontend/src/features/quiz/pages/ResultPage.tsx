@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Button from "@components/common/Button";
 import Card from "@components/common/Card";
-import LoveScale from "@components/common/LoveScale";
+import LoveScale from "@components/quiz/LoveScale";
 import Skeleton from "@components/common/Skeleton";
 import TopNav from "@components/common/TopNav";
 import { removeQuizFromStorage } from "@utils/storage";

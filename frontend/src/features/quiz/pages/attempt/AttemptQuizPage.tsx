@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@api/apiClient";
-import type { OptionType } from "../../components/OptionCard";
+import type { OptionType } from "@components/quiz/OptionCard";
 import Button from "@components/common/Button";
 import Skeleton from "@components/common/Skeleton";
 import Card from "@components/common/Card";
