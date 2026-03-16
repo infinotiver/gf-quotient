@@ -6,12 +6,12 @@ export const submissionMessages = [
 ];
 
 export const resultsMessages = [
-  "Here’s how well they know you.",
-  "Love scoreboard, right on time.",
-  "Results are in. Let’s see the magic.",
-  "A little truth, a little love.",
+  "The results are in—let’s see how your hearts align.",
+  "Quiz complete! Time to reveal your connection score.",
+  "Here is your relationship snapshot. Ready for the big reveal?",
+  "Let’s see how well you two really know each other.",
+  "Moment of truth! Your love story, decoded.",
 ];
-
 
 export const lovemeterVerdicts = [
   { min: 0, max: 30, label: "Warm Spark" },

@@ -18,7 +18,7 @@ export default function ShareQuizPage() {
       />
       <div className="flex flex-1 items-center justify-center">
       <Card className="w-full max-w-xl">
-        <h1 className="text-3xl font-bold mb-6 text-center">
+        <h1 className="text-3xl font-bold mb-6 text-center font-display">
           Quiz Created with Love!
         </h1>
 

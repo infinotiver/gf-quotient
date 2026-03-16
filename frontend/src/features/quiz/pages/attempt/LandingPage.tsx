@@ -40,7 +40,7 @@ export default function AttemptLanding() {
       />
       <div className="flex flex-1 items-center justify-center">
         <Card className="w-full max-w-2xl">
-          <h1 className="text-3xl font-bold text-center mb-4">
+          <h1 className="text-3xl font-bold text-center mb-4 font-display">
             {quiz.quiz.title}
           </h1>
           <p className="text-muted-foreground text-center mb-6">

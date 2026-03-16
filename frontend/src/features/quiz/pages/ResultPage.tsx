@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom";
-import Card from "@components/common/Card";
-import Skeleton from "@components/common/Skeleton";
-import Button from "@components/common/Button";
 import { useMemo } from "react";
-import { getVerdict, pickRandom, resultsMessages } from "../utils/messages";
+import { useParams } from "react-router-dom";
+import Button from "@components/common/Button";
+import Card from "@components/common/Card";
 import LoveScale from "@components/common/LoveScale";
+import Skeleton from "@components/common/Skeleton";
 import TopNav from "@components/common/TopNav";
 import { removeQuizFromStorage } from "@utils/storage";
-import useResults from "@hooks/quiz/useResults";
 import useDeleteQuiz from "@hooks/quiz/useDeleteQuiz";
+import useResults from "@hooks/quiz/useResults";
+import { getVerdict, pickRandom, resultsMessages } from "../utils/messages";
 
 export default function ResultPage() {
   const { token } = useParams();
@@ -29,7 +29,22 @@ export default function ResultPage() {
         <Skeleton width="lg" lines={6} />
       </div>
     );
-  if (error || !data) return <p>Error loading results.</p>;
+  if (error || !data)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground outer-pad">
+        <Card className="max-w-md text-center">
+          <h2 className="text-xl font-bold mb-2">Could not load results</h2>
+          <p className="text-sm text-muted-foreground">
+            The link may be invalid or the quiz was deleted.
+          </p>
+          <div className="mt-4 flex justify-center">
+            <Button variant="secondary" onClick={() => (window.location.href = "/")}>
+              Go home
+            </Button>
+          </div>
+        </Card>
+      </div>
+    );
 
   const quiz = data.quiz;
   const score = quiz.score ?? 0;
@@ -48,19 +63,19 @@ export default function ResultPage() {
       />
       <div className="flex flex-1 items-center justify-center">
         <Card className="w-full max-w-3xl">
-          <h1 className="text-3xl font-bold text-center mb-2 font-gyg">
-            {quiz.title}
+          <h1 className="text-3xl font-bold text-center mb-2 font-display">
+            {quiz.title || "Untitled quiz"}
           </h1>
           <p className="text-muted-foreground text-center mb-2">
-            {quiz.description}
+            {quiz.description || "No description provided."}
           </p>
           {responses.length > 0 ? (
             <>
               <h2 className="text-center text-xl font-display font-bold mb-1">
-                LoveMeter verdict:{" "}
+                Lovio verdict:{" "}
                 <span className="text-primary">{verdict}</span>
               </h2>
-              <p className="text-center text-md text-muted-foreground mb-4">
+              <p className="text-center text-xs text-muted-foreground mb-4">
                 {blurb}
               </p>
               <div className="text-center mb-8">
@@ -77,12 +92,6 @@ export default function ResultPage() {
                   ? `${window.location.origin}/attempt/${quiz.quiz_id}`
                   : "Attempt link unavailable"}
               </code>
-              <div className="mt-3 text-md text-muted-foreground">
-                Results link (keep private):{" "}
-                {token
-                  ? `${window.location.origin}/results/${token}`
-                  : "Unavailable"}
-              </div>
             </div>
           )}
 
