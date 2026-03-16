@@ -36,7 +36,7 @@ export default function AttemptQuiz() {
       setSubmitted(true);
     },
     onError: (error) => {
-      alert("Failed to submit responses. Please try again.");
+      alert("Failed to submit responses. Quizes can take only one entry at max. If you think this was a mistake, please try again.");
       console.error(error);
     },
   });
