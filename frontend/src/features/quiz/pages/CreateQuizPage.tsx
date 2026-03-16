@@ -96,6 +96,7 @@ export default function CreateQuizPage() {
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   const handleSubmit = () => {
+    if (mutation.isPending) return;
     if (quizData.questions.length === 0) {
       setNotice("Please add at least one question before creating your quiz.");
       return;
@@ -196,7 +197,11 @@ export default function CreateQuizPage() {
               )}
               {currentStep === 2 && (
                 <div className="mt-4">
-                  <QuizSummaryStep data={quizData} onSubmit={handleSubmit} />
+                  <QuizSummaryStep
+                    data={quizData}
+                    onSubmit={handleSubmit}
+                    isSubmitting={mutation.isPending}
+                  />
                 </div>
               )}
             </Card>
@@ -213,11 +218,15 @@ export default function CreateQuizPage() {
       {(canGoBack || canGoNext) && (
         <FloatingActionBar>
           {canGoBack && (
-            <Button variant="secondary" onClick={back}>
+            <Button variant="secondary" onClick={back} disabled={mutation.isPending}>
               Back
             </Button>
           )}
-          {canGoNext && <Button onClick={next}>Next</Button>}
+          {canGoNext && (
+            <Button onClick={next} disabled={mutation.isPending}>
+              Next
+            </Button>
+          )}
         </FloatingActionBar>
       )}
       <Footer />

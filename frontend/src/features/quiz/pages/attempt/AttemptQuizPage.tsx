@@ -75,10 +75,12 @@ export default function AttemptQuiz() {
   const handleSubmit = (
     answers: { question_id: number; selected_option: number }[]
   ) => {
+    if (mutation.isPending) return;
     mutation.mutate({ responses: answers });
   };
 
   const currentAnswer = answers.find((a) => a.question_id === currentQ.id);
+  const isSubmitting = mutation.isPending;
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground outer-pad">
@@ -113,21 +115,28 @@ export default function AttemptQuiz() {
 
         <div className="flex gap-4 mt-8 justify-center">
           {step > 0 && (
-            <Button variant="secondary" onClick={() => setStep((s) => s - 1)}>
+            <Button
+              variant="secondary"
+              onClick={() => setStep((s) => s - 1)}
+              disabled={isSubmitting}
+            >
               Back
             </Button>
           )}
           {step < questions.length - 1 && (
-            <Button onClick={() => setStep((s) => s + 1)} disabled={!currentAnswer}>
+            <Button
+              onClick={() => setStep((s) => s + 1)}
+              disabled={!currentAnswer || isSubmitting}
+            >
               Next
             </Button>
           )}
           {step === questions.length - 1 && (
             <Button
               onClick={() => handleSubmit(answers)}
-              disabled={answers.length < questions.length}
+              disabled={answers.length < questions.length || isSubmitting}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           )}
         </div>
