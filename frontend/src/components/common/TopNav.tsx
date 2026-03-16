@@ -21,18 +21,21 @@ type TopNavProps = {
 
 export default function TopNav({ links = [], actions = [] }: TopNavProps) {
   return (
-    <div className="sticky top-0 z-50 flex flex-wrap gap-2 rounded-b-xl px-4 py-2 backdrop-blur-2xl flex-row items-center justify-between">
-      <Link to="/" className="flex items-center gap-1">
-        💕
-        <Button variant="ghost">LoveMeter</Button>
+    <nav className="sticky top-0 z-50 w-full  backdrop-blur-3xl rounded-xl flex items-center justify-between px-2 py-1">
+      <Link
+        to="/"
+        className="flex items-center gap-2 font-display text-2xl text-primary hover:opacity-90 transition-all select-none"
+      >
+        <span className="text-3xl">💕</span>
+        <span className="tracking-tight font-bold">LoveMeter</span>
       </Link>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 bg-primary/40 p-1 rounded-full">
         {links.map((link) => (
           <Link key={link.to} to={link.to}>
             <Button
               variant={link.variant ?? "ghost"}
               size="sm"
-              className="rounded-full"
+              className="rounded-full font-gaegu px-4 text-base hover:bg-accent/60"
             >
               {link.label}
             </Button>
@@ -43,13 +46,13 @@ export default function TopNav({ links = [], actions = [] }: TopNavProps) {
             key={action.label}
             variant={action.variant ?? "ghost"}
             size="sm"
-            className="rounded-full"
+            className="rounded-full font-gaegu px-4 text-base hover:bg-accent/60"
             onClick={action.onClick}
           >
             {action.label}
           </Button>
         ))}
       </div>
-    </div>
+    </nav>
   );
 }

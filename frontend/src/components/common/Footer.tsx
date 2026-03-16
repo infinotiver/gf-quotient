@@ -8,31 +8,33 @@ type FooterProps = {
 
 function Footer({ stats }: FooterProps) {
   return (
-    <footer className="mt-6 pb-4">
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
-        <div className="flex flex-col gap-3 px-3 py-3 text-md text-muted-foreground backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-1 ">
-            <div className="flex items-center gap-1">
-              <span>Made by</span>
+    <footer className="mt-10 pb-6 w-full bg-transparent">
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 px-4 py-4 m">
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <div className="flex items-center gap-2 font-display text-lg text-foreground">
+              <span>
+                Made with love by
+              </span>
               <a
                 href="https://github.com/infinotiver"
                 target="_blank"
                 rel="noreferrer"
-                className="font-semibold text-foreground hover:opacity-80"
+                className="font-semibold underline underline-offset-2 hover:text-primary transition-colors"
               >
                 infinotiver
               </a>
             </div>
             {stats ? (
-              <div className="text-[11px] text-muted-foreground/90">
-                {stats.totalQuizzes ?? "--"} quizzes |{" "}
+              <div className="text-xs font-gaegu text-muted-foreground/90 tracking-wide">
+                {stats.totalQuizzes ?? "--"} quizzes &bull;{" "}
                 {stats.totalCrushPages ?? "--"} crush pages
               </div>
             ) : null}
           </div>
-          <div className="flex items-center gap-2 text-md">
+          <div className="flex items-center gap-3 mt-2 md:mt-0">
             <a href="/privacy">
-              <Button variant="ghost" size="xs">
+              <Button variant="ghost" size="sm" className="font-gaegu px-3">
                 Privacy
               </Button>
             </a>
@@ -41,7 +43,7 @@ function Footer({ stats }: FooterProps) {
               target="_blank"
               rel="noreferrer"
             >
-              <Button variant="ghost" size="xs">
+              <Button variant="ghost" size="sm" className="font-gaegu px-3">
                 GitHub
               </Button>
             </a>

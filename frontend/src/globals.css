@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Give+You+Glory&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Give+You+Glory&family=Instrument+Serif:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -78,12 +78,21 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  /* font-family: "Give You Glory", cursive; */
+
+  /* font-family: "Gaegu", sans-serif; */
+}
+
+.font-gaegu {
   font-family: "Gaegu", sans-serif;
 }
 
+.font-gyg {
+  font-family: "Give You Glory", cursive;
+}
+
 .font-display {
-  font-family: "Playfair Display", "Times New Roman", serif;
+  /* font-family: "Playfair Display", "Times New Roman", serif; */
+  font-family: "Instrument Serif", serif;
 }
 
 .homepage-bg {
@@ -92,11 +101,9 @@ body {
     radial-gradient(760px 520px at 95% -10%, hsla(8, 85%, 62%, 0.32), transparent 60%),
     radial-gradient(640px 420px at 24% 95%, hsla(0, 80%, 58%, 0.22), transparent 60%),
     linear-gradient(180deg, hsl(355 55% 92%), hsl(355 50% 88%)),
-    repeating-linear-gradient(
-      135deg,
+    repeating-linear-gradient(135deg,
       hsla(355, 55%, 65%, 0.08) 0px,
       hsla(355, 55%, 65%, 0.08) 2px,
       transparent 2px,
-      transparent 8px
-    );
+      transparent 8px);
 }

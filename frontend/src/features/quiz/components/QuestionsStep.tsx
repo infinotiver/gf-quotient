@@ -79,7 +79,7 @@ export default function QuestionsStep({
                 className="w-full justify-between"
                 onClick={() => setExpandedIndex(isOpen ? null : idx)}
               >
-                <div className="text-md text-foreground">
+                <div className="flex grow items-center text-md text-foreground justify-start text-left font-gaegu">
                   Q{idx + 1}: {q.text || "Untitled question"}
                 </div>
                 {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}

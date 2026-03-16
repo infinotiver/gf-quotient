@@ -4,10 +4,10 @@ import Card from "./Card";
 function CreateCrushCard() {
   return (
     <Card>
-      <div className="text-xl font-semibold text-foreground mb-3">
+      <div className="text-xl font-semibold text-foreground mb-3 font-display">
         Ask your crush out
       </div>
-      <div className="text-md text-muted-foreground mb-3">
+      <div className="text-md text-muted-foreground mb-3 text-gyg">
         A tiny utility to ask them out in a creative way (and we'll try to get
         you a date, hopefully).
       </div>

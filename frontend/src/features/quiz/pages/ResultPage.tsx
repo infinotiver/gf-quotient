@@ -48,7 +48,9 @@ export default function ResultPage() {
       />
       <div className="flex flex-1 items-center justify-center">
         <Card className="w-full max-w-3xl">
-          <h1 className="text-3xl font-bold text-center mb-2">{quiz.title}</h1>
+          <h1 className="text-3xl font-bold text-center mb-2 font-gyg">
+            {quiz.title}
+          </h1>
           <p className="text-muted-foreground text-center mb-2">
             {quiz.description}
           </p>

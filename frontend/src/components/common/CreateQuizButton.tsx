@@ -4,7 +4,7 @@ import Card from "./Card";
 function CreateQuizButton() {
   return (
     <Card>
-      <div className="text-xl font-semibold text-foreground mb-3">
+      <div className="text-xl font-semibold text-foreground mb-3 font-display">
         Create your quiz
       </div>
       <div className="text-md text-muted-foreground mb-3">

@@ -1,4 +1,3 @@
-import Bubble from "@components/common/Bubble";
 import CreateQuizButton from "@components/common/CreateQuizButton";
 import CreateCrushCard from "@components/common/CreateCrushCard";
 import Footer from "@components/common/Footer";
@@ -16,14 +15,33 @@ function HomePage() {
           <div className="w-full max-w-5xl mx-auto flex flex-col gap-5">
             <TopNav
               links={[
-                { label: "Create quiz", to: "/create-quiz", variant: "primary" },
-                { label: "Will you be my valentine?", to: "/crush/create", variant: "secondary" },
+                {
+                  label: "Create quiz",
+                  to: "/create-quiz",
+                  variant: "primary",
+                },
+                {
+                  label: "Will you be my valentine?",
+                  to: "/crush/create",
+                  variant: "secondary",
+                },
               ]}
             />
-            <Bubble subtitle="Valentine's Special" title="Know your love, know yourself" />
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <CreateQuizButton />
-                <CreateCrushCard />
+            <div className="relative rounded-3xl flex flex-col justify-center items-center text-center inner-pad">
+              <p className="text-lg uppercase tracking-wide text-muted-foreground font-semibold font-gaegu">
+                Valentine's special
+              </p>
+
+              <div className="p-2 text-4xl font-bold font-display text-foreground">
+                Make love notes and quizzes
+              </div>
+              <div className="text-xl font-gyg">
+                Best way to share your feelings and test your relationship!
+              </div>
+            </div>
+            <section className="flex flex-col lg:flex-row gap-4">
+              <CreateQuizButton />
+              <CreateCrushCard />
             </section>
           </div>
         </main>

@@ -24,7 +24,7 @@ export default function PrivacyPage() {
                 accordance with this policy.
               </p>
 
-              <h2 className="text-foreground font-semibold text-base">
+              <h2 className="text-foreground font-semibold text-base font-gyg">
                 Information we collect
               </h2>
               <p>
