@@ -17,35 +17,37 @@ export default function ShareQuizPage() {
         ]}
       />
       <div className="flex flex-1 items-center justify-center">
-      <Card className="w-full max-w-xl">
-        <h1 className="text-3xl font-bold mb-6 text-center font-display">
-          Quiz Created with Love!
-        </h1>
+        <Card className="w-full max-w-xl">
+          <h1 className="text-3xl font-bold mb-6 text-center font-display">
+            Quiz Created with Love!
+          </h1>
 
-        <p className="mb-3 text-center">
-          Share this link so they can take the quiz:
-        </p>
-        <code className="block border border-border px-4 py-2 rounded-lg text-center break-all">
-          {quizId
-            ? `${window.location.origin}/attempt/${quizId}`
-            : "Attempt link unavailable"}
-        </code>
+          <p className="mb-3 text-center font-gyg">
+            Share this link so they can take the quiz:
+          </p>
+          <code className="block border border-border px-4 py-2 rounded-lg text-center break-all font-gaegu text-lg">
+            {quizId
+              ? `${window.location.origin}/attempt/${quizId}`
+              : "Attempt link unavailable"}
+          </code>
 
-        <p className="my-6 text-center">Keep this results link private:</p>
-        <code className="block bg-primary text-primary-foreground px-4 py-2 rounded-lg text-center break-all">
-          {token
-            ? `${window.location.origin}/results/${token}`
-            : "Results token unavailable"}
-        </code>
+          <p className="my-6 text-center font-gyg">
+            Keep this results link private:
+          </p>
+          <code className="block bg-primary text-primary-foreground px-4 py-2 rounded-lg text-center break-all font-gaegu text-lg">
+            {token
+              ? `${window.location.origin}/results/${token}`
+              : "Results token unavailable"}
+          </code>
 
-        <div className="mt-6 flex justify-center">
-          <Link to="/" className="w-full">
-            <Button variant="secondary" className="w-full">
-              Go to Home
-            </Button>
-          </Link>
-        </div>
-      </Card>
+          <div className="mt-6 flex justify-center">
+            <Link to="/" className="w-full">
+              <Button variant="secondary" className="w-full font-gyg">
+                Go to Home
+              </Button>
+            </Link>
+          </div>
+        </Card>
       </div>
     </div>
   );

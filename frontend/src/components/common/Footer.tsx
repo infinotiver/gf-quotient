@@ -26,7 +26,7 @@ function Footer({ stats }: FooterProps) {
               </a>
             </div>
             {stats ? (
-              <div className="text-xs font-gaegu text-muted-foreground/90 tracking-wide">
+              <div className="text-sm font-gaegu text-muted-foreground/90 tracking-wide">
                 {stats.totalQuizzes ?? "--"} quizzes &bull;{" "}
                 {stats.totalCrushPages ?? "--"} crush pages
               </div>
@@ -34,7 +34,7 @@ function Footer({ stats }: FooterProps) {
           </div>
           <div className="flex items-center gap-3 mt-2 md:mt-0">
             <a href="/privacy">
-              <Button variant="ghost" size="sm" className="font-gaegu px-3">
+              <Button variant="ghost" size="sm" className="font-gaegu">
                 Privacy
               </Button>
             </a>
@@ -43,7 +43,7 @@ function Footer({ stats }: FooterProps) {
               target="_blank"
               rel="noreferrer"
             >
-              <Button variant="ghost" size="sm" className="font-gaegu px-3">
+              <Button variant="ghost" size="sm" className="font-gaegu">
                 GitHub
               </Button>
             </a>

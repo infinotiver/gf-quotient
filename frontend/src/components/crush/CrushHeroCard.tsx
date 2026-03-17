@@ -1,8 +1,14 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import type { CrushPublic } from "@features/crush/types";
 import Button from "@components/common/Button";
 import Card from "@components/common/Card";
-
+import confetti from "canvas-confetti";
 type Props = {
   page: CrushPublic;
   answer: "yes" | "no" | null;
@@ -37,16 +43,47 @@ export default function CrushHeroCard({
   const [yesHoverCount, setYesHoverCount] = useState(0);
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const cappedNoClicks = Math.min(noClicks, 5);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const yesBtnRef = useRef<HTMLButtonElement>(null);
   const heroImage =
     answer === "yes" && page.after_yes_gif
       ? page.after_yes_gif
       : page.hero_image;
   const accentBg = accentGradient(page.theme.accent);
+  const celebrate = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+  };
+  // Confetti effect (simple emoji burst)
+  useEffect(() => {
+    if (cappedNoClicks === 5) {
+      setShowConfetti(true);
+      const timeout = setTimeout(() => setShowConfetti(false), 1200);
+      return () => clearTimeout(timeout);
+    }
+  }, [cappedNoClicks]);
   return (
     <Card
       className="w-full max-w-2xl bg-card"
       style={{ color: page.theme.text, background: accentBg }}
     >
+      {/* Tooltip Easter Egg: appear above card, centered */}
+      {yesHoverCount >= 10 && !answer && (
+        <div className="w-full flex justify-center mb-2">
+          <span
+            className="px-3 py-2 rounded-lg bg-secondary/10 text-pink-600 text-xs font-gaegu z-10 shadow-lg transition-opacity duration-300 opacity-100"
+            style={{
+              boxShadow: "0 4px 16px 0 rgba(255, 182, 193, 0.15)",
+              pointerEvents: "none",
+            }}
+          >
+            Just say yes already!
+          </span>
+        </div>
+      )}
       <h1 className="text-3xl font-bold font-display text-center mb-4">
         {page.title}
       </h1>
@@ -72,12 +109,16 @@ export default function CrushHeroCard({
       ) : (
         <div className="flex gap-3 justify-center">
           <Button
-            onClick={() => onAnswer("yes")}
+            onClick={() => {
+              celebrate();
+              onAnswer("yes");
+            }}
             className="min-w-[120px] text-white transition-transform"
             style={{
               background: page.theme.accent,
               transform: `scale(${1 + cappedNoClicks * 0.1 + yesHoverCount * 0.05})`,
             }}
+            onMouseEnter={() => setYesHoverCount((c) => c + 1)}
           >
             {page.yes_text}
           </Button>
@@ -91,7 +132,7 @@ export default function CrushHeroCard({
                 y: Math.random() * 200 - 100,
               });
             }}
-            className="min-w-[120px] border transition-transform"
+            className=" border transition-transform"
             style={{
               borderColor: page.theme.accent,
               color: page.theme.accent,
@@ -101,6 +142,11 @@ export default function CrushHeroCard({
           >
             {page.no_text}
           </Button>
+          {cappedNoClicks === 5 && !answer && (
+            <div className="text-center text-xs text-pink-500 mt-2 font-gaegu">
+              You’re persistent! 😅
+            </div>
+          )}
         </div>
       )}
     </Card>

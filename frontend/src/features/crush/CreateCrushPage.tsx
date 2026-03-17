@@ -348,7 +348,7 @@ export default function CreateCrushPage() {
               )}
             </Card>
             <Card className="space-y-4">
-              <div className="text-md font-semibold">Live preview</div>
+              <div className="text-md font-semibold py-2 font-gyg">Live preview</div>
               <CrushPreviewCard
                 form={form}
                 answer={previewAnswer}
