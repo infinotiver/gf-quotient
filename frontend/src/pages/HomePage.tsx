@@ -21,7 +21,7 @@ function HomePage() {
                   variant: "primary",
                 },
                 {
-                  label: "Will you be my valentine?",
+                  label: "Ask out",
                   to: "/crush/create",
                   variant: "secondary",
                 },
