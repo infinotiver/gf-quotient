@@ -1,10 +1,4 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import type { CrushPublic } from "@features/crush/types";
 import Button from "@components/common/Button";
 import Card from "@components/common/Card";
@@ -43,8 +37,6 @@ export default function CrushHeroCard({
   const [yesHoverCount, setYesHoverCount] = useState(0);
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const cappedNoClicks = Math.min(noClicks, 5);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const yesBtnRef = useRef<HTMLButtonElement>(null);
   const heroImage =
     answer === "yes" && page.after_yes_gif
       ? page.after_yes_gif
@@ -58,13 +50,6 @@ export default function CrushHeroCard({
     });
   };
   // Confetti effect (simple emoji burst)
-  useEffect(() => {
-    if (cappedNoClicks === 5) {
-      setShowConfetti(true);
-      const timeout = setTimeout(() => setShowConfetti(false), 1200);
-      return () => clearTimeout(timeout);
-    }
-  }, [cappedNoClicks]);
   return (
     <Card
       className="w-full max-w-2xl bg-card"
@@ -74,7 +59,7 @@ export default function CrushHeroCard({
       {yesHoverCount >= 10 && !answer && (
         <div className="w-full flex justify-center mb-2">
           <span
-            className="px-3 py-2 rounded-lg bg-secondary/10 text-pink-600 text-xs font-gaegu z-10 shadow-lg transition-opacity duration-300 opacity-100"
+            className="px-3 py-2 rounded-lg bg-secondary/0 text-pink-600 text-xs font-gaegu z-10 shadow-lg transition-opacity duration-300 opacity-100"
             style={{
               boxShadow: "0 4px 16px 0 rgba(255, 182, 193, 0.15)",
               pointerEvents: "none",
