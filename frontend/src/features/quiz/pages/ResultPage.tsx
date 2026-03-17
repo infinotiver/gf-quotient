@@ -100,23 +100,23 @@ export default function ResultPage() {
                 ? `${window.location.origin}/attempt/${quiz.quiz_id}`
                 : ""}
             </div>
-            <h1 className="text-3xl font-bold text-center mb-2 font-display">
+            <h1 className="text-3xl font-bold text-center font-display">
               {quiz.title || "Untitled quiz"}
             </h1>
-            <p className="text-muted-foreground text-center mb-2">
+            <p className="text-muted-foreground text-center text-xs font-gyg mb-2">
               {quiz.description || "No description provided."}
             </p>
             {responses.length > 0 ? (
               <>
                 <h2 className="text-center text-xl font-display font-bold mb-1">
-                  Lovemeter verdict:{" "}
+                  Verdict:{" "}
                   <span className="text-primary">{verdict}</span>
                 </h2>
                 <p className="text-center text-xs text-muted-foreground mb-4">
                   {blurb}
                 </p>
                 <div className="text-center mb-8">
-                  <LoveScale score={score} total={total} label="Love scale" />
+                  <LoveScale score={score} total={total} />
                 </div>
               </>
             ) : (
