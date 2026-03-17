@@ -50,58 +50,20 @@ export default function CreateCrushPage() {
         />
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="space-y-6">
-              <h1 className="text-3xl font-bold font-display text-center">
+            <Card className="space-y-8">
+              <h1 className="text-3xl font-bold font-display text-center mb-2">
                 LoveMeter Crush Page
               </h1>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                  <label className="text-md font-semibold" htmlFor="template">
-                    Template
-                  </label>
-                  <select
-                    id="template"
-                    className="px-3 py-2 bg-background rounded-lg border  border-input"
-                    value={selectedTemplate}
-                    onChange={(event) =>
-                      onTemplateChange(event.target.value as CrushTemplateKey)
-                    }
-                  >
-                    {crushTemplates.map((template) => (
-                      <option key={template.key} value={template.key}>
-                        {template.label}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="flex items-center justify-between gap-4 text-md text-muted-foreground">
-                    <p className="flex-1">{activeTemplate.description}</p>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] uppercase tracking-wide">
-                        Accent
-                      </span>
-                      <span
-                        className="h-5 w-8 rounded"
-                        style={{ background: theme.accent }}
-                      />
-                      <span className="text-[10px] uppercase tracking-wide">
-                        Text
-                      </span>
-                      <span
-                        className="h-5 w-8 rounded-lg border  border-border"
-                        style={{ background: theme.text }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="flex flex-col gap-5">
+                {/* Group 1: Page title & question */}
+                <div className="rounded-lg border border-muted bg-muted/30 p-4 flex flex-col gap-3">
                   <div className="flex flex-col gap-2">
                     <label className="text-md font-semibold" htmlFor="title">
                       Page title
                     </label>
                     <input
                       id="title"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
+                      className="w-full p-2 bg-background rounded-lg border border-input"
                       value={form.title}
                       onChange={(event) =>
                         setForm((previous) => ({
@@ -112,190 +74,238 @@ export default function CreateCrushPage() {
                       placeholder="Will you be my Valentine?"
                     />
                   </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="flex flex-col gap-2">
-                    <label
-                      className="text-md font-semibold"
-                      htmlFor="backgroundColor"
-                    >
-                      Background color or gradient
+                    <label className="text-md font-semibold" htmlFor="question">
+                      Main question
                     </label>
                     <input
-                      id="backgroundColor"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
-                      value={form.theme.background}
+                      id="question"
+                      className="w-full p-2 bg-background rounded-lg border border-input"
+                      value={form.question}
                       onChange={(event) =>
                         setForm((previous) => ({
                           ...previous,
-                          theme: {
-                            ...previous.theme,
-                            background: event.target.value,
-                          },
+                          question: event.target.value,
                         }))
                       }
-                      placeholder="linear-gradient(135deg, #ffe3ef, #ffb3d7)"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label
-                      className="text-md font-semibold"
-                      htmlFor="backgroundImage"
-                    >
-                      Background image URL (optional)
-                    </label>
-                    <input
-                      id="backgroundImage"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
-                      value={form.theme.background_image ?? ""}
-                      onChange={(event) =>
-                        setForm((previous) => ({
-                          ...previous,
-                          theme: {
-                            ...previous.theme,
-                            background_image: event.target.value || undefined,
-                          },
-                        }))
-                      }
-                      placeholder="https://example.com/bg.jpg"
+                      placeholder="Would you go on a cozy date with me?"
                     />
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <label className="text-md font-semibold" htmlFor="question">
-                    Main question
-                  </label>
-                  <textarea
-                    id="question"
-                    className="w-full p-2 bg-background rounded-lg border  border-input"
-                    value={form.question}
-                    onChange={(event) =>
-                      setForm((previous) => ({
-                        ...previous,
-                        question: event.target.value,
-                      }))
-                    }
-                    placeholder="Would you go on a cozy date with me?"
-                  />
+                {/* Group 2: Button labels & after-response messages */}
+                <div className="rounded-lg border border-muted bg-muted/30 p-4 flex flex-col gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex flex-col gap-2">
+                      <label
+                        className="text-md font-semibold"
+                        htmlFor="yesText"
+                      >
+                        Yes button label
+                      </label>
+                      <input
+                        id="yesText"
+                        className="w-full p-2 bg-background rounded-lg border border-input"
+                        value={form.yes_text}
+                        onChange={(event) =>
+                          setForm((previous) => ({
+                            ...previous,
+                            yes_text: event.target.value,
+                          }))
+                        }
+                        placeholder="Yes, I'd love to"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-md font-semibold" htmlFor="noText">
+                        No button label
+                      </label>
+                      <input
+                        id="noText"
+                        className="w-full p-2 bg-background rounded-lg border border-input"
+                        value={form.no_text}
+                        onChange={(event) =>
+                          setForm((previous) => ({
+                            ...previous,
+                            no_text: event.target.value,
+                          }))
+                        }
+                        placeholder="Not right now"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                    <div className="flex flex-col gap-2">
+                      <label
+                        className="text-md font-semibold"
+                        htmlFor="yesMessage"
+                      >
+                        Message after Yes
+                      </label>
+                      <textarea
+                        id="yesMessage"
+                        className="w-full p-2 bg-background rounded-lg border border-input"
+                        value={form.message_after_yes ?? ""}
+                        onChange={(event) =>
+                          setForm((previous) => ({
+                            ...previous,
+                            message_after_yes: event.target.value,
+                          }))
+                        }
+                        placeholder="You just made my day glow."
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label
+                        className="text-md font-semibold"
+                        htmlFor="noMessage"
+                      >
+                        Message after No
+                      </label>
+                      <textarea
+                        id="noMessage"
+                        className="w-full p-2 bg-background rounded-lg border border-input"
+                        value={form.message_after_no ?? ""}
+                        onChange={(event) =>
+                          setForm((previous) => ({
+                            ...previous,
+                            message_after_no: event.target.value,
+                          }))
+                        }
+                        placeholder="Thanks for being honest."
+                      />
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {/* Group 3: Theme & images */}
+                <div className="rounded-lg border border-muted bg-muted/30 p-4 flex flex-col gap-3">
                   <div className="flex flex-col gap-2">
-                    <label className="text-md font-semibold" htmlFor="yesText">
-                      Yes button label
+                    <label className="text-md font-semibold" htmlFor="template">
+                      Template
                     </label>
-                    <input
-                      id="yesText"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
-                      value={form.yes_text}
+                    <select
+                      id="template"
+                      className="px-3 py-2 bg-background rounded-lg border border-input"
+                      value={selectedTemplate}
                       onChange={(event) =>
-                        setForm((previous) => ({
-                          ...previous,
-                          yes_text: event.target.value,
-                        }))
+                        onTemplateChange(event.target.value as CrushTemplateKey)
                       }
-                      placeholder="Yes, I'd love to"
-                    />
+                    >
+                      {crushTemplates.map((template) => (
+                        <option key={template.key} value={template.key}>
+                          {template.label}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="flex items-center justify-between gap-4 text-md text-muted-foreground">
+                      <p className="flex-1">{activeTemplate.description}</p>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] uppercase tracking-wide">
+                          Accent
+                        </span>
+                        <span
+                          className="h-5 w-8 rounded"
+                          style={{ background: theme.accent }}
+                        />
+                        <span className="text-[10px] uppercase tracking-wide">
+                          Text
+                        </span>
+                        <span
+                          className="h-5 w-8 rounded-lg border border-border"
+                          style={{ background: theme.text }}
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-md font-semibold" htmlFor="noText">
-                      No button label
-                    </label>
-                    <input
-                      id="noText"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
-                      value={form.no_text}
-                      onChange={(event) =>
-                        setForm((previous) => ({
-                          ...previous,
-                          no_text: event.target.value,
-                        }))
-                      }
-                      placeholder="Not right now"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                    <div className="flex flex-col gap-2">
+                      <label
+                        className="text-md font-semibold"
+                        htmlFor="backgroundColor"
+                      >
+                        Background color or gradient
+                      </label>
+                      <input
+                        id="backgroundColor"
+                        className="w-full p-2 bg-background rounded-lg border border-input"
+                        value={form.theme.background}
+                        onChange={(event) =>
+                          setForm((previous) => ({
+                            ...previous,
+                            theme: {
+                              ...previous.theme,
+                              background: event.target.value,
+                            },
+                          }))
+                        }
+                        placeholder="linear-gradient(135deg, #ffe3ef, #ffb3d7)"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label
+                        className="text-md font-semibold"
+                        htmlFor="backgroundImage"
+                      >
+                        Background image URL (optional)
+                      </label>
+                      <input
+                        id="backgroundImage"
+                        className="w-full p-2 bg-background rounded-lg border border-input"
+                        value={form.theme.background_image ?? ""}
+                        onChange={(event) =>
+                          setForm((previous) => ({
+                            ...previous,
+                            theme: {
+                              ...previous.theme,
+                              background_image: event.target.value || undefined,
+                            },
+                          }))
+                        }
+                        placeholder="https://example.com/bg.jpg"
+                      />
+                    </div>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 mt-2">
                     <label
                       className="text-md font-semibold"
-                      htmlFor="yesMessage"
+                      htmlFor="heroImage"
                     >
-                      Message after Yes
+                      Hero image or GIF URL
                     </label>
-                    <textarea
-                      id="yesMessage"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
-                      value={form.message_after_yes ?? ""}
+                    <input
+                      id="heroImage"
+                      className="w-full p-2 bg-background rounded-lg border border-input"
+                      value={form.hero_image ?? ""}
                       onChange={(event) =>
                         setForm((previous) => ({
                           ...previous,
-                          message_after_yes: event.target.value,
+                          hero_image: event.target.value,
                         }))
                       }
-                      placeholder="You just made my day glow."
+                      placeholder="https://example.com/image.jpg or .gif"
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 mt-2">
                     <label
                       className="text-md font-semibold"
-                      htmlFor="noMessage"
+                      htmlFor="afterYesGif"
                     >
-                      Message after No
+                      After Yes image or GIF URL
                     </label>
-                    <textarea
-                      id="noMessage"
-                      className="w-full p-2 bg-background rounded-lg border  border-input"
-                      value={form.message_after_no ?? ""}
+                    <input
+                      id="afterYesGif"
+                      className="w-full p-2 bg-background rounded-lg border border-input"
+                      value={form.after_yes_gif ?? ""}
                       onChange={(event) =>
                         setForm((previous) => ({
                           ...previous,
-                          message_after_no: event.target.value,
+                          after_yes_gif: event.target.value,
                         }))
                       }
-                      placeholder="Thanks for being honest."
+                      placeholder="https://example.com/celebrate.gif"
                     />
                   </div>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-md font-semibold" htmlFor="heroImage">
-                    Hero image or GIF URL
-                  </label>
-                  <input
-                    id="heroImage"
-                    className="w-full p-2 bg-background rounded-lg border  border-input"
-                    value={form.hero_image ?? ""}
-                    onChange={(event) =>
-                      setForm((previous) => ({
-                        ...previous,
-                        hero_image: event.target.value,
-                      }))
-                    }
-                    placeholder="https://example.com/image.jpg or .gif"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label
-                    className="text-md font-semibold"
-                    htmlFor="afterYesGif"
-                  >
-                    After Yes image or GIF URL
-                  </label>
-                  <input
-                    id="afterYesGif"
-                    className="w-full p-2 bg-background rounded-lg border  border-input"
-                    value={form.after_yes_gif ?? ""}
-                    onChange={(event) =>
-                      setForm((previous) => ({
-                        ...previous,
-                        after_yes_gif: event.target.value,
-                      }))
-                    }
-                    placeholder="https://example.com/celebrate.gif"
-                  />
                 </div>
               </div>
               {pageId && showLinkModal && (
